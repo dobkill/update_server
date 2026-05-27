@@ -1,0 +1,28 @@
+{
+  "items": [
+    {
+      "product_code": "project-manage",
+      "name": "Project Manage",
+      "summary": "项目管理小项目，提供版本发布说明、安装包下载和页面化功能介绍。",
+      "cover_image_url": "",
+      "latest_version": "2.3.1",
+      "updated_at": "2026-05-23T10:00:00Z"
+    },
+    {
+      "product_code": "smart-ops",
+      "name": "Smart Ops",
+      "summary": "运维助手小项目，聚合巡检编排、任务回执和版本发布入口。",
+      "cover_image_url": "",
+      "latest_version": "1.8.4",
+      "updated_at": "2026-05-19T08:30:00Z"
+    },
+    {
+      "product_code": "data-bridge",
+      "name": "Data Bridge",
+      "summary": "数据桥接小项目，用于接入转换脚本、导出结果和版本说明页面。",
+      "cover_image_url": "",
+      "latest_version": "3.1.0",
+      "updated_at": "2026-05-11T14:20:00Z"
+    }
+  ]
+}

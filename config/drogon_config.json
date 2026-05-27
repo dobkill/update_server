@@ -1,0 +1,25 @@
+{
+  "app": {
+    "threads_num": 1,
+    "enable_session": false,
+    "document_root": "./web/dist",
+    "upload_path": "./data/uploads",
+    "client_max_body_size": "50M"
+  },
+  "listeners": [
+    {
+      "address": "0.0.0.0",
+      "port": 8080,
+      "https": false
+    }
+  ],
+  "db_clients": [
+    {
+      "name": "default",
+      "rdbms": "sqlite3",
+      "filename": "./data/database/update_platform.db",
+      "is_fast": false,
+      "number_of_connections": 1
+    }
+  ]
+}
