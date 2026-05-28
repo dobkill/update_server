@@ -1,13 +1,13 @@
 #pragma once
 #include <nlohmann/json.hpp>
-#include <mutex>
 #include <string>
+#include <mutex>
 #include <map>
 namespace Action{
     using json = nlohmann::json;
     class ConvertTaskAction{
     public:
-        json createTask(const json &task);
+        json createTask(const std::string &product_code, const std::string &from_version, const std::string &to_version);
         json getTaskStatus(const std::string &taskId);
         json getTaskResult(const std::string &taskId);
     private:

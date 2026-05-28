@@ -1,7 +1,5 @@
 {
   "app_name": "software-update-platform",
-  "listen_host": "0.0.0.0",
-  "listen_port": 8080,
   "database_name": "default",
   "database_path": "./data/database/update_platform.db",
   "storage_root": "./data",

@@ -6,6 +6,6 @@ namespace Action{
     using json = nlohmann::json;
     class DocumentAction{
     public:
-        json GetDocument();
+        json GetDocument(const std::string &product_code, const std::string &version);
     };
 }

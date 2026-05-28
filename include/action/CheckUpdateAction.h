@@ -4,8 +4,7 @@ namespace Action{
     using json = nlohmann::json;
     class CheckUpdateAction{
     public:
-        json buildPayload();
-    };
-
+        json CheckUpdate(const std::string &product_code, const std::string &version);
+    };    
     
 }
