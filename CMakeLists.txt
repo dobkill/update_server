@@ -11,36 +11,36 @@ option(UPDATE_PLATFORM_BUILD_WEB "Build web assets with external Node tooling" O
 find_package(Drogon CONFIG REQUIRED)
 find_package(spdlog CONFIG REQUIRED)
 find_package(nlohmann_json CONFIG REQUIRED)
-find_package(sqlite3 CONFIG REQUIRED)
+find_package(OpenSSL REQUIRED)
 
 file(GLOB_RECURSE action_sources "src/action/*.cc")
 
 file(GLOB_RECURSE service_sources "src/service/*.cc")
 
 file(GLOB_RECURSE storage_sources "src/storage/*.cc")
+file(GLOB_RECURSE tools_sources "src/tools/*.cc")
 
 add_executable(software_update_platform
     src/bin/main.cpp
     ${action_sources}
-
     ${service_sources}
-
-
     src/config/app_config.cc
-    src/storage/file_store.cc
-
     ${storage_sources}
+    ${tools_sources}
 )
-include_directories(include) 
 
-
+target_include_directories(software_update_platform
+    PRIVATE
+        include
+)
 
 target_link_libraries(software_update_platform
     PRIVATE
         Drogon::Drogon
         spdlog::spdlog
         nlohmann_json::nlohmann_json
-        sqlite3::sqlite3
+        sqlite3
+        OpenSSL::Crypto
 )
 
 enable_testing()

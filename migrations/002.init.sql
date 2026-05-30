@@ -73,7 +73,8 @@ CREATE TABLE IF NOT EXISTS release_assets (
 
     file_path TEXT NOT NULL,
     file_size INTEGER NOT NULL,
-    sha256 TEXT NOT NULL,
+    sha256 TEXT,
+    md5 TEXT,
 
     status TEXT NOT NULL DEFAULT 'active',
 
@@ -86,13 +87,14 @@ CREATE TABLE IF NOT EXISTS release_assets (
     UNIQUE(release_id, platform, arch, package_type),
 
     CHECK(file_size >= 0),
-    CHECK(length(sha256) = 64),
+    CHECK(sha256 IS NULL OR length(sha256) = 64),
+    CHECK(md5 IS NULL OR length(md5) = 32),
     CHECK(status IN ('active', 'disabled', 'yanked'))
 );
 
 
 -- =========================================================
--- 4. 渠道发布表：控制 stable / beta / dev 的 latest 和灰度
+-- 4. 渠道发布表：控制 stable / beta / dev 的 latest 
 -- =========================================================
 CREATE TABLE IF NOT EXISTS release_channels (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -159,8 +161,6 @@ CREATE TABLE IF NOT EXISTS update_packages (
     updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     FOREIGN KEY(product_id) REFERENCES products(id),
-    FOREIGN KEY(source_release_id, product_id) REFERENCES releases(id, product_id),
-    FOREIGN KEY(target_release_id, product_id) REFERENCES releases(id, product_id),
 
     UNIQUE(source_release_id, target_release_id, platform, arch, package_type),
 
@@ -183,11 +183,8 @@ CREATE TABLE IF NOT EXISTS convert_rules (
     source_data_schema_version TEXT NOT NULL,
     target_data_schema_version TEXT NOT NULL,
 
-    -- 可选：如果转换规则只适用于特定版本，可以填
-    source_release_id INTEGER,
-    target_release_id INTEGER,
-
     script_path TEXT NOT NULL,
+    cost_time  INTEGER NOT NULL DEFAULT 5,
     script_sha256 TEXT,
 
     status TEXT NOT NULL DEFAULT 'active',
@@ -196,8 +193,6 @@ CREATE TABLE IF NOT EXISTS convert_rules (
     updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     FOREIGN KEY(product_id) REFERENCES products(id),
-    FOREIGN KEY(source_release_id, product_id) REFERENCES releases(id, product_id),
-    FOREIGN KEY(target_release_id, product_id) REFERENCES releases(id, product_id),
 
     UNIQUE(product_id, source_data_schema_version, target_data_schema_version),
 
@@ -225,7 +220,7 @@ CREATE TABLE IF NOT EXISTS convert_tasks (
     source_data_schema_version TEXT NOT NULL,
     target_data_schema_version TEXT NOT NULL,
 
-    status TEXT NOT NULL DEFAULT 'pending',
+    status TEXT NOT NULL DEFAULT 'running',
 
     input_file_path TEXT NOT NULL,
     input_file_sha256 TEXT,
@@ -235,7 +230,6 @@ CREATE TABLE IF NOT EXISTS convert_tasks (
 
     log_file_path TEXT,
     error_message TEXT,
-
     retry_count INTEGER NOT NULL DEFAULT 0,
 
     created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,

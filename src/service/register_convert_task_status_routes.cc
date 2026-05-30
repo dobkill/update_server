@@ -5,6 +5,8 @@ namespace Router{
         drogon::app().registerHandler(
             "/api/v1/products/{product_code}/convert-tasks/{task_id}/status",
             [self](const drogon::HttpRequestPtr &req, std::function<void(const drogon::HttpResponsePtr &)> &&callback, const std::string &product_code, const std::string &task_id){
+                (void)req;
+                (void)product_code;
                 Json json = self->m_convertTaskAction.getTaskStatus(task_id);
                 auto resp = drogon::HttpResponse::newHttpResponse();
                 resp->setContentTypeCode(drogon::CT_APPLICATION_JSON);

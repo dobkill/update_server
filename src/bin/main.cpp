@@ -3,8 +3,10 @@
 #include <array>
 #include <config/app_config.h>
 #include <filesystem>
-#include <string_view>
 #include <nlohmann/json.hpp>
+#include <service/ApiRoutes.h>
+#include <storage/storage.h>
+#include <string_view>
 
 namespace fs = std::filesystem;
 namespace
@@ -41,6 +43,7 @@ int main()
     const auto convertScriptPath = findPath("python/convert/convert_data.py");
 
     auto &app = drogon::app();
+    Config::AppConfig::Instance();
 
     if (fs::exists(configPath))
     {
@@ -52,10 +55,28 @@ int main()
         app.setDocumentRoot(webRoot.string());
         app.setHomePage("index.html");
     }
-    app.setDocumentRoot("./data");
+
+    Router::ApiRoutes::Instance();
+
     app.setDefaultHandler(
         [webIndex](const drogon::HttpRequestPtr &req,
                    std::function<void(const drogon::HttpResponsePtr &)> &&callback) {
+            if (!fs::exists(webIndex))
+            {
+                json body = {
+                    {"code", 404},
+                    {"message", "web/dist/index.html not found"},
+                    {"data", json::object()}
+                };
+                auto resp = drogon::HttpResponse::newHttpResponse();
+                resp->setStatusCode(drogon::k404NotFound);
+                resp->setContentTypeCode(drogon::CT_APPLICATION_JSON);
+                resp->setBody(body.dump());
+                callback(resp);
+                return;
+            }
+
+            (void)req;
                 callback(drogon::HttpResponse::newFileResponse(webIndex.string(), "", drogon::CT_NONE, "", req));
         });
 

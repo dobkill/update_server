@@ -1,16 +1,37 @@
-#include "app_config.h"
+#include "config/app_config.h"
+
+#include <filesystem>
 #include <fstream>
 #include <iostream>
-#include <string>
-namespace Config{
+
+namespace Config {
+    namespace {
+        std::string findConfigPath()
+        {
+            namespace fs = std::filesystem;
+            const fs::path relative = "config/app.json";
+            const fs::path current = fs::current_path();
+
+            for (const auto &base : {current, current.parent_path()})
+            {
+                const auto candidate = base / relative;
+                if (fs::exists(candidate))
+                {
+                    return fs::absolute(candidate).lexically_normal().string();
+                }
+            }
+
+            return relative.string();
+        }
+    }
+
     std::shared_ptr<AppConfig> AppConfig::s_instance = nullptr;
     std::mutex AppConfig::s_mutex;
 
     std::shared_ptr<AppConfig> AppConfig::Instance(){
-        const std::string &config_path = "./config/app.json";
         std::lock_guard<std::mutex> lock(s_mutex);
         if(!s_instance){
-            s_instance = std::make_shared<AppConfig>(config_path);
+            s_instance = std::shared_ptr<AppConfig>(new AppConfig(findConfigPath()));
         }
         return s_instance;
     }
@@ -29,7 +50,8 @@ namespace Config{
         try{
             json config_json;
             file >> config_json;
-            
+            if(config_json.contains("worker_num"))
+                worker_num = config_json["worker_num"].get<int>();
             if(config_json.contains("app_name"))
                 app_name = config_json["app_name"].get<std::string>();
             if(config_json.contains("database_name"))
@@ -38,8 +60,10 @@ namespace Config{
                 database_path = config_json["database_path"].get<std::string>();
             if(config_json.contains("storage_root"))
                 storage_root = config_json["storage_root"].get<std::string>();
-            if(config_json.contains("upload_dir"))
-                upload_dir = config_json["upload_dir"].get<std::string>();
+            if(config_json.contains("upload_task_dir"))
+                upload_task_dir = config_json["upload_task_dir"].get<std::string>();
+            if(config_json.contains("download_task_dir"))
+                download_task_dir = config_json["download_task_dir"].get<std::string>();
             if(config_json.contains("converted_dir"))
                 converted_dir = config_json["converted_dir"].get<std::string>();
             if(config_json.contains("failed_dir"))
@@ -60,7 +84,6 @@ namespace Config{
                 max_upload_size_bytes = config_json["max_upload_size_bytes"].get<int>();
             if(config_json.contains("convert_result_retention_days"))
                 convert_result_retention_days = config_json["convert_result_retention_days"].get<int>();
-                
         }catch(const json::exception& e){
             std::cerr << "Error: JSON parsing failed: " << e.what() << std::endl;
         }
@@ -68,63 +91,71 @@ namespace Config{
         file.close();
     }
 
-    std::string AppConfig::getAppName(){
+    std::string AppConfig::getAppName() const{
         return app_name;
     }
 
-    std::string AppConfig::getDatabaseName(){
+    std::string AppConfig::getDatabaseName() const{
         return database_name;
     }
 
-    std::string AppConfig::getDatabasePath(){
+    std::string AppConfig::getDatabasePath() const{
         return database_path;
     }
 
-    std::string AppConfig::getStorageRoot(){
+    std::string AppConfig::getStorageRoot() const{
         return storage_root;
     }
 
-    std::string AppConfig::getUploadDir(){
-        return upload_dir;
+    std::string AppConfig::getUploadTaskDir() const{
+        return upload_task_dir;
     }
 
-    std::string AppConfig::getConvertedDir(){
+    std::string AppConfig::getDownloadTaskDir() const{
+        return download_task_dir;
+    }
+
+    std::string AppConfig::getConvertedDir() const{
         return converted_dir;
     }
 
-    std::string AppConfig::getFailedDir(){
+    int AppConfig::getWorkerNum() const{
+        return worker_num;
+    }
+
+    std::string AppConfig::getFailedDir() const{
         return failed_dir;
     }
 
-    std::string AppConfig::getPackageDir(){
+    std::string AppConfig::getPackageDir() const{
         return package_dir;
     }
 
-    std::string AppConfig::getPageStagingDir(){
+    std::string AppConfig::getPageStagingDir() const{
         return page_staging_dir;
     }
 
-    std::string AppConfig::getPageActiveDir(){
+    std::string AppConfig::getPageActiveDir() const{
         return page_active_dir;
     }
 
-    std::string AppConfig::getPageArchiveDir(){
+    std::string AppConfig::getPageArchiveDir() const{
         return page_archive_dir;
     }
 
-    std::string AppConfig::getLogDir(){
+    std::string AppConfig::getLogDir() const{
         return log_dir;
     }
 
-    std::string AppConfig::getConvertScript(){
+    std::string AppConfig::getConvertScript() const{
         return convert_script;
     }
 
-    int AppConfig::getMaxUploadSizeBytes(){
+    int AppConfig::getMaxUploadSizeBytes() const{
         return max_upload_size_bytes;
     }
 
-    int AppConfig::getConvertResultRetentionDays(){
+    int AppConfig::getConvertResultRetentionDays() const{
         return convert_result_retention_days;
     }
 

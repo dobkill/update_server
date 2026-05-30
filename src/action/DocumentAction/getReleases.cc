@@ -1,7 +1,7 @@
-#include "action/ProductsAction.h"
+#include "action/DocumentAction.h"
 
 namespace Action {
-    json ProductsAction::ListProducts(){
+    json DocumentAction::GetListReleases(const std::string &product_code){
         if (!storage) {
             return {{"code", 500}, {"message", "storage not initialized"}, {"data", json::object()}};
         }
@@ -9,7 +9,7 @@ namespace Action {
         return {
             {"code", 0},
             {"message", "ok"},
-            {"data", {{"items", storage->getALLProducts()}}}
+            {"data", {{"items", storage->getALLReleases(product_code)}}}
         };
     }
 }
