@@ -12,7 +12,6 @@ namespace Config {
     class AppConfig {
     public:
         static std::shared_ptr<AppConfig> Instance();
-
     public:
         std::string getAppName() const;
         std::string getDatabaseName() const;

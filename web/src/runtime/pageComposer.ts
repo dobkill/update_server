@@ -1,5 +1,23 @@
 import { type PageBlock, type ProductReleaseDetail } from "./api";
 
+/**
+ * 拼接静态资源的基础 URL
+ * 后端返回的 download_url 是 ./data/... 格式的相对路径
+ * 需要拼接 baseUrl 才能形成完整的下载 URL
+ */
+function resolveStaticUrl(relativePath: string | undefined | null): string {
+  if (!relativePath) {
+    return "";
+  }
+  // 如果已经是完整 URL，直接返回
+  if (relativePath.startsWith("http://") || relativePath.startsWith("https://")) {
+    return relativePath;
+  }
+  // 拼接 baseUrl（去除可能的尾部斜杠）
+  const baseUrl = window.location.origin.replace(/\/$/, "");
+  return baseUrl + relativePath;
+}
+
 export function composeReleaseBlocks(release: ProductReleaseDetail): PageBlock[] {
   const pageData = release.page.page_data;
 
@@ -61,7 +79,7 @@ export function composeReleaseBlocks(release: ProductReleaseDetail): PageBlock[]
         packageSize: download.package_size ?? "待接口补充",
         releaseNote: download.release_note ?? release.release_notes_summary,
         downloadText: download.download_text ?? "下载当前版本",
-        downloadUrl: download.download_url ?? ""
+        downloadUrl: resolveStaticUrl(download.download_url)
       }
     });
   }

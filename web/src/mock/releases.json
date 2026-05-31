@@ -32,7 +32,7 @@
                 },
                 {
                   "title": "下载统一",
-                  "desc": "详情页下载区块直接消费 API 返回的 `/api/v1/products/{product_code}/releases/{version}/download`。"
+                  "desc": "详情页下载区块直接使用后端返回的 ./data/... 路径，前端拼接 baseUrl 后进行下载。"
                 }
               ]
             },
@@ -41,7 +41,7 @@
                 "读取版本详情 JSON",
                 "组装 Hero、摘要、特性、下载和 FAQ 区块",
                 "渲染出当前版本详情页",
-                "用户点击下载后进入统一下载接口"
+                "用户点击下载后通过 baseUrl + download_url 拼接完整 URL 进行下载"
               ]
             },
             "download": {
@@ -50,7 +50,7 @@
               "package_size": "89 MB",
               "release_note": "推荐 Windows x64 Stable 安装包。",
               "download_text": "下载 Windows x64 Stable",
-              "download_url": "/api/v1/products/project-manage/releases/2.3.1/download?platform=windows&arch=x64&channel=stable",
+              "download_url": "./data/packages/project-manage/2.3.1/installer.exe",
               "platform": "windows",
               "arch": "x64",
               "channel": "stable"
@@ -100,7 +100,7 @@
               "package_size": "84 MB",
               "release_note": "历史版本下载入口。",
               "download_text": "下载 2.3.0",
-              "download_url": "/api/v1/products/project-manage/releases/2.3.0/download?platform=windows&arch=x64&channel=stable",
+              "download_url": "./data/packages/project-manage/2.3.0/installer.exe",
               "platform": "windows",
               "arch": "x64",
               "channel": "stable"
@@ -143,7 +143,7 @@
               "package_size": "76 MB",
               "release_note": "推荐 Linux x64 Stable 安装包。",
               "download_text": "下载 Linux x64 Stable",
-              "download_url": "/api/v1/products/smart-ops/releases/1.8.4/download?platform=linux&arch=x64&channel=stable",
+              "download_url": "./data/packages/smart-ops/1.8.4/installer.tar.gz",
               "platform": "linux",
               "arch": "x64",
               "channel": "stable"
@@ -186,7 +186,7 @@
               "package_size": "63 MB",
               "release_note": "推荐 MacOS arm64 Stable 安装包。",
               "download_text": "下载 MacOS arm64 Stable",
-              "download_url": "/api/v1/products/data-bridge/releases/3.1.0/download?platform=macos&arch=arm64&channel=stable",
+              "download_url": "./data/packages/data-bridge/3.1.0/installer.dmg",
               "platform": "macos",
               "arch": "arm64",
               "channel": "stable"

@@ -92,9 +92,7 @@ bool ConvertDataTaskAction::execute_task(const Task &one) {
 
     std::string cmd = "python3 " + shellQuote(one.script_path) +
         " --input " + shellQuote(one.input_file_path) +
-        " --output " + shellQuote(one.output_file_path) +
-        " --source-version " + shellQuote(one.source_data_schema_version) +
-        " --target-version " + shellQuote(one.target_data_schema_version);
+        " --output " + shellQuote(one.output_file_path) ;
 
     int ret = std::system(cmd.c_str());
 

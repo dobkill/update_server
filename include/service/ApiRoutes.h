@@ -23,7 +23,6 @@ namespace Router
 
     private:
         ApiRoutes() = default;
-
         static std::shared_ptr<ApiRoutes> s_instance;
         static std::mutex s_mutex;
 
