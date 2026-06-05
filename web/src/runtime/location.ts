@@ -23,7 +23,7 @@ export function normalizePath(pathname: string): string {
 }
 
 export function normalizeProductCode(productCode?: string | null): string {
-  return (productCode ?? "").trim().toLowerCase();
+  return (productCode ?? "").trim();
 }
 
 export function normalizeVersion(version?: string | null): string {

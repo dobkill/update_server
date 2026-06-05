@@ -25,9 +25,10 @@ defineProps<{
   gap: 1rem;
   align-items: start;
   padding: 1rem 1.25rem;
-  border-radius: 20px;
+  border-radius: 8px;
   border: 1px solid var(--line);
   background: var(--surface);
+  box-shadow: var(--shadow-soft);
 }
 
 .row span {

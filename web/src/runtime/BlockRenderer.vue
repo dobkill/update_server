@@ -6,6 +6,7 @@ import FooterCtaBlock from "../blocks/FooterCtaBlock.vue";
 import HeroBlock from "../blocks/HeroBlock.vue";
 import ImageTextBlock from "../blocks/ImageTextBlock.vue";
 import RichTextBlock from "../blocks/RichTextBlock.vue";
+import ScreenshotGalleryBlock from "../blocks/ScreenshotGalleryBlock.vue";
 import TimelineBlock from "../blocks/TimelineBlock.vue";
 
 type Block = {
@@ -22,6 +23,7 @@ const componentMap = {
   FeatureGridBlock,
   RichTextBlock,
   ImageTextBlock,
+  ScreenshotGalleryBlock,
   DownloadPanelBlock,
   TimelineBlock,
   FaqBlock,

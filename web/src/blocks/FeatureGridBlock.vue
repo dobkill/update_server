@@ -24,10 +24,11 @@ defineProps<{
 }
 
 .card {
-  padding: 1.5rem;
+  padding: 1.1rem;
   border: 1px solid var(--line);
-  border-radius: 24px;
+  border-radius: 8px;
   background: var(--surface);
+  box-shadow: var(--shadow-soft);
 }
 
 .card h3 {
@@ -37,5 +38,6 @@ defineProps<{
 .card p {
   margin: 0;
   color: var(--muted);
+  line-height: 1.65;
 }
 </style>

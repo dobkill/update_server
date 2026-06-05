@@ -1,0 +1,26 @@
+[[product]]
+name = "Daily"
+code = "Daily"
+description = "Obsidian 插件，用来管理每日任务、快速记录和项目规划进度。"
+icon_path = "/data/releases/Daily/v1.0.0/icon/image.png"
+status = "active"
+
+[[release]]
+product_code = "Daily"
+version = "v1.0.0"
+release_note = "Daily v1.0.0 首个可用版本，包含每日任务、项目规划和进度复盘页面。"
+data_schema_version = "v1.0.0"
+status = "active"
+vue_path = "/data/releases/Daily/v1.0.0/vue/DailyReleasePage.vue"
+
+[[release.asset]]
+platform = "obsidian"
+arch = "any"
+package_type = "plugin"
+file_path = "./data/packages/Daily/v1.0.0/Daily-v1.0.0.zip"
+auto_hash = true
+auto_size = true
+
+[[release.channel]]
+channel = "stable"
+is_latest = true

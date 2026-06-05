@@ -24,7 +24,7 @@ namespace Storage {
             "LEFT JOIN convert_rules cr ON cr.product_id = p.id "
             "  AND cr.target_data_schema_version = r.data_schema_version "
             "  AND cr.status = 'active' "
-            "WHERE p.code = ? "
+            "WHERE p.code = ? COLLATE NOCASE "
             "  AND rc.channel = 'stable' "
             "  AND rc.platform = ? "
             "  AND rc.arch = ? "

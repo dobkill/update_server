@@ -5,7 +5,6 @@ import type { ProductSummary } from "../runtime/api";
 const props = defineProps<{
   items: ProductSummary[];
   keyword: string;
-  dataSource: string;
 }>();
 
 const emit = defineEmits<{
@@ -13,7 +12,7 @@ const emit = defineEmits<{
   open: [productCode: string];
 }>();
 
-const resultLabel = computed(() => `${props.items.length} 个小项目`);
+const resultLabel = computed(() => `${props.items.length} 个项目`);
 
 function productInitial(name: string): string {
   return name
@@ -26,29 +25,23 @@ function productInitial(name: string): string {
 </script>
 
 <template>
-  <section class="catalog-hero">
-    <div>
-      <p class="eyebrow">Web Module / Product Catalog</p>
-      <h1>所有小项目都先落在同一个默认页面</h1>
-      <p class="summary">
-        无参访问时展示统一产品列表。页面结构固定，数据来自 `GET /api/v1/products`，搜索在前端基于已加载列表完成。
-      </p>
+  <section class="catalog-toolbar">
+    <div class="title-group">
+      <p class="eyebrow">Release Catalog</p>
+      <h1>产品与插件</h1>
+      <span>{{ resultLabel }}</span>
     </div>
 
-    <div class="search-panel">
-      <label class="search-label" for="product-search">搜索小项目</label>
+    <label class="search-panel" for="product-search">
+      <span>搜索</span>
       <input
         id="product-search"
         :value="keyword"
         type="search"
-        placeholder="输入项目名、编码或简介"
+        placeholder="项目名、编码或简介"
         @input="emit('update:keyword', ($event.target as HTMLInputElement).value)"
       />
-      <div class="meta-row">
-        <strong>{{ resultLabel }}</strong>
-        <span>数据来源：{{ dataSource }}</span>
-      </div>
-    </div>
+    </label>
   </section>
 
   <section v-if="items.length" class="catalog-grid">
@@ -65,126 +58,115 @@ function productInitial(name: string): string {
       </div>
 
       <div class="card-meta">
-        <span v-if="item.latest_version" class="version-chip">Latest {{ item.latest_version }}</span>
+        <span v-if="item.latest_version" class="version-chip">{{ item.latest_version }}</span>
         <span v-if="item.updated_at">{{ item.updated_at.slice(0, 10) }}</span>
       </div>
 
       <button type="button" class="card-action" @click="emit('open', item.product_code)">
-        查看最新版本
+        打开详情
       </button>
     </article>
   </section>
 
   <section v-else class="empty-card">
-    <h2>没有匹配到小项目</h2>
-    <p>可以换个关键词再试，或者清空搜索条件查看完整列表。</p>
+    <h2>没有匹配到项目</h2>
+    <p>换个关键词再试，或清空搜索条件查看完整列表。</p>
   </section>
 </template>
 
 <style scoped>
-.catalog-hero {
-  display: grid;
-  grid-template-columns: minmax(0, 1.4fr) minmax(280px, 0.8fr);
-  gap: 1.25rem;
+.catalog-toolbar {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: end;
   margin-top: 1rem;
+  padding: 1.1rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  box-shadow: var(--shadow-soft);
+}
+
+.title-group {
+  display: grid;
+  gap: 0.25rem;
 }
 
 .eyebrow {
-  margin: 0 0 0.75rem;
+  margin: 0;
   color: var(--primary);
-  letter-spacing: 0.12em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   font-size: 0.78rem;
 }
 
-.catalog-hero h1 {
+.catalog-toolbar h1 {
   margin: 0;
-  max-width: 11ch;
-  font-size: clamp(2.5rem, 6vw, 4.8rem);
-  line-height: 0.94;
+  font-size: 1.85rem;
+  line-height: 1.1;
 }
 
-.summary {
-  margin: 1rem 0 0;
-  max-width: 56rem;
+.title-group span,
+.search-panel span {
   color: var(--muted);
-  line-height: 1.8;
+  font-size: 0.9rem;
 }
 
 .search-panel {
   display: grid;
-  gap: 0.8rem;
-  align-content: start;
-  padding: 1.4rem;
-  border: 1px solid var(--line);
-  border-radius: 28px;
-  background: rgba(255, 251, 244, 0.84);
-  box-shadow: var(--shadow-soft);
-}
-
-.search-label {
-  font-size: 0.9rem;
-  color: var(--muted);
+  gap: 0.35rem;
+  min-width: min(24rem, 100%);
 }
 
 .search-panel input {
   width: 100%;
-  padding: 0.95rem 1rem;
-  border: 1px solid rgba(32, 29, 24, 0.15);
-  border-radius: 18px;
-  background: #fffdfa;
-  font: inherit;
-}
-
-.meta-row {
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-  color: var(--muted);
-  font-size: 0.9rem;
+  padding: 0.7rem 0.8rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fbfcff;
 }
 
 .catalog-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 1rem;
-  margin-top: 1.5rem;
+  margin-top: 1rem;
 }
 
 .product-card,
 .empty-card {
   display: grid;
   gap: 1rem;
-  padding: 1.35rem;
+  align-content: start;
+  padding: 1rem;
   border: 1px solid var(--line);
-  border-radius: 28px;
-  background: rgba(255, 251, 244, 0.84);
+  border-radius: 8px;
+  background: var(--surface);
   box-shadow: var(--shadow-soft);
 }
 
 .card-cover {
-  min-height: 150px;
-  border-radius: 22px;
+  aspect-ratio: 16 / 9;
+  border-radius: 6px;
   overflow: hidden;
-  background:
-    radial-gradient(circle at top left, rgba(188, 84, 47, 0.28), transparent 28%),
-    linear-gradient(135deg, rgba(67, 120, 97, 0.18), rgba(226, 206, 176, 0.62));
+  background: linear-gradient(135deg, #e9f1ff, #e8f7f0 62%, #fff4dd);
 }
 
 .card-cover img {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block;
 }
 
 .cover-fallback {
   display: grid;
   place-items: center;
-  min-height: 150px;
+  height: 100%;
   color: var(--primary-dark);
   font-size: 2.2rem;
-  letter-spacing: 0.08em;
+  font-weight: 700;
 }
 
 .card-copy {
@@ -196,13 +178,11 @@ function productInitial(name: string): string {
   margin: 0;
   color: var(--primary);
   font-size: 0.82rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
 }
 
 .card-copy h2 {
   margin: 0;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
 }
 
 .card-summary {
@@ -221,24 +201,24 @@ function productInitial(name: string): string {
 }
 
 .version-chip {
-  padding: 0.35rem 0.7rem;
+  padding: 0.32rem 0.6rem;
   border-radius: 999px;
-  background: rgba(188, 84, 47, 0.12);
+  background: var(--surface-subtle);
   color: var(--primary-dark);
 }
 
 .card-action {
   justify-self: start;
-  padding: 0.85rem 1.05rem;
+  padding: 0.65rem 0.85rem;
   border: 0;
-  border-radius: 999px;
+  border-radius: 8px;
   background: var(--primary);
-  color: #fff8f1;
+  color: #fff;
   cursor: pointer;
 }
 
 .empty-card {
-  margin-top: 1.5rem;
+  margin-top: 1rem;
 }
 
 .empty-card h2,
@@ -251,8 +231,9 @@ function productInitial(name: string): string {
 }
 
 @media (max-width: 760px) {
-  .catalog-hero {
-    grid-template-columns: 1fr;
+  .catalog-toolbar {
+    align-items: stretch;
+    flex-direction: column;
   }
 }
 </style>

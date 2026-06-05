@@ -9,7 +9,7 @@ namespace Storage {
            "r.vue_path, r.published_at, r.created_at, r.updated_at "
            "FROM releases r "
            "JOIN products p ON p.id = r.product_id "
-           "WHERE p.code = ? "
+           "WHERE p.code = ? COLLATE NOCASE "
            "ORDER BY COALESCE(r.published_at, r.created_at) DESC;",
            {product_code});
     }

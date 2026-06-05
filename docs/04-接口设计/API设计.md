@@ -96,6 +96,36 @@ Query 参数：
 }
 ```
 
+当存在 `data/releases/<product_code>/<version>/vue/page.json` 时，`page.page_data` 会使用该清单内容。Daily v1.0.0 的详情页会返回 `blocks`，其中包含截图画廊：
+
+```json
+{
+  "page": {
+    "vue_entry_url": "/data/releases/Daily/v1.0.0/vue/DailyReleasePage.vue",
+    "page_data": {
+      "blocks": [
+        {
+          "type": "HeroBlock",
+          "props": {
+            "title": "Daily",
+            "image": "/data/releases/Daily/v1.0.0/vue/image.png"
+          }
+        },
+        {
+          "type": "ScreenshotGalleryBlock",
+          "props": {
+            "title": "界面预览",
+            "items": []
+          }
+        }
+      ]
+    }
+  }
+}
+```
+
+`product_code` 查询大小写不敏感，返回值仍保持数据库中保存的原始大小写。
+
 未找到版本时：
 
 ```json
@@ -216,3 +246,14 @@ GET /api/v1/products/{product_code}/convert-tasks/{task_id}/result
 ```
 
 任务完成后结果响应包含 `output_file_path` 和 `download_url`。
+
+## 静态资源
+
+后端 default handler 支持 `/data/...` 文件访问，仅映射到项目 `data/` 目录下的真实文件，并拒绝路径穿越。
+
+示例：
+
+```http
+GET /data/releases/Daily/v1.0.0/vue/image.png
+GET /data/packages/Daily/v1.0.0/Daily-v1.0.0.zip
+```

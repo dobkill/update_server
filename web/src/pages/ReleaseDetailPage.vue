@@ -6,141 +6,120 @@ import { type PageBlock, type ProductReleaseDetail } from "../runtime/api";
 const props = defineProps<{
   release: ProductReleaseDetail;
   blocks: PageBlock[];
-  dataSource: string;
 }>();
 
 const emit = defineEmits<{
   back: [];
 }>();
 
-const isLatestAlias = computed(() => props.release.requested_version === "latest");
 const publishedDate = computed(() => props.release.published_at?.slice(0, 10) ?? "--");
 </script>
 
 <template>
-  <section class="release-hero">
-    <div class="hero-copy">
-      <button type="button" class="back-link" @click="emit('back')">返回产品列表</button>
-      <p class="eyebrow">{{ release.product_code }}</p>
+  <section class="release-toolbar">
+    <button type="button" class="back-link" @click="emit('back')">返回</button>
+
+    <div class="release-title">
+      <p>{{ release.product_code }}</p>
       <h1>{{ release.title }}</h1>
-      <p class="summary">{{ release.release_notes_summary }}</p>
     </div>
 
-    <aside class="meta-panel">
+    <dl class="release-meta">
       <div>
-        <p class="meta-label">请求版本</p>
-        <strong>{{ release.requested_version }}</strong>
-      </div>
-      <div>
-        <p class="meta-label">实际版本</p>
-        <strong>{{ release.resolved_version }}</strong>
+        <dt>版本</dt>
+        <dd>{{ release.resolved_version }}</dd>
       </div>
       <div>
-        <p class="meta-label">渠道</p>
-        <strong>{{ release.channel }}</strong>
+        <dt>渠道</dt>
+        <dd>{{ release.channel }}</dd>
       </div>
       <div>
-        <p class="meta-label">发布时间</p>
-        <strong>{{ publishedDate }}</strong>
+        <dt>发布</dt>
+        <dd>{{ publishedDate }}</dd>
       </div>
-      <div>
-        <p class="meta-label">页面数据</p>
-        <strong>{{ dataSource }}</strong>
-      </div>
-      <div v-if="release.page.vue_entry_url">
-        <p class="meta-label">入口脚本</p>
-        <code>{{ release.page.vue_entry_url }}</code>
-      </div>
-      <p v-if="isLatestAlias" class="hint">
-        当前访问的是默认详情页，web 已请求 `Document?version=latest`，并展示当前渠道下解析到的实际版本。
-      </p>
-    </aside>
+    </dl>
   </section>
 
   <BlockRenderer :blocks="blocks" />
 </template>
 
 <style scoped>
-.release-hero {
+.release-toolbar {
   display: grid;
-  grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.75fr);
-  gap: 1.25rem;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 1rem;
+  align-items: center;
   margin-top: 1rem;
-}
-
-.hero-copy,
-.meta-panel {
-  padding: 1.6rem;
+  padding: 1rem;
   border: 1px solid var(--line);
-  border-radius: 28px;
-  background: rgba(255, 251, 244, 0.84);
+  border-radius: 8px;
+  background: var(--surface);
   box-shadow: var(--shadow-soft);
 }
 
 .back-link {
-  justify-self: start;
-  margin-bottom: 1rem;
-  padding: 0;
-  border: 0;
-  background: transparent;
+  padding: 0.6rem 0.8rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fbfcff;
   color: var(--primary-dark);
   cursor: pointer;
 }
 
-.eyebrow {
-  margin: 0 0 0.75rem;
+.release-title {
+  min-width: 0;
+}
+
+.release-title p,
+.release-title h1,
+.release-meta,
+.release-meta dt,
+.release-meta dd {
+  margin: 0;
+}
+
+.release-title p {
   color: var(--primary);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  font-size: 0.8rem;
-}
-
-.hero-copy h1 {
-  margin: 0;
-  font-size: clamp(2.4rem, 5vw, 4.6rem);
-  line-height: 0.96;
-}
-
-.summary {
-  margin: 1rem 0 0;
-  color: var(--muted);
-  line-height: 1.8;
-}
-
-.meta-panel {
-  display: grid;
-  gap: 1rem;
-  align-content: start;
-}
-
-.meta-label {
-  margin: 0 0 0.35rem;
-  color: var(--muted);
   font-size: 0.82rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
 }
 
-.meta-panel strong,
-.meta-panel code {
-  font-size: 0.98rem;
+.release-title h1 {
+  overflow-wrap: anywhere;
+  font-size: 1.35rem;
 }
 
-.meta-panel code {
-  display: block;
-  word-break: break-all;
-  color: var(--primary-dark);
+.release-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
 }
 
-.hint {
-  margin: 0;
+.release-meta div {
+  min-width: 5.4rem;
+  padding: 0.52rem 0.65rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface-subtle);
+}
+
+.release-meta dt {
   color: var(--muted);
-  line-height: 1.7;
+  font-size: 0.74rem;
 }
 
-@media (max-width: 760px) {
-  .release-hero {
+.release-meta dd {
+  margin-top: 0.18rem;
+  font-weight: 700;
+}
+
+@media (max-width: 820px) {
+  .release-toolbar {
     grid-template-columns: 1fr;
+    align-items: stretch;
+  }
+
+  .back-link {
+    justify-self: start;
   }
 }
 </style>

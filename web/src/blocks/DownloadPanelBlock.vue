@@ -44,10 +44,11 @@ withDefaults(
 .panel {
   display: grid;
   gap: 1rem;
-  padding: 1.75rem;
-  border-radius: 24px;
+  padding: 1.2rem;
+  border-radius: 8px;
   border: 1px solid var(--line);
-  background: linear-gradient(180deg, rgba(255, 250, 240, 0.94), rgba(239, 231, 213, 0.94));
+  background: linear-gradient(135deg, #ffffff, #eef4ff);
+  box-shadow: var(--shadow-soft);
 }
 
 .tag {
@@ -66,10 +67,10 @@ withDefaults(
 
 .download-link {
   justify-self: start;
-  padding: 0.85rem 1.15rem;
-  border-radius: 999px;
+  padding: 0.75rem 0.95rem;
+  border-radius: 8px;
   background: var(--primary);
-  color: #fff8f1;
+  color: #fff;
 }
 
 dl {

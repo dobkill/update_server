@@ -23,10 +23,11 @@ defineProps<{
 }
 
 .faq article {
-  padding: 1.5rem;
-  border-radius: 24px;
+  padding: 1rem;
+  border-radius: 8px;
   border: 1px solid var(--line);
   background: var(--surface);
+  box-shadow: var(--shadow-soft);
 }
 
 .faq h3 {

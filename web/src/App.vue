@@ -25,16 +25,15 @@ const release = ref<ProductReleaseDetail | null>(null);
 const keyword = ref("");
 const loading = ref(true);
 const error = ref("");
-const pageSource = ref("本地 JSON");
 
 const title = computed(() => {
   if (currentLocation.value.page === "catalog") {
-    return "小项目列表 | 更新平台 Web 模块";
+    return "产品与插件 | 更新平台";
   }
 
   return release.value
     ? `${release.value.title} | ${release.value.product_code}`
-    : "版本详情 | 更新平台 Web 模块";
+    : "版本详情 | 更新平台";
 });
 
 const filteredProducts = computed(() => {
@@ -74,19 +73,13 @@ async function loadCatalogPage() {
   const remoteProducts = await fetchProducts();
   if (remoteProducts) {
     products.value = remoteProducts;
-    pageSource.value = "API /api/v1/products";
     loading.value = false;
     return;
   }
 
   products.value = getMockProducts();
-  pageSource.value = "本地 JSON";
-  error.value = "产品列表接口暂不可用，当前展示的是本地 JSON 中的小项目数据。";
+  error.value = "接口暂不可用，当前显示本地示例数据。";
   loading.value = false;
-}
-
-function getReleaseSourceLabel(version: string, channel: string): string {
-  return `API /api/v1/products/{product_code}/Document?version=${version}&channel=${channel}`;
 }
 
 async function loadReleasePage(productCode: string, version: string, channel: string) {
@@ -97,7 +90,6 @@ async function loadReleasePage(productCode: string, version: string, channel: st
   const remoteRelease = await fetchReleaseDetail(productCode, version, channel);
   if (remoteRelease) {
     release.value = remoteRelease;
-    pageSource.value = getReleaseSourceLabel(version, channel);
     loading.value = false;
     return;
   }
@@ -105,12 +97,10 @@ async function loadReleasePage(productCode: string, version: string, channel: st
   const fallbackRelease = getMockReleaseDetail(productCode, version, channel);
   if (fallbackRelease) {
     release.value = fallbackRelease;
-    pageSource.value = "本地 JSON";
-    error.value = `版本详情接口暂不可用，当前展示的是本地 JSON 中 ${channel} 渠道的页面装配数据。`;
+    error.value = `接口暂不可用，当前显示 ${channel} 渠道的本地示例数据。`;
   } else {
     release.value = null;
-    pageSource.value = "无可用数据";
-    error.value = `未找到产品 ${productCode} 在 ${channel} 渠道下的版本 ${version} 页面数据。`;
+    error.value = `未找到 ${productCode} ${version} 的 ${channel} 渠道数据。`;
   }
 
   loading.value = false;
@@ -177,40 +167,20 @@ watchEffect(() => {
     :current-version="currentVersion"
     @home="openCatalog"
   >
-    <section class="status-band">
-      <div>
-        <p class="band-label">当前实现状态</p>
-        <strong>已切换到产品列表 + 版本详情双页面</strong>
-      </div>
-      <div>
-        <p class="band-label">当前页面</p>
-        <strong>{{ currentLocation.page === "catalog" ? "默认产品列表页" : "小项目详情页" }}</strong>
-      </div>
-      <div>
-        <p class="band-label">页面数据来源</p>
-        <strong>{{ pageSource }}</strong>
-      </div>
-      <div v-if="currentLocation.page === 'release'">
-        <p class="band-label">当前渠道</p>
-        <strong>{{ currentChannel }}</strong>
-      </div>
-    </section>
-
     <section v-if="loading" class="state-card">
-      <h1>正在装配页面</h1>
-      <p>`web` 模块正在读取产品列表、版本参数和页面 JSON。</p>
+      <strong>加载中</strong>
+      <span>正在读取发布数据...</span>
     </section>
 
-    <section v-else-if="error" class="state-card">
-      <h1>已切换到后备数据</h1>
-      <p>{{ error }}</p>
+    <section v-else-if="error" class="state-card warning">
+      <strong>提示</strong>
+      <span>{{ error }}</span>
     </section>
 
     <ProductCatalogPage
       v-if="!loading && currentLocation.page === 'catalog'"
       :items="filteredProducts"
       :keyword="keyword"
-      :data-source="pageSource"
       @update:keyword="keyword = $event"
       @open="openProduct"
     />
@@ -219,57 +189,30 @@ watchEffect(() => {
       v-else-if="!loading && release && currentLocation.page === 'release'"
       :release="release"
       :blocks="releaseBlocks"
-      :data-source="pageSource"
       @back="openCatalog"
     />
   </AppShell>
 </template>
 
 <style scoped>
-.status-band {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1rem;
-  margin: 1.5rem auto 0;
-}
-
-.status-band > div {
-  padding: 1rem 1.1rem;
-  border: 1px solid var(--line);
-  border-radius: 22px;
-  background: rgba(255, 250, 242, 0.82);
-  box-shadow: var(--shadow-soft);
-}
-
-.band-label {
-  margin: 0 0 0.45rem;
-  color: var(--muted);
-  font-size: 0.82rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.status-band strong {
-  font-size: 1rem;
-}
-
 .state-card {
-  margin: 1.5rem auto 0;
-  max-width: 56rem;
-  padding: 1.6rem 1.8rem;
+  display: flex;
+  gap: 0.65rem;
+  align-items: center;
+  margin: 1rem auto 0;
+  padding: 0.85rem 1rem;
   border: 1px solid var(--line);
-  border-radius: 26px;
-  background: rgba(255, 250, 242, 0.9);
+  border-radius: 8px;
+  background: var(--surface);
   box-shadow: var(--shadow-soft);
 }
 
-.state-card h1 {
-  margin: 0 0 0.75rem;
-  font-size: clamp(1.8rem, 4vw, 2.5rem);
+.state-card.warning {
+  border-color: rgba(183, 121, 31, 0.35);
+  background: #fff8ec;
 }
 
-.state-card p {
-  margin: 0;
+.state-card span {
   color: var(--muted);
 }
 </style>

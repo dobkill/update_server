@@ -10,7 +10,7 @@ namespace Storage {
             "FROM release_assets a "
             "JOIN releases r ON r.id = a.release_id AND r.product_id = a.product_id "
             "JOIN products p ON p.id = a.product_id "
-            "WHERE p.code = ? "
+            "WHERE p.code = ? COLLATE NOCASE "
             "ORDER BY r.created_at DESC, a.created_at DESC;",
             {product_code});
     }

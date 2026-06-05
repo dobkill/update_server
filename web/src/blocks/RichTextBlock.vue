@@ -20,10 +20,11 @@ withDefaults(
 
 <style scoped>
 .block {
-  padding: 1.75rem;
+  padding: 1.2rem;
   border: 1px solid var(--line);
-  border-radius: 24px;
+  border-radius: 8px;
   background: var(--surface);
+  box-shadow: var(--shadow-soft);
 }
 
 .block h3 {

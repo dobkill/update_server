@@ -1,7 +1,14 @@
 #include "storage/storage.h"
 
+#include <array>
+#include <filesystem>
+#include <fstream>
+#include <string_view>
+
 namespace Storage
 {
+    namespace fs = std::filesystem;
+
     namespace
     {
         std::string jsonString(const json &row, const std::string &key, const std::string &fallback = "")
@@ -16,6 +23,58 @@ namespace Storage
             }
             return row[key].dump();
         }
+
+        fs::path findPath(std::string_view relativePath)
+        {
+            const fs::path target(relativePath);
+            const auto current = fs::current_path();
+
+            for (const auto &base : std::array<fs::path, 2>{current, current.parent_path()})
+            {
+                const auto candidate = base / target;
+                if (fs::exists(candidate))
+                {
+                    return fs::absolute(candidate).lexically_normal();
+                }
+            }
+
+            return fs::absolute(target).lexically_normal();
+        }
+
+        json loadReleasePageData(const std::string &product_code, const std::string &version)
+        {
+            if (product_code.empty() || version.empty())
+            {
+                return json::object();
+            }
+
+            const auto page_manifest = findPath(
+                "data/releases/" + product_code + "/" + version + "/vue/page.json");
+            if (!fs::exists(page_manifest) || !fs::is_regular_file(page_manifest))
+            {
+                return json::object();
+            }
+
+            std::ifstream input(page_manifest);
+            if (!input)
+            {
+                return json::object();
+            }
+
+            try
+            {
+                json payload = json::parse(input);
+                if (payload.contains("page_data") && payload["page_data"].is_object())
+                {
+                    return payload["page_data"];
+                }
+                return payload.is_object() ? payload : json::object();
+            }
+            catch (const json::parse_error &)
+            {
+                return json::object();
+            }
+        }
     }
 
     json Storage_SQL::getProduct(const std::string &product_code)
@@ -23,7 +82,7 @@ namespace Storage
         return queryOne(
             "SELECT id, code, name, description, icon_path, status, created_at, updated_at "
             "FROM products "
-            "WHERE code = ? "
+            "WHERE code = ? COLLATE NOCASE "
             "LIMIT 1;",
             {product_code});
     }
@@ -52,7 +111,7 @@ namespace Storage
                 "  AND a.platform = rc.platform "
                 "  AND a.arch = rc.arch "
                 "  AND a.package_type = rc.package_type "
-                "WHERE p.code = ? "
+                "WHERE p.code = ? COLLATE NOCASE "
                 "  AND rc.channel = ? "
                 "  AND rc.is_latest = 1 "
                 "  AND rc.status = 'active' "
@@ -70,7 +129,7 @@ namespace Storage
                 "FROM products p "
                 "JOIN releases r ON r.product_id = p.id "
                 "LEFT JOIN release_assets a ON a.release_id = r.id AND a.product_id = p.id "
-                "WHERE p.code = ? "
+                "WHERE p.code = ? COLLATE NOCASE "
                 "  AND r.version = ? "
                 "LIMIT 1;",
                 {product_code, requested_version});
@@ -82,6 +141,7 @@ namespace Storage
         }
 
         const auto safe_channel = channel.empty() ? "stable" : channel;
+        const auto resolved_product_code = jsonString(row, "product_code", product_code);
         const auto resolved_version = jsonString(row, "version");
         const auto release_note = jsonString(row, "release_note");
         const auto title = jsonString(row, "product_name", product_code) + " " + resolved_version;
@@ -103,9 +163,28 @@ namespace Storage
                 {"channel", safe_channel}
             }}
         };
+        const auto manifest_page_data = loadReleasePageData(resolved_product_code, resolved_version);
+        if (!manifest_page_data.empty())
+        {
+            page_data = manifest_page_data;
+            if (!page_data.contains("download"))
+            {
+                page_data["download"] = {
+                    {"version", resolved_version},
+                    {"package_type", jsonString(row, "package_type")},
+                    {"package_size", row.contains("file_size") && !row["file_size"].is_null() ? std::to_string(row["file_size"].get<long long>()) : ""},
+                    {"release_note", release_note},
+                    {"download_text", "下载当前版本"},
+                    {"download_url", jsonString(row, "download_url")},
+                    {"platform", jsonString(row, "platform")},
+                    {"arch", jsonString(row, "arch")},
+                    {"channel", safe_channel}
+                };
+            }
+        }
 
         return {
-            {"product_code", product_code},
+            {"product_code", resolved_product_code},
             {"requested_version", requested_version},
             {"resolved_version", resolved_version},
             {"channel", safe_channel},

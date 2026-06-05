@@ -59,8 +59,44 @@ int main()
     Router::ApiRoutes::Instance();
 
     app.setDefaultHandler(
-        [webIndex](const drogon::HttpRequestPtr &req,
+        [webIndex, dataRoot](const drogon::HttpRequestPtr &req,
                    std::function<void(const drogon::HttpResponsePtr &)> &&callback) {
+            const auto requestPath = req->path();
+            if (requestPath.rfind("/data/", 0) == 0)
+            {
+                auto relativePath = fs::path(requestPath.substr(std::string_view("/data/").size()));
+                if (relativePath.is_absolute())
+                {
+                    auto resp = drogon::HttpResponse::newHttpResponse();
+                    resp->setStatusCode(drogon::k403Forbidden);
+                    callback(resp);
+                    return;
+                }
+
+                for (const auto &part : relativePath)
+                {
+                    if (part == "..")
+                    {
+                        auto resp = drogon::HttpResponse::newHttpResponse();
+                        resp->setStatusCode(drogon::k403Forbidden);
+                        callback(resp);
+                        return;
+                    }
+                }
+
+                const auto filePath = (dataRoot / relativePath).lexically_normal();
+                if (!fs::exists(filePath) || !fs::is_regular_file(filePath))
+                {
+                    auto resp = drogon::HttpResponse::newHttpResponse();
+                    resp->setStatusCode(drogon::k404NotFound);
+                    callback(resp);
+                    return;
+                }
+
+                callback(drogon::HttpResponse::newFileResponse(filePath.string(), "", drogon::CT_NONE, "", req));
+                return;
+            }
+
             if (!fs::exists(webIndex))
             {
                 json body = {

@@ -31,10 +31,10 @@ const props = withDefaults(
   justify-content: space-between;
   gap: 1rem;
   align-items: center;
-  padding: 1.75rem;
-  border-radius: 24px;
-  background: #1f1f1a;
-  color: #f7f2e8;
+  padding: 1.2rem;
+  border-radius: 8px;
+  background: #151a23;
+  color: #f8fbff;
 }
 
 .cta h3 {
@@ -47,8 +47,8 @@ const props = withDefaults(
 }
 
 .cta a {
-  padding: 0.85rem 1.1rem;
-  border-radius: 999px;
+  padding: 0.75rem 0.95rem;
+  border-radius: 8px;
   background: var(--primary);
   white-space: nowrap;
 }

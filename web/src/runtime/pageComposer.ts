@@ -1,28 +1,61 @@
 import { type PageBlock, type ProductReleaseDetail } from "./api";
 
-/**
- * 拼接静态资源的基础 URL
- * 后端返回的 download_url 是 ./data/... 格式的相对路径
- * 需要拼接 baseUrl 才能形成完整的下载 URL
- */
-function resolveStaticUrl(relativePath: string | undefined | null): string {
+export function resolveStaticUrl(relativePath: string | undefined | null): string {
   if (!relativePath) {
     return "";
   }
-  // 如果已经是完整 URL，直接返回
+
   if (relativePath.startsWith("http://") || relativePath.startsWith("https://")) {
     return relativePath;
   }
-  // 拼接 baseUrl（去除可能的尾部斜杠）
+
   const baseUrl = window.location.origin.replace(/\/$/, "");
-  return baseUrl + relativePath;
+  if (relativePath.startsWith("/")) {
+    return `${baseUrl}${relativePath}`;
+  }
+
+  const normalizedPath = relativePath.startsWith("./")
+    ? relativePath.slice(2)
+    : relativePath;
+  return `${baseUrl}/${normalizedPath}`;
+}
+
+function resolveBlockAssets(block: PageBlock): PageBlock {
+  const props = { ...(block.props ?? {}) };
+
+  if (typeof props.image === "string") {
+    props.image = resolveStaticUrl(props.image);
+  }
+
+  if (typeof props.downloadUrl === "string") {
+    props.downloadUrl = resolveStaticUrl(props.downloadUrl);
+  }
+
+  if (Array.isArray(props.items)) {
+    props.items = props.items.map((item) => {
+      if (!item || typeof item !== "object") {
+        return item;
+      }
+
+      const nextItem = { ...(item as Record<string, unknown>) };
+      if (typeof nextItem.image === "string") {
+        nextItem.image = resolveStaticUrl(nextItem.image);
+      }
+      return nextItem;
+    });
+  }
+
+  return {
+    ...block,
+    props
+  };
 }
 
 export function composeReleaseBlocks(release: ProductReleaseDetail): PageBlock[] {
   const pageData = release.page.page_data;
 
   if (pageData?.blocks?.length) {
-    return pageData.blocks;
+    return pageData.blocks.map(resolveBlockAssets);
   }
 
   const blocks: PageBlock[] = [];

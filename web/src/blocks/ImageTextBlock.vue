@@ -31,10 +31,11 @@ withDefaults(
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 1rem;
-  padding: 1.5rem;
+  padding: 1rem;
   border: 1px solid var(--line);
-  border-radius: 24px;
+  border-radius: 8px;
   background: var(--surface);
+  box-shadow: var(--shadow-soft);
 }
 
 .copy p {
@@ -46,13 +47,13 @@ withDefaults(
   display: grid;
   place-items: center;
   min-height: 220px;
-  border-radius: 20px;
-  background: linear-gradient(135deg, rgba(82, 134, 109, 0.22), rgba(178, 76, 42, 0.12));
+  border-radius: 6px;
+  background: var(--surface-subtle);
 }
 
 .art img {
   max-width: 100%;
-  border-radius: 20px;
+  border-radius: 6px;
 }
 
 .placeholder {
