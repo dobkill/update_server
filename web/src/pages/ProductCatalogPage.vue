@@ -131,7 +131,7 @@ function openWork(product: PortfolioProduct): void {
       <h1>个人作品集</h1>
       <p>设计、开发与持续迭代中的作品。</p>
       <div class="hero-actions" aria-label="首页操作">
-        <a class="primary-action" href="#works">浏览作品 <span aria-hidden="true">-&gt;</span></a>
+        <a class="primary-action" href="#works">浏览作品 <span aria-hidden="true">→</span></a>
         <a
           v-if="home.profile.github_url"
           class="secondary-action"
@@ -200,7 +200,7 @@ function openWork(product: PortfolioProduct): void {
           <span class="meta-line">{{ updateMeta(latestUpdate, primaryWork) }}</span>
           <div class="card-actions">
             <button type="button" class="text-action" @click="openWork(primaryWork)">
-              查看详情 <span aria-hidden="true">-&gt;</span>
+              查看详情 <span aria-hidden="true">→</span>
             </button>
             <a
               v-if="primaryWork.github_url"
@@ -260,7 +260,7 @@ function openWork(product: PortfolioProduct): void {
           <span class="meta-line">{{ productMeta(product) }}</span>
           <div class="card-actions">
             <button type="button" class="text-action" @click="openWork(product)">
-              查看详情 <span aria-hidden="true">-&gt;</span>
+              查看详情 <span aria-hidden="true">→</span>
             </button>
             <a
               v-if="product.github_url"
@@ -303,29 +303,37 @@ function openWork(product: PortfolioProduct): void {
   </section>
 
   <footer class="portfolio-footer">
-    <span>© 2026 YXX Works · 个人作品集</span>
-    <nav v-if="home.profile.github_url || home.profile.email" aria-label="站点链接">
+    <div class="footer-brand">
+      <span class="footer-logo" aria-hidden="true">
+        <span></span>
+      </span>
+      <span>© {{ new Date().getFullYear() }} {{ home.profile.site_name || "YXX Works" }}</span>
+    </div>
+    <nav v-if="home.profile.github_url || home.profile.email" aria-label="站点链接" class="footer-nav">
       <a v-if="home.profile.github_url" :href="home.profile.github_url" target="_blank" rel="noreferrer">
         GitHub
       </a>
-      <a v-if="home.profile.email" :href="`mailto:${home.profile.email}`">邮件</a>
+      <a v-if="home.profile.email" :href="`mailto:${home.profile.email}`">邮件联系</a>
     </nav>
   </footer>
 </template>
 
 <style scoped>
+/* ═══════════════════════════════════════
+   Hero Section
+   ═══════════════════════════════════════ */
 .portfolio-hero {
   display: grid;
-  grid-template-columns: minmax(0, 0.95fr) minmax(20rem, 0.88fr);
-  gap: 3.2rem;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(1.5rem, 4vw, 3.2rem);
   align-items: center;
-  min-height: 23rem;
-  padding: 3rem 2.8rem 2.2rem;
+  min-height: auto;
+  padding: clamp(1.5rem, 4vw, 3rem) clamp(1rem, 3vw, 2.8rem) clamp(1rem, 2vw, 2.2rem);
 }
 
 .hero-copy {
   display: grid;
-  gap: 1.35rem;
+  gap: clamp(0.75rem, 1.5vw, 1.35rem);
   min-width: 0;
   max-width: 40rem;
 }
@@ -333,16 +341,17 @@ function openWork(product: PortfolioProduct): void {
 .hero-copy h1 {
   margin: 0;
   color: #0f1422;
-  font-size: 2.75rem;
+  font-size: clamp(1.8rem, 5vw, 2.75rem);
   line-height: 1.12;
+  letter-spacing: -0.02em;
 }
 
 .hero-copy p {
   max-width: 34rem;
   margin: 0;
   color: #536072;
-  font-size: 1.08rem;
-  line-height: 1.9;
+  font-size: var(--font-body);
+  line-height: 1.8;
 }
 
 .hero-actions,
@@ -350,7 +359,7 @@ function openWork(product: PortfolioProduct): void {
 .chip-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.75rem;
+  gap: var(--space-s);
   align-items: center;
 }
 
@@ -360,23 +369,34 @@ function openWork(product: PortfolioProduct): void {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 0.35rem;
   max-width: 100%;
-  min-height: 2.75rem;
-  border-radius: 8px;
+  min-height: 2.6rem;
+  border-radius: var(--radius-md);
   text-align: center;
   font-weight: 700;
+  transition: all var(--transition-normal);
 }
 
 .primary-action,
 .secondary-action {
-  padding: 0.7rem 1.3rem;
+  padding: 0.65rem 1.2rem;
 }
 
 .primary-action {
   border: 1px solid #4f46e5;
   background: linear-gradient(135deg, #4f46e5, #2466d8);
   color: #fff;
-  box-shadow: 0 14px 26px rgba(55, 79, 211, 0.22);
+  box-shadow: 0 8px 20px rgba(55, 79, 211, 0.22);
+}
+
+.primary-action:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 28px rgba(55, 79, 211, 0.32);
+}
+
+.primary-action:active {
+  transform: translateY(0);
 }
 
 .secondary-action {
@@ -385,10 +405,16 @@ function openWork(product: PortfolioProduct): void {
   color: #182236;
 }
 
+.secondary-action:hover {
+  border-color: var(--primary-light);
+  background: #fff;
+  color: var(--primary);
+}
+
+/* ─── Hero Feature ─── */
 .hero-feature {
   position: relative;
   min-width: 0;
-  min-height: 20rem;
 }
 
 .ghost-card,
@@ -397,7 +423,7 @@ function openWork(product: PortfolioProduct): void {
 .work-card,
 .direction-card {
   border: 1px solid rgba(219, 225, 238, 0.94);
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   background: rgba(255, 255, 255, 0.9);
   box-shadow: var(--shadow-soft);
 }
@@ -408,6 +434,7 @@ function openWork(product: PortfolioProduct): void {
   width: 82%;
   height: 72%;
   opacity: 0.56;
+  pointer-events: none;
 }
 
 .ghost-card.one {
@@ -425,18 +452,23 @@ function openWork(product: PortfolioProduct): void {
   position: relative;
   display: grid;
   grid-template-columns: 0.9fr 1fr;
-  gap: 1.2rem;
+  gap: clamp(0.75rem, 1.5vw, 1.2rem);
   min-width: 0;
-  min-height: 18rem;
-  padding: 1.15rem;
+  padding: clamp(0.75rem, 1.5vw, 1.15rem);
+  transition: box-shadow var(--transition-normal), transform var(--transition-normal);
 }
 
+.spotlight-card:hover {
+  box-shadow: var(--shadow-hover);
+}
+
+/* ─── Cover Frames ─── */
 .cover-frame {
   position: relative;
   display: grid;
   place-items: center;
   overflow: hidden;
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   background:
     linear-gradient(135deg, rgba(255, 255, 255, 0.26), rgba(255, 255, 255, 0)),
     linear-gradient(135deg, #11145c, #2932b5 48%, #0f9f8f);
@@ -444,22 +476,29 @@ function openWork(product: PortfolioProduct): void {
 
 .cover-frame.large {
   aspect-ratio: 4 / 3;
-  min-height: 15.5rem;
 }
 
 .cover-frame.small,
 .update-card .cover-frame {
-  width: 8.7rem;
-  height: 6.4rem;
-  flex: 0 0 8.7rem;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  max-width: 10rem;
+  flex: 0 0 auto;
 }
 
 .cover-frame img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform var(--transition-slow);
 }
 
+.spotlight-card:hover .cover-frame img,
+.work-card:hover .cover-frame img {
+  transform: scale(1.03);
+}
+
+/* ─── Daily Mark (placeholder) ─── */
 .daily-mark {
   position: relative;
   display: grid;
@@ -469,14 +508,14 @@ function openWork(product: PortfolioProduct): void {
   aspect-ratio: 1.16;
   padding: 1rem;
   border: 1px solid rgba(255, 255, 255, 0.36);
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   background: rgba(255, 255, 255, 0.13);
   color: #fff;
   box-shadow: inset 0 0 2rem rgba(255, 255, 255, 0.14);
 }
 
 .daily-mark.compact {
-  width: 6.5rem;
+  width: clamp(4rem, 8vw, 6.5rem);
 }
 
 .daily-mark span {
@@ -493,13 +532,14 @@ function openWork(product: PortfolioProduct): void {
   letter-spacing: 0;
 }
 
+/* ─── Shared Typography ─── */
 .spotlight-copy,
 .update-copy,
 .work-copy,
 .direction-card {
   display: grid;
   align-content: center;
-  gap: 0.78rem;
+  gap: 0.65rem;
   min-width: 0;
 }
 
@@ -507,19 +547,20 @@ function openWork(product: PortfolioProduct): void {
 .chip-row span {
   width: fit-content;
   border: 1px solid #dfe6f2;
-  border-radius: 8px;
+  border-radius: 999px;
   background: #f7f9ff;
   color: #405071;
-  font-size: 0.78rem;
-  font-weight: 800;
+  font-size: clamp(0.7rem, 0.9vw, 0.78rem);
+  font-weight: 700;
+  letter-spacing: 0.02em;
 }
 
 .eyebrow {
-  padding: 0.32rem 0.58rem;
+  padding: 0.28rem 0.65rem;
 }
 
 .chip-row span {
-  padding: 0.28rem 0.54rem;
+  padding: 0.22rem 0.55rem;
   max-width: 100%;
   overflow-wrap: anywhere;
 }
@@ -540,7 +581,7 @@ function openWork(product: PortfolioProduct): void {
 }
 
 .spotlight-card h2 {
-  font-size: 1.65rem;
+  font-size: var(--font-xl);
 }
 
 .spotlight-card p,
@@ -550,41 +591,49 @@ function openWork(product: PortfolioProduct): void {
 .timeline-item p {
   margin: 0;
   color: #5d687a;
+  font-size: var(--font-sm);
   line-height: 1.72;
   overflow-wrap: anywhere;
 }
 
+/* ═══════════════════════════════════════
+   Sections
+   ═══════════════════════════════════════ */
 .portfolio-section {
-  margin-top: 1.5rem;
+  margin-top: var(--space-xl);
 }
 
 .section-heading {
-  margin-bottom: 0.8rem;
+  margin-bottom: var(--space-m);
 }
 
 .section-heading h2 {
   margin: 0;
-  font-size: 1.22rem;
+  font-size: var(--font-xl);
   line-height: 1.2;
+  letter-spacing: -0.01em;
 }
 
+/* ═══════════════════════════════════════
+   Updates Panel
+   ═══════════════════════════════════════ */
 .updates-panel {
   display: grid;
-  grid-template-columns: minmax(0, 0.95fr) minmax(18rem, 0.9fr);
-  gap: 1.3rem;
-  padding: 1.25rem;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(0.75rem, 1.5vw, 1.3rem);
+  padding: clamp(0.75rem, 1.5vw, 1.25rem);
 }
 
 .update-card {
   display: flex;
-  gap: 1rem;
+  gap: var(--space-m);
   align-items: center;
   min-width: 0;
 }
 
 .meta-line {
   color: #6b7588;
-  font-size: 0.9rem;
+  font-size: var(--font-sm);
 }
 
 .text-action {
@@ -592,14 +641,19 @@ function openWork(product: PortfolioProduct): void {
   padding: 0;
   border: 0;
   background: transparent;
-  color: #3f48d8;
+  color: var(--primary);
   cursor: pointer;
+  font-size: var(--font-sm);
 }
 
+.text-action:hover {
+  color: var(--primary-dark);
+}
+
+/* ─── Timeline ─── */
 .timeline {
   display: grid;
-  max-height: 15rem;
-  overflow-y: auto;
+  gap: 0;
   padding: 0.1rem 0.2rem 0.1rem 0;
 }
 
@@ -616,7 +670,7 @@ function openWork(product: PortfolioProduct): void {
   top: 1.05rem;
   bottom: 0;
   left: 0.44rem;
-  width: 1px;
+  width: 1.5px;
   background: #dce3ef;
   content: "";
 }
@@ -633,85 +687,152 @@ function openWork(product: PortfolioProduct): void {
   margin-top: 0.2rem;
   border-radius: 50%;
   background: #c8d0de;
+  transition: all var(--transition-normal);
 }
 
 .timeline-item.active .timeline-dot {
-  background: #4f46e5;
+  background: var(--primary);
   box-shadow: 0 0 0 0.34rem rgba(79, 70, 229, 0.13);
 }
 
 .timeline-item h3 {
-  font-size: 0.98rem;
+  font-size: clamp(0.85rem, 1vw, 0.98rem);
 }
 
 .timeline-item p {
-  margin-top: 0.28rem;
-  font-size: 0.92rem;
+  margin-top: 0.2rem;
+  font-size: clamp(0.82rem, 0.95vw, 0.92rem);
 }
 
+/* ═══════════════════════════════════════
+   Work Grid
+   ═══════════════════════════════════════ */
 .work-grid,
 .direction-grid {
   display: grid;
-  gap: 1rem;
+  gap: var(--space-m);
 }
 
 .work-grid {
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr));
 }
 
 .direction-grid {
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr));
 }
 
 .work-card {
   display: grid;
-  gap: 1rem;
+  gap: var(--space-m);
   align-content: start;
-  min-height: 18rem;
-  padding: 1rem;
+  padding: clamp(0.75rem, 1.5vw, 1rem);
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.work-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-hover);
 }
 
 .placeholder {
   border-style: dashed;
-  background: rgba(250, 252, 255, 0.82);
+  background: linear-gradient(
+    135deg,
+    rgba(250, 252, 255, 0.82),
+    rgba(243, 246, 255, 0.6)
+  );
 }
 
 .placeholder-icon,
 .direction-icon {
   display: grid;
   place-items: center;
-  width: 3rem;
-  height: 3rem;
+  width: 2.8rem;
+  height: 2.8rem;
   border: 1px solid #dfe6f2;
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   background: #f7f9ff;
   color: #39445c;
   font-weight: 900;
+  font-size: 1.1rem;
+  transition: all var(--transition-normal);
 }
 
 .direction-card {
-  min-height: 11rem;
-  padding: 1rem;
+  padding: clamp(0.75rem, 1.5vw, 1rem);
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal), border-color var(--transition-normal);
 }
 
+.direction-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--primary-light);
+}
+
+.direction-card:hover .direction-icon {
+  background: rgba(79, 70, 229, 0.08);
+  border-color: var(--primary-light);
+  color: var(--primary);
+}
+
+/* ═══════════════════════════════════════
+   Footer
+   ═══════════════════════════════════════ */
 .portfolio-footer {
   display: flex;
   justify-content: space-between;
-  gap: 1rem;
+  gap: var(--space-m);
   align-items: center;
-  margin: 1.8rem 0 0.5rem;
-  padding: 1.1rem 0 0;
+  margin: var(--space-2xl) 0 0;
+  padding: var(--space-l) var(--space-m) var(--space-s);
   border-top: 1px solid #e2e7f1;
   color: #667187;
+  font-size: var(--font-sm);
 }
 
-.portfolio-footer nav {
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-s);
+}
+
+.footer-logo {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 4px;
+  background: linear-gradient(135deg, #7d5cff, #2e5cf4);
+  flex-shrink: 0;
+}
+
+.footer-logo span {
+  width: 0.3rem;
+  height: 0.9rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.footer-nav {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: var(--space-m);
   align-items: center;
 }
 
+.footer-nav a {
+  color: #667187;
+  transition: color var(--transition-fast);
+}
+
+.footer-nav a:hover {
+  color: var(--primary);
+}
+
+/* ═══════════════════════════════════════
+   Responsive Breakpoints
+   ═══════════════════════════════════════ */
 @media (max-width: 980px) {
   .portfolio-hero,
   .updates-panel {
@@ -719,19 +840,14 @@ function openWork(product: PortfolioProduct): void {
   }
 
   .portfolio-hero {
-    gap: 2rem;
-    min-height: auto;
-    padding: 2.4rem 1.5rem 1.6rem;
+    gap: clamp(1.2rem, 3vw, 2rem);
+    padding: clamp(1.5rem, 3vw, 2.4rem) clamp(0.75rem, 2vw, 1.5rem) clamp(1rem, 2vw, 1.6rem);
   }
 }
 
 @media (max-width: 680px) {
   .portfolio-hero {
-    padding: 2rem 0 1rem;
-  }
-
-  .hero-copy h1 {
-    font-size: 2.1rem;
+    padding: clamp(1rem, 3vw, 2rem) 0 clamp(0.5rem, 2vw, 1rem);
   }
 
   .spotlight-card,
@@ -749,16 +865,15 @@ function openWork(product: PortfolioProduct): void {
   }
 
   .spotlight-card {
-    min-height: auto;
-    padding: 0.85rem;
+    padding: 0.75rem;
   }
 
   .cover-frame.large {
-    min-height: 12rem;
+    min-height: auto;
   }
 
   .updates-panel {
-    padding: 0.85rem;
+    padding: 0.75rem;
   }
 
   .update-card {
@@ -768,18 +883,19 @@ function openWork(product: PortfolioProduct): void {
 
   .update-card .cover-frame {
     width: 100%;
-    height: auto;
+    max-width: none;
     aspect-ratio: 16 / 9;
     flex-basis: auto;
   }
 
   .work-card {
-    min-height: auto;
+    padding: 0.85rem;
   }
 
   .portfolio-footer {
     flex-direction: column;
     align-items: flex-start;
+    gap: var(--space-s);
   }
 }
 
@@ -792,6 +908,18 @@ function openWork(product: PortfolioProduct): void {
   .primary-action,
   .secondary-action {
     width: 100%;
+  }
+
+  .cover-frame.small,
+  .update-card .cover-frame {
+    max-width: none;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+  }
+
+  .work-grid,
+  .direction-grid {
+    grid-template-columns: 1fr;
   }
 }
 </style>

@@ -17,7 +17,9 @@ const publishedDate = computed(() => props.release.published_at?.slice(0, 10) ??
 
 <template>
   <section class="release-toolbar">
-    <button type="button" class="back-link" @click="emit('back')">返回</button>
+    <button type="button" class="back-link" @click="emit('back')">
+      <span aria-hidden="true">←</span> 返回
+    </button>
 
     <div class="release-title">
       <p>{{ release.product_code }}</p>
@@ -47,23 +49,40 @@ const publishedDate = computed(() => props.release.published_at?.slice(0, 10) ??
 .release-toolbar {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) auto;
-  gap: 1rem;
+  gap: var(--space-m);
   align-items: center;
-  margin-top: 1rem;
-  padding: 1rem;
+  margin-top: var(--space-m);
+  padding: clamp(0.75rem, 1.5vw, 1rem);
   border: 1px solid var(--line);
-  border-radius: 8px;
+  border-radius: var(--radius-lg);
   background: var(--surface);
   box-shadow: var(--shadow-soft);
 }
 
 .back-link {
-  padding: 0.6rem 0.8rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.5rem 0.85rem;
   border: 1px solid var(--line);
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   background: #fbfcff;
   color: var(--primary-dark);
+  font-size: var(--font-sm);
+  font-weight: 600;
   cursor: pointer;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+
+.back-link:hover {
+  background: var(--surface-subtle);
+  border-color: var(--primary-light);
+  color: var(--primary);
+}
+
+.back-link:active {
+  transform: scale(0.97);
 }
 
 .release-title {
@@ -80,37 +99,48 @@ const publishedDate = computed(() => props.release.published_at?.slice(0, 10) ??
 
 .release-title p {
   color: var(--primary);
-  font-size: 0.82rem;
+  font-size: var(--font-sm);
+  font-weight: 600;
+  letter-spacing: 0.03em;
 }
 
 .release-title h1 {
   overflow-wrap: anywhere;
-  font-size: 1.35rem;
+  font-size: var(--font-xl);
+  letter-spacing: -0.01em;
+  line-height: 1.25;
 }
 
 .release-meta {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.65rem;
+  gap: var(--space-xs);
   min-width: 0;
 }
 
 .release-meta div {
-  min-width: 5.4rem;
-  padding: 0.52rem 0.65rem;
+  min-width: 5rem;
+  padding: 0.4rem 0.6rem;
   border: 1px solid var(--line);
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   background: var(--surface-subtle);
+  transition: border-color var(--transition-fast);
+}
+
+.release-meta div:hover {
+  border-color: rgba(79, 70, 229, 0.2);
 }
 
 .release-meta dt {
   color: var(--muted);
-  font-size: 0.74rem;
+  font-size: clamp(0.68rem, 0.8vw, 0.74rem);
+  font-weight: 500;
 }
 
 .release-meta dd {
-  margin-top: 0.18rem;
+  margin-top: 0.15rem;
   font-weight: 700;
+  font-size: var(--font-sm);
 }
 
 @media (max-width: 820px) {
@@ -131,12 +161,12 @@ const publishedDate = computed(() => props.release.published_at?.slice(0, 10) ??
 
 @media (max-width: 520px) {
   .release-toolbar {
-    margin-top: 0.75rem;
-    padding: 0.85rem;
+    margin-top: var(--space-s);
+    padding: 0.75rem;
   }
 
   .release-title h1 {
-    font-size: 1.16rem;
+    font-size: var(--font-lg);
   }
 }
 </style>

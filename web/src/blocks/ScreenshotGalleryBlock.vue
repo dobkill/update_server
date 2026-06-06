@@ -19,8 +19,13 @@ defineProps<{
 
     <div class="gallery-grid">
       <article v-for="item in items ?? []" :key="item.title" class="shot-card">
-        <img :src="item.image" :alt="item.title" loading="lazy" />
-        <div>
+        <div class="shot-image-wrap">
+          <img :src="item.image" :alt="item.title" loading="lazy" />
+          <div class="shot-overlay">
+            <span>{{ item.title }}</span>
+          </div>
+        </div>
+        <div class="shot-info">
           <h4>{{ item.title }}</h4>
           <p v-if="item.desc">{{ item.desc }}</p>
         </div>
@@ -32,12 +37,12 @@ defineProps<{
 <style scoped>
 .gallery {
   display: grid;
-  gap: 1rem;
+  gap: var(--space-m);
 }
 
 .gallery-head {
   display: grid;
-  gap: 0.45rem;
+  gap: 0.35rem;
 }
 
 .gallery-head h3,
@@ -48,30 +53,42 @@ defineProps<{
 }
 
 .gallery-head h3 {
-  font-size: 1.55rem;
+  font-size: var(--font-xl);
 }
 
-.gallery-head p,
-.shot-card p {
+.gallery-head p {
   color: var(--muted);
+  font-size: var(--font-body);
   line-height: 1.65;
 }
 
 .gallery-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
+  gap: var(--space-m);
 }
 
 .shot-card {
   display: grid;
-  gap: 0.85rem;
+  gap: 0.75rem;
   min-width: 0;
-  padding: 0.8rem;
+  padding: 0.65rem;
   border: 1px solid var(--line);
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   background: var(--surface);
   box-shadow: var(--shadow-soft);
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.shot-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-hover);
+}
+
+.shot-image-wrap {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-sm);
 }
 
 .shot-card img {
@@ -80,19 +97,50 @@ defineProps<{
   aspect-ratio: 16 / 9;
   object-fit: cover;
   object-position: top center;
-  border-radius: 6px;
-  border: 1px solid var(--line);
   background: #eef2f7;
+  transition: transform var(--transition-slow);
 }
 
-.shot-card h4 {
-  font-size: 1rem;
+.shot-card:hover .shot-image-wrap img {
+  transform: scale(1.05);
+}
+
+.shot-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 0.75rem;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.5), transparent 60%);
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+}
+
+.shot-card:hover .shot-overlay {
+  opacity: 1;
+}
+
+.shot-overlay span {
+  color: #fff;
+  font-weight: 600;
+  font-size: var(--font-sm);
+}
+
+.shot-info h4 {
+  font-size: 0.95rem;
   overflow-wrap: anywhere;
+}
+
+.shot-info p {
+  color: var(--muted);
+  font-size: var(--font-sm);
+  line-height: 1.5;
 }
 
 @media (max-width: 520px) {
   .gallery-head h3 {
-    font-size: 1.3rem;
+    font-size: var(--font-lg);
   }
 }
 </style>

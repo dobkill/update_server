@@ -161,57 +161,173 @@ watchEffect(() => {
     :profile="shellProfile"
     @home="openCatalog"
   >
-    <section v-if="loading" class="state-card">
-      <strong>加载中</strong>
-      <span>正在读取发布数据...</span>
-    </section>
+    <Transition name="page-fade" mode="out-in">
+      <section v-if="loading" key="loading" class="state-card loading-state">
+        <div class="spinner" aria-hidden="true">
+          <span></span>
+        </div>
+        <div class="state-copy">
+          <strong>加载中</strong>
+          <span>正在读取发布数据…</span>
+        </div>
+      </section>
 
-    <section v-else-if="error" class="state-card warning">
-      <strong>提示</strong>
-      <span>{{ error }}</span>
-    </section>
+      <section v-else-if="error && !release" key="error" class="state-card error-state">
+        <div class="error-icon" aria-hidden="true">⚠</div>
+        <div class="state-copy">
+          <strong>提示</strong>
+          <span>{{ error }}</span>
+        </div>
+      </section>
 
-    <ProductCatalogPage
-      v-if="!loading && currentLocation.page === 'catalog'"
-      :home="portfolioHome"
-      @open="openProduct"
-    />
+      <ProductCatalogPage
+        v-else-if="currentLocation.page === 'catalog'"
+        key="catalog"
+        :home="portfolioHome"
+        @open="openProduct"
+      />
 
-    <ReleaseDetailPage
-      v-else-if="!loading && release && currentLocation.page === 'release'"
-      :release="release"
-      :blocks="releaseBlocks"
-      @back="openCatalog"
-    />
+      <ReleaseDetailPage
+        v-else-if="release && currentLocation.page === 'release'"
+        key="release"
+        :release="release"
+        :blocks="releaseBlocks"
+        @back="openCatalog"
+      />
+    </Transition>
+
+    <!-- Soft error bar when data loaded from fallback -->
+    <Transition name="slide-up">
+      <div v-if="error && release" class="soft-error-bar">
+        <span>{{ error }}</span>
+      </div>
+    </Transition>
   </AppShell>
 </template>
 
 <style scoped>
-.state-card {
+/* ─── Loading State ─── */
+.loading-state {
   display: flex;
-  gap: 0.65rem;
+  gap: var(--space-m);
   align-items: center;
-  margin: 1rem auto 0.4rem;
-  padding: 0.85rem 1rem;
+  justify-content: center;
+  margin: var(--space-xl) auto;
+  padding: var(--space-l) var(--space-xl);
   border: 1px solid var(--line);
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.86);
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.9);
   box-shadow: var(--shadow-soft);
 }
 
-.state-card.warning {
-  border-color: rgba(183, 121, 31, 0.35);
-  background: #fff8ec;
+.spinner {
+  position: relative;
+  width: 2rem;
+  height: 2rem;
+  flex-shrink: 0;
 }
 
-.state-card span {
+.spinner span {
+  position: absolute;
+  inset: 0;
+  border: 2.5px solid var(--line);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ─── Error State ─── */
+.error-state {
+  display: flex;
+  gap: var(--space-m);
+  align-items: flex-start;
+  margin: var(--space-xl) auto;
+  padding: var(--space-l) var(--space-xl);
+  border: 1px solid rgba(220, 80, 60, 0.25);
+  border-radius: var(--radius-lg);
+  background: #fff6f5;
+  box-shadow: var(--shadow-soft);
+}
+
+.error-icon {
+  font-size: 1.4rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+/* ─── Shared state card ─── */
+.state-card .state-copy {
+  display: grid;
+  gap: 0.2rem;
+  min-width: 0;
+}
+
+.state-card .state-copy span {
   color: var(--muted);
+  font-size: var(--font-sm);
 }
 
+/* ─── Soft Error Bar ─── */
+.soft-error-bar {
+  position: fixed;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 200;
+  padding: 0.55rem 1.1rem;
+  border: 1px solid rgba(183, 121, 31, 0.3);
+  border-radius: var(--radius-xl);
+  background: #fff8ec;
+  color: #8a6d2b;
+  font-size: var(--font-sm);
+  box-shadow: var(--shadow-soft);
+  white-space: nowrap;
+  max-width: 90vw;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ─── Page Fade Transition ─── */
+.page-fade-enter-active,
+.page-fade-leave-active {
+  transition: opacity var(--transition-normal);
+}
+
+.page-fade-enter-from,
+.page-fade-leave-to {
+  opacity: 0;
+}
+
+/* ─── Slide-up Transition ─── */
+.slide-up-enter-active,
+.slide-up-leave-active {
+  transition: all var(--transition-normal);
+}
+
+.slide-up-enter-from,
+.slide-up-leave-to {
+  opacity: 0;
+  transform: translateX(-50%) translateY(1rem);
+}
+
+/* ─── Responsive ─── */
 @media (max-width: 560px) {
-  .state-card {
+  .loading-state,
+  .error-state {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
+    text-align: center;
+  }
+
+  .soft-error-bar {
+    white-space: normal;
+    text-align: center;
   }
 }
 </style>

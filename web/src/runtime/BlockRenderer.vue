@@ -45,7 +45,7 @@ const componentMap = {
 <style scoped>
 .blocks {
   display: grid;
-  gap: 1.5rem;
-  padding: 1.5rem 0 4rem;
+  gap: clamp(1rem, 2.5vw, 1.5rem);
+  padding: var(--space-l) 0 var(--space-2xl);
 }
 </style>
