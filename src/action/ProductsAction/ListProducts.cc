@@ -1,9 +1,10 @@
 #include "action/ProductsAction.h"
 
 namespace Action {
-    json ProductsAction::ListProducts(){
+    json ProductsAction::ListProducts()
+    {
         if (!storage) {
-            return {{"code", 500}, {"message", "storage not initialized"}, {"data", json::object()}};
+            return {{"code", 500}, {"message", "storage not initialized"}, {"data", {{"items", json::array()}}}};
         }
 
         return {

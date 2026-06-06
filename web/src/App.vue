@@ -5,12 +5,13 @@ import ReleaseDetailPage from "./pages/ReleaseDetailPage.vue";
 import { composeReleaseBlocks } from "./runtime/pageComposer";
 import {
   defaultReleaseChannel,
-  fetchProducts,
+  fetchPortfolioHome,
   fetchReleaseDetail,
+  type PortfolioHomeData,
   type ProductReleaseDetail,
-  type ProductSummary
+  type SiteProfile
 } from "./runtime/api";
-import { getMockProducts, getMockReleaseDetail } from "./runtime/mockData";
+import { getMockPortfolioHome, getMockReleaseDetail } from "./runtime/mockData";
 import {
   buildCatalogUrl,
   buildReleaseUrl,
@@ -20,15 +21,21 @@ import {
 import AppShell from "./shell/AppShell.vue";
 
 const currentLocation = ref(getCurrentAppLocation());
-const products = ref<ProductSummary[]>([]);
+const portfolioHome = ref<PortfolioHomeData>(getMockPortfolioHome());
 const release = ref<ProductReleaseDetail | null>(null);
-const keyword = ref("");
 const loading = ref(true);
 const error = ref("");
 
+const emptyProfile: SiteProfile = {
+  site_name: "YXX Works",
+  subtitle: "产品、插件与创作实验",
+  github_url: "",
+  email: ""
+};
+
 const title = computed(() => {
   if (currentLocation.value.page === "catalog") {
-    return "产品与插件 | 更新平台";
+    return `${portfolioHome.value.profile.site_name || "YXX Works"} | ${portfolioHome.value.profile.subtitle || "产品、插件与创作实验"}`;
   }
 
   return release.value
@@ -36,21 +43,8 @@ const title = computed(() => {
     : "版本详情 | 更新平台";
 });
 
-const filteredProducts = computed(() => {
-  const needle = keyword.value.trim().toLowerCase();
-  if (!needle) {
-    return products.value;
-  }
-
-  return products.value.filter((item) =>
-    [item.product_code, item.name, item.summary]
-      .join(" ")
-      .toLowerCase()
-      .includes(needle)
-  );
-});
-
 const releaseBlocks = computed(() => (release.value ? composeReleaseBlocks(release.value) : []));
+const shellProfile = computed(() => portfolioHome.value?.profile ?? emptyProfile);
 const currentProductCode = computed(() =>
   currentLocation.value.page === "release" ? currentLocation.value.productCode : ""
 );
@@ -70,22 +64,21 @@ async function loadCatalogPage() {
   error.value = "";
   release.value = null;
 
-  const remoteProducts = await fetchProducts();
-  if (remoteProducts) {
-    products.value = remoteProducts;
+  const remoteHome = await fetchPortfolioHome();
+  if (remoteHome) {
+    portfolioHome.value = remoteHome;
     loading.value = false;
     return;
   }
 
-  products.value = getMockProducts();
-  error.value = "接口暂不可用，当前显示本地示例数据。";
+  portfolioHome.value = getMockPortfolioHome();
+  error.value = "";
   loading.value = false;
 }
 
 async function loadReleasePage(productCode: string, version: string, channel: string) {
   loading.value = true;
   error.value = "";
-  products.value = [];
 
   const remoteRelease = await fetchReleaseDetail(productCode, version, channel);
   if (remoteRelease) {
@@ -165,6 +158,7 @@ watchEffect(() => {
   <AppShell
     :current-product-code="currentProductCode"
     :current-version="currentVersion"
+    :profile="shellProfile"
     @home="openCatalog"
   >
     <section v-if="loading" class="state-card">
@@ -179,9 +173,7 @@ watchEffect(() => {
 
     <ProductCatalogPage
       v-if="!loading && currentLocation.page === 'catalog'"
-      :items="filteredProducts"
-      :keyword="keyword"
-      @update:keyword="keyword = $event"
+      :home="portfolioHome"
       @open="openProduct"
     />
 
@@ -199,11 +191,11 @@ watchEffect(() => {
   display: flex;
   gap: 0.65rem;
   align-items: center;
-  margin: 1rem auto 0;
+  margin: 1rem auto 0.4rem;
   padding: 0.85rem 1rem;
   border: 1px solid var(--line);
   border-radius: 8px;
-  background: var(--surface);
+  background: rgba(255, 255, 255, 0.86);
   box-shadow: var(--shadow-soft);
 }
 

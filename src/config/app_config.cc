@@ -50,6 +50,10 @@ namespace Config {
         try{
             json config_json;
             file >> config_json;
+            
+            if(config_json.contains("sql_file"))
+                sql_file = config_json["sql_file"].get<std::string>();
+            
             if(config_json.contains("worker_num"))
                 worker_num = config_json["worker_num"].get<int>();
             if(config_json.contains("app_name"))
@@ -109,6 +113,10 @@ namespace Config {
 
     std::string AppConfig::getUploadTaskDir() const{
         return upload_task_dir;
+    }
+    
+    std::string AppConfig::getSqlFile() const{
+        return sql_file;
     }
 
     std::string AppConfig::getDownloadTaskDir() const{

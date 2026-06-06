@@ -1,6 +1,6 @@
 #include "service/ApiRoutes.h"
-namespace Router{   
 
+namespace Router {
 
 void ApiRoutes::register_products_routes()
 {

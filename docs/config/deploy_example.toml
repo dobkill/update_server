@@ -1,101 +1,74 @@
-# ============================================================
-# 管理员操作配置文件 — 编辑后运行:
-#   python python/admin/admin.py
-#
-# admin.py 会交互式选择配置文件，并默认先预演不写库。
-# 自动化场景可使用环境变量:
-#   ADMIN_CONFIG=config/deploy.toml ADMIN_DRY_RUN=0 python python/admin/admin.py
-# ============================================================
+# 管理员操作配置文件
+# 运行: ADMIN_CONFIG=config/deploy_example.toml ADMIN_DRY_RUN=1 python python/admin/admin.py
 
-# ── 1. 添加产品（首次注册新产品时填写）─────────────────
+[site_profile]
+site_name = "YXX Works"
+subtitle = "产品、插件与创作实验"
+github_url = ""
+email = ""
 
 [[product]]
-name = "Project Manage"
-code = "project-manage"
-description = "项目管理小项目"
-icon_path = "/public/icons/project-manage.png"
-status = "active"          # active | disabled | archived
+name = "Daily"
+code = "Daily"
+github_url = ""
+description = "Obsidian 插件，用来管理每日任务、快速记录和项目规划进度。"
+icon_path = "/data/releases/Daily/v1.0.0/icon/image.png"
+status = "active"
 
-# 可以一次添加多个产品:
-# [[product]]
-# name = "Another App"
-# code = "another-app"
-# description = "另一个应用"
+[[future_direction]]
+title = "Obsidian 插件增强"
+comment = "持续优化记录、任务与知识管理体验。"
+icon_path = ""
+sort_order = 10
+status = "active"
 
-# ── 2. 注册版本（核心操作）───────────────────────────
-# release 包含内嵌的 asset（全量包）和 channel（渠道发布）
-# 按依赖顺序自动编排: 版本 → 全量包 → 渠道
+[[future_direction]]
+title = "效率工具"
+comment = "开发更轻量、专注的个人效率工具。"
+icon_path = ""
+sort_order = 20
+status = "active"
+
+[[future_direction]]
+title = "Web 实验"
+comment = "尝试小型 Web 产品与交互实验，探索新的表达方式。"
+icon_path = ""
+sort_order = 30
+status = "active"
+
+[[recommendation]]
+product_code = "Daily"
+sort_order = 10
+status = "active"
 
 [[release]]
-product_code = "project-manage"
-version = "2.3.1"
-release_note = "修复导出卡死问题，优化首页加载速度"
-data_schema_version = "2"
-status = "active"          # draft | active | deprecated | yanked
-vue_path = "/public/releases/project-manage/2.3.1/entry.js"
-
-# 全量安装包（可多个平台）
-[[release.asset]]
-platform = "windows"       # windows | linux | macos | obsidian
-arch = "x64"               # x64 | arm64 | x86 | any
-package_type = "portable"  # portable | installer | appimage 等
-file_path = "./data/packages/project-manage/2.3.1/installer.exe"
-auto_hash = true           # 自动计算 SHA256 和 MD5
-auto_size = true           # 自动获取文件大小
+product_code = "Daily"
+version = "v1.0.0"
+release_note = "Daily v1.0.0 首个可用版本。"
+data_schema_version = "v1.0.0"
+status = "active"
+vue_path = "/data/releases/Daily/v1.0.0/vue/DailyReleasePage.vue"
 
 [[release.asset]]
-platform = "linux"
-arch = "x64"
-package_type = "appimage"
-file_path = "./data/packages/project-manage/2.3.1/project-manage.AppImage"
+platform = "obsidian"
+arch = "any"
+package_type = "plugin"
+file_path = "./data/packages/Daily/v1.0.0/Daily-v1.0.0.zip"
 auto_hash = true
 auto_size = true
 
-# 渠道发布
 [[release.channel]]
-channel = "stable"         # stable | beta | dev
+channel = "stable"
 is_latest = true
-# platform/arch/package_type 省略时，自动取第一个 asset 的值
-
-# ── 3. 增量更新包（可选）─────────────────────────────
-
-[[update_package]]
-product_code = "project-manage"
-source_version = "2.3.0"
-target_version = "2.3.1"
-platform = "windows"
-arch = "x64"
-package_type = "portable"
-file_path = "./data/packages/project-manage/patch_2.3.0_to_2.3.1.patch"
-auto_hash = true
-auto_size = true
-
-# ── 4. 数据转换规则（可选）───────────────────────────
 
 [[convert_rule]]
-product_code = "project-manage"
-source_schema = "1"
-target_schema = "2"
-script_path = "python/convert/project-manage/convert_v1_to_v2.py"
-cost_time = 10
-auto_hash = true
+product_code = "Daily"
+source_schema = "v0.9.0"
+target_schema = "v1.0.0"
+script_path = "python/convert/convert_data.py"
+cost_time = 5
+auto_hash = false
 
-# ── 5. 页面运维（可选）───────────────────────────────
-
-# [page_publish]
-# manifest = "./data/releases/page_manifest.json"
-# assets = "./data/releases/assets"
-# target = "active"         # staging | active
-
-# [page_offline]
-# page_key = "project-manage"
-# action = "offline"        # online | offline
-
-# [page_rollback]
-# page_key = "project-manage"
-
-# ── 6. 系统运维（可选）───────────────────────────────
-
-# [cleanup]
-# directory = "./data/temp"
-# older_than_hours = 24
+[cleanup]
+directory = "./data/temp"
+older_than_hours = 24

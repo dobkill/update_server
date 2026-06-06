@@ -25,6 +25,10 @@ namespace Storage {
         json getLatestRelease(const std::string &product_code,const std::string& platform,const std::string& arch,const std::string& package_type);
         json getALLReleases(const std::string &product_code);
         json getALLPackages(const std::string &product_code);
+        json getRecommendations();
+        json getSiteProfile();
+        json getFutureDirections();
+        json getRecentUpdates(int limit = 10);
         bool addTask(
             const std::string &task_id,
             const int product_id,
@@ -53,6 +57,8 @@ namespace Storage {
         bool readSQLFile(const std::string& file_path, std::string& sql_content);
         void execSQL(const std::string& sql);
         bool tableExists(const std::string &table_name);
+        bool columnExists(const std::string &table_name, const std::string &column_name);
+        bool ensurePortfolioSchema();
         json queryRows(const std::string &sql, const std::vector<std::string> &params = {});
         json queryOne(const std::string &sql, const std::vector<std::string> &params = {});
         bool executeStatement(const std::string &sql, const std::vector<std::string> &params = {});

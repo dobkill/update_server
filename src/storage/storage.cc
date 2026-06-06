@@ -104,19 +104,18 @@ namespace Storage
         }
     }
 
+
+
     bool Storage_SQL::init_db()
     {
         auto config = Config::AppConfig::Instance();
         std::string db_path = config->getDatabasePath();
-
         if (db_path.empty())
         {
             std::cerr << "Database path is empty" << std::endl;
             return false;
         }
-
         std::filesystem::path db_file_path(db_path);
-
         std::error_code ec;
 
         auto parent_path = db_file_path.parent_path();
@@ -185,7 +184,7 @@ namespace Storage
         if (need_init)
         {
             std::string sql_content;
-            if (!readSQLFile(findProjectFile("migrations/002.init.sql"), sql_content))
+            if (!readSQLFile(findProjectFile(config->getSqlFile()), sql_content))
             {
                 std::cerr << "Failed to read migration file" << std::endl;
                 return false;
@@ -203,15 +202,13 @@ namespace Storage
                 sqlite3_free(errMsg);
                 return false;
             }
-
             std::cout << "Database initialized successfully" << std::endl;
         }
         else
         {
             std::cout << "Database already exists, skipping initialization" << std::endl;
         }
-
-        return true;
+        return ensurePortfolioSchema();
     }
 
     std::shared_ptr<Storage_SQL> Storage_SQL::Instance()
@@ -240,6 +237,144 @@ namespace Storage
             "SELECT name FROM sqlite_master WHERE type = 'table' AND name = ?;",
             {table_name});
         return !result.empty();
+    }
+
+    bool Storage_SQL::columnExists(const std::string &table_name, const std::string &column_name)
+    {
+        const auto rows = queryRows("PRAGMA table_info(\"" + table_name + "\");");
+        for (const auto &row : rows)
+        {
+            if (row.contains("name") && row["name"].is_string() && row["name"].get<std::string>() == column_name)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    bool Storage_SQL::ensurePortfolioSchema()
+    {
+        if (!tableExists("products"))
+        {
+            std::cerr << "products table is missing" << std::endl;
+            return false;
+        }
+
+        const std::vector<std::string> statements = {
+            "CREATE TABLE IF NOT EXISTS schema_migrations ("
+            "version TEXT PRIMARY KEY, "
+            "applied_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP, "
+            "note TEXT NOT NULL DEFAULT ''"
+            ");",
+
+            "CREATE TABLE IF NOT EXISTS product_careers ("
+            "id INTEGER PRIMARY KEY AUTOINCREMENT, "
+            "product_id INTEGER NOT NULL, "
+            "career TEXT NOT NULL, "
+            "created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP, "
+            "updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP, "
+            "FOREIGN KEY(product_id) REFERENCES products(id), "
+            "UNIQUE(product_id, career)"
+            ");",
+
+            "CREATE TABLE IF NOT EXISTS recommendations ("
+            "id INTEGER PRIMARY KEY AUTOINCREMENT, "
+            "product_id INTEGER NOT NULL, "
+            "status TEXT NOT NULL DEFAULT 'active', "
+            "sort_order INTEGER NOT NULL DEFAULT 100, "
+            "created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP, "
+            "updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP, "
+            "FOREIGN KEY(product_id) REFERENCES products(id), "
+            "CHECK(status IN ('active', 'disabled'))"
+            ");",
+
+            "CREATE TABLE IF NOT EXISTS site_profile ("
+            "id INTEGER PRIMARY KEY CHECK(id = 1), "
+            "site_name TEXT NOT NULL DEFAULT 'YXX Works', "
+            "subtitle TEXT NOT NULL DEFAULT '产品、插件与创作实验', "
+            "github_url TEXT NOT NULL DEFAULT '', "
+            "email TEXT NOT NULL DEFAULT '', "
+            "created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP, "
+            "updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP"
+            ");",
+
+            "CREATE TABLE IF NOT EXISTS future_directions ("
+            "id INTEGER PRIMARY KEY AUTOINCREMENT, "
+            "title TEXT NOT NULL, "
+            "comment TEXT NOT NULL, "
+            "icon_path TEXT NOT NULL DEFAULT '', "
+            "status TEXT NOT NULL DEFAULT 'active', "
+            "sort_order INTEGER NOT NULL DEFAULT 100, "
+            "created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP, "
+            "updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP, "
+            "CHECK(status IN ('active', 'disabled'))"
+            ");"};
+
+        for (const auto &statement : statements)
+        {
+            if (!executeStatement(statement))
+            {
+                return false;
+            }
+        }
+
+        if (!columnExists("products", "github_url") &&
+            !executeStatement("ALTER TABLE products ADD COLUMN github_url TEXT NOT NULL DEFAULT '';"))
+        {
+            return false;
+        }
+
+        if (!columnExists("recommendations", "sort_order") &&
+            !executeStatement("ALTER TABLE recommendations ADD COLUMN sort_order INTEGER NOT NULL DEFAULT 100;"))
+        {
+            return false;
+        }
+
+        if (!columnExists("future_directions", "sort_order") &&
+            !executeStatement("ALTER TABLE future_directions ADD COLUMN sort_order INTEGER NOT NULL DEFAULT 100;"))
+        {
+            return false;
+        }
+
+        if (!executeStatement(
+                "INSERT INTO site_profile (id, site_name, subtitle, github_url, email) "
+                "VALUES (1, 'YXX Works', '产品、插件与创作实验', '', '') "
+                "ON CONFLICT(id) DO NOTHING;"))
+        {
+            return false;
+        }
+
+        const std::vector<std::vector<std::string>> directions = {
+            {"Obsidian 插件增强", "持续优化记录、任务与知识管理体验。", "10"},
+            {"效率工具", "开发更轻量、专注的个人效率工具。", "20"},
+            {"Web 实验", "尝试小型 Web 产品与交互实验，探索新的表达方式。", "30"}};
+
+        for (const auto &direction : directions)
+        {
+            if (!executeStatement(
+                    "INSERT INTO future_directions (title, comment, icon_path, status, sort_order) "
+                    "SELECT ?, ?, '', 'active', ? "
+                    "WHERE NOT EXISTS (SELECT 1 FROM future_directions WHERE title = ?);",
+                    {direction[0], direction[1], direction[2], direction[0]}))
+            {
+                return false;
+            }
+        }
+
+        if (!executeStatement(
+                "INSERT INTO recommendations (product_id, status, sort_order) "
+                "SELECT id, 'active', 10 FROM products "
+                "WHERE code = 'Daily' COLLATE NOCASE "
+                "  AND status = 'active' "
+                "  AND NOT EXISTS (SELECT 1 FROM recommendations WHERE product_id = products.id);"))
+        {
+            return false;
+        }
+
+        return executeStatement(
+            "INSERT INTO schema_migrations (version, note) "
+            "VALUES ('20260606_portfolio_home', 'portfolio home schema') "
+            "ON CONFLICT(version) DO NOTHING;");
     }
 
     json Storage_SQL::queryRows(const std::string &sql, const std::vector<std::string> &params)

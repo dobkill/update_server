@@ -10,9 +10,12 @@ from admin._asset import add_asset
 from admin._channel import set_release_channel
 from admin._cleanup import clean_temp_files
 from admin._convert_rule import add_convert_rule
+from admin._future_direction import upsert_future_direction
 from admin._page import page_offline, page_publish, page_rollback
 from admin._product import add_product
+from admin._recommendation import upsert_recommendation
 from admin._release import add_release
+from admin._site_profile import set_site_profile
 from admin._update_package import add_update_package
 
 
@@ -29,7 +32,10 @@ class DeployRunner:
 
     def run_all(self) -> list[dict]:
         """按顺序执行所有配置的操作。"""
+        self._run_site_profile()
         self._run_products()
+        self._run_future_directions()
+        self._run_recommendations()
         self._run_releases()
         self._run_update_packages()
         self._run_convert_rules()
@@ -72,6 +78,19 @@ class DeployRunner:
     def _run_products(self) -> None:
         for p in self.config.get("product", []):
             self._exec("product", add_product, p)
+
+    def _run_site_profile(self) -> None:
+        profile = self.config.get("site_profile")
+        if profile is not None:
+            self._exec("site_profile", set_site_profile, profile)
+
+    def _run_future_directions(self) -> None:
+        for item in self.config.get("future_direction", []):
+            self._exec("future_direction", upsert_future_direction, item)
+
+    def _run_recommendations(self) -> None:
+        for item in self.config.get("recommendation", []):
+            self._exec("recommendation", upsert_recommendation, item)
 
     def _run_releases(self) -> None:
         """release 包含内嵌的 asset 和 channel，需按顺序编排。"""

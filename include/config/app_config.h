@@ -12,6 +12,7 @@ namespace Config {
     class AppConfig {
     public:
         static std::shared_ptr<AppConfig> Instance();
+
     public:
         std::string getAppName() const;
         std::string getDatabaseName() const;
@@ -27,6 +28,8 @@ namespace Config {
         std::string getPageArchiveDir() const;
         std::string getLogDir() const;
         std::string getConvertScript() const;
+        std::string getSqlFile() const;
+        
         int getMaxUploadSizeBytes() const;
         int getConvertResultRetentionDays() const;
         int getWorkerNum() const;
@@ -46,6 +49,7 @@ namespace Config {
         std::string page_archive_dir = "./data/releases/archive";
         std::string log_dir = "./data/logs";
         std::string convert_script = "./python/convert/convert_data.py";
+        std::string sql_file = "migrations/002.init.sql";
         int max_upload_size_bytes = 52428800;
         int convert_result_retention_days = 7;
         int worker_num = 1;

@@ -50,6 +50,29 @@ def validate_deploy_config(config: dict) -> list[str]:
         if status not in ("active", "disabled", "archived"):
             messages.append(f"product[{i}]: status='{status}' 不合法 (active/disabled/archived)")
 
+    profile = config.get("site_profile")
+    if profile is not None:
+        if "site_name" in profile and not profile.get("site_name"):
+            messages.append("site_profile: site_name 不能为空")
+        if "subtitle" in profile and not profile.get("subtitle"):
+            messages.append("site_profile: subtitle 不能为空")
+
+    for i, item in enumerate(config.get("future_direction", [])):
+        if not item.get("title"):
+            messages.append(f"future_direction[{i}]: 缺少 title")
+        if not item.get("comment"):
+            messages.append(f"future_direction[{i}]: 缺少 comment")
+        status = item.get("status", "active")
+        if status not in ("active", "disabled"):
+            messages.append(f"future_direction[{i}]: status='{status}' 不合法")
+
+    for i, item in enumerate(config.get("recommendation", [])):
+        if not item.get("product_code"):
+            messages.append(f"recommendation[{i}]: 缺少 product_code")
+        status = item.get("status", "active")
+        if status not in ("active", "disabled"):
+            messages.append(f"recommendation[{i}]: status='{status}' 不合法")
+
     # 校验 release
     for i, r in enumerate(config.get("release", [])):
         if not r.get("product_code"):

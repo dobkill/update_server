@@ -18,8 +18,45 @@ export type ProductSummary = {
   name: string;
   summary: string;
   cover_image_url?: string;
+  github_url?: string;
   latest_version?: string;
   updated_at?: string;
+  tag?: string;
+  status_label?: string;
+};
+
+export type SiteProfile = {
+  site_name: string;
+  subtitle: string;
+  github_url: string;
+  email: string;
+};
+
+export type PortfolioProduct = ProductSummary & {
+  published_at?: string;
+};
+
+export type RecentUpdate = {
+  product_code: string;
+  name: string;
+  version: string;
+  published_at: string;
+  title: string;
+  description: string;
+};
+
+export type FutureDirection = {
+  title: string;
+  comment: string;
+  icon_path?: string;
+};
+
+export type PortfolioHomeData = {
+  profile: SiteProfile;
+  recommendations: PortfolioProduct[];
+  products: PortfolioProduct[];
+  recent_updates: RecentUpdate[];
+  future_directions: FutureDirection[];
 };
 
 export type ReleasePageData = {
@@ -105,6 +142,38 @@ export async function fetchProducts(): Promise<ProductSummary[] | null> {
     return payload.data.items;
   } catch (error) {
     console.warn("fetchProducts fallback", error);
+    return null;
+  }
+}
+
+export async function fetchPortfolioHome(): Promise<PortfolioHomeData | null> {
+  try {
+    const response = await fetch("/api/v1/portfolio-home", {
+      headers: {
+        Accept: "application/json"
+      }
+    });
+
+    if (!response.ok) {
+      return null;
+    }
+
+    const payload = (await response.json()) as ApiPayload<PortfolioHomeData>;
+
+    if (
+      payload.code !== 0 ||
+      !payload.data?.profile ||
+      !Array.isArray(payload.data.products) ||
+      !Array.isArray(payload.data.recommendations) ||
+      !Array.isArray(payload.data.recent_updates) ||
+      !Array.isArray(payload.data.future_directions)
+    ) {
+      return null;
+    }
+
+    return payload.data;
+  } catch (error) {
+    console.warn("fetchPortfolioHome fallback", error);
     return null;
   }
 }

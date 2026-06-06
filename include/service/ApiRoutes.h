@@ -34,7 +34,9 @@ namespace Router
 
     private:
         void init_routes();
-        void register_products_routes(); // 获取全部产品-----------为主页 服务
+
+        void register_portfolio_home_routes(); // 获取首页聚合信息
+        void register_products_routes(); // 获取真实产品列表
         void register_document_routes(); // 软件详情页
         void register_release_routes();  // 获取全部产品版本
 

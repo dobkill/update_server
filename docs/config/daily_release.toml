@@ -1,8 +1,41 @@
 [[product]]
 name = "Daily"
 code = "Daily"
+github_url = ""
 description = "Obsidian 插件，用来管理每日任务、快速记录和项目规划进度。"
 icon_path = "/data/releases/Daily/v1.0.0/icon/image.png"
+status = "active"
+
+[site_profile]
+site_name = "YXX Works"
+subtitle = "产品、插件与创作实验"
+github_url = ""
+email = ""
+
+[[future_direction]]
+title = "Obsidian 插件增强"
+comment = "持续优化记录、任务与知识管理体验。"
+icon_path = ""
+sort_order = 10
+status = "active"
+
+[[future_direction]]
+title = "效率工具"
+comment = "开发更轻量、专注的个人效率工具。"
+icon_path = ""
+sort_order = 20
+status = "active"
+
+[[future_direction]]
+title = "Web 实验"
+comment = "尝试小型 Web 产品与交互实验，探索新的表达方式。"
+icon_path = ""
+sort_order = 30
+status = "active"
+
+[[recommendation]]
+product_code = "Daily"
+sort_order = 10
 status = "active"
 
 [[release]]

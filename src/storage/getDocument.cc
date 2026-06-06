@@ -80,7 +80,7 @@ namespace Storage
     json Storage_SQL::getProduct(const std::string &product_code)
     {
         return queryOne(
-            "SELECT id, code, name, description, icon_path, status, created_at, updated_at "
+            "SELECT id, code, name, github_url, description, icon_path, status, created_at, updated_at "
             "FROM products "
             "WHERE code = ? COLLATE NOCASE "
             "LIMIT 1;",

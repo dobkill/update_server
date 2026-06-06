@@ -1,0 +1,4 @@
+/home/a/Yuan/Code/CPP/updata_server/build/CMakeFiles/software_update_platform.dir
+/home/a/Yuan/Code/CPP/updata_server/build/CMakeFiles/test.dir
+/home/a/Yuan/Code/CPP/updata_server/build/CMakeFiles/edit_cache.dir
+/home/a/Yuan/Code/CPP/updata_server/build/CMakeFiles/rebuild_cache.dir

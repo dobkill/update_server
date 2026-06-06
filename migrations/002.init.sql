@@ -2,6 +2,74 @@ PRAGMA journal_mode = WAL;
 PRAGMA synchronous = NORMAL;
 PRAGMA foreign_keys = ON;
 
+
+-- =========================================================
+-- 0. 迁移版本表
+-- =========================================================
+CREATE TABLE IF NOT EXISTS schema_migrations (
+    version TEXT PRIMARY KEY,
+    applied_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    note TEXT NOT NULL DEFAULT ''
+);
+
+
+-- =========================================================
+-- 1. 产品职业方向表：一个产品的职业方向
+-- =========================================================
+CREATE TABLE IF NOT EXISTS product_careers (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    product_id INTEGER NOT NULL,
+    career TEXT NOT NULL,
+    created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY(product_id) REFERENCES products(id),
+    UNIQUE(product_id, career)
+);
+
+-- =========================================================
+-- 1. 产品推荐表：推荐项目清单
+-- =========================================================
+CREATE TABLE IF NOT EXISTS recommendations (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    product_id INTEGER NOT NULL,
+    status TEXT NOT NULL DEFAULT 'active',
+    sort_order INTEGER NOT NULL DEFAULT 100,
+    created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY(product_id) REFERENCES products(id),
+    CHECK(status IN ('active', 'disabled'))
+);
+
+-- =========================================================
+-- 1. 站点配置表：站点信息配置
+-- =========================================================
+CREATE TABLE IF NOT EXISTS site_profile (
+    id INTEGER PRIMARY KEY CHECK(id = 1),
+    site_name TEXT NOT NULL DEFAULT 'YXX Works',
+    subtitle TEXT NOT NULL DEFAULT '产品、插件与创作实验',
+    github_url TEXT NOT NULL DEFAULT '',
+    email TEXT NOT NULL DEFAULT '',
+    created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+
+-- =========================================================
+-- 1. 未来方向表：未来方向清单
+-- =========================================================
+CREATE TABLE IF NOT EXISTS future_directions (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    title TEXT NOT NULL,
+    comment TEXT NOT NULL,
+    icon_path TEXT NOT NULL DEFAULT '',
+    status TEXT NOT NULL DEFAULT 'active',
+    sort_order INTEGER NOT NULL DEFAULT 100,
+    created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CHECK(status IN ('active', 'disabled'))
+);
+
+
 -- =========================================================
 -- 1. 产品表：一个软件产品本体
 -- =========================================================
@@ -10,7 +78,7 @@ CREATE TABLE IF NOT EXISTS products (
 
     name TEXT NOT NULL,
     code TEXT NOT NULL UNIQUE,
-
+    github_url TEXT NOT NULL DEFAULT '',
     description TEXT,
     icon_path TEXT,
 
@@ -21,6 +89,22 @@ CREATE TABLE IF NOT EXISTS products (
 
     CHECK(status IN ('active', 'disabled', 'archived'))
 );
+
+INSERT INTO site_profile (id, site_name, subtitle, github_url, email)
+VALUES (1, 'YXX Works', '产品、插件与创作实验', '', '')
+ON CONFLICT(id) DO NOTHING;
+
+INSERT INTO future_directions (title, comment, icon_path, status, sort_order)
+SELECT 'Obsidian 插件增强', '持续优化记录、任务与知识管理体验。', '', 'active', 10
+WHERE NOT EXISTS (SELECT 1 FROM future_directions WHERE title = 'Obsidian 插件增强');
+
+INSERT INTO future_directions (title, comment, icon_path, status, sort_order)
+SELECT '效率工具', '开发更轻量、专注的个人效率工具。', '', 'active', 20
+WHERE NOT EXISTS (SELECT 1 FROM future_directions WHERE title = '效率工具');
+
+INSERT INTO future_directions (title, comment, icon_path, status, sort_order)
+SELECT 'Web 实验', '尝试小型 Web 产品与交互实验，探索新的表达方式。', '', 'active', 30
+WHERE NOT EXISTS (SELECT 1 FROM future_directions WHERE title = 'Web 实验');
 
 
 -- =========================================================

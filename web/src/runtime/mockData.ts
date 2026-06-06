@@ -1,6 +1,12 @@
 import productsJson from "../mock/products.json";
+import portfolioHomeJson from "../mock/portfolioHome.json";
 import releasesJson from "../mock/releases.json";
-import { defaultReleaseChannel, type ProductReleaseDetail, type ProductSummary } from "./api";
+import {
+  defaultReleaseChannel,
+  type PortfolioHomeData,
+  type ProductReleaseDetail,
+  type ProductSummary
+} from "./api";
 
 type MockReleaseDetail = Omit<ProductReleaseDetail, "requested_version">;
 
@@ -20,6 +26,10 @@ const releaseStore = releasesJson as MockReleaseStore;
 
 export function getMockProducts(): ProductSummary[] {
   return productCatalog.items;
+}
+
+export function getMockPortfolioHome(): PortfolioHomeData {
+  return portfolioHomeJson as PortfolioHomeData;
 }
 
 export function getMockReleaseDetail(

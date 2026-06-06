@@ -2,27 +2,24 @@
 
 ## 已完成
 
-1. CMake 可构建 `software_update_platform`。
-2. `main.cpp` 已接入配置、静态 web、API 路由和 SPA fallback。
-3. `service` 已注册当前核心 API。
-4. `action` 已形成产品、文档、更新检查、数据转换任务四类入口。
-5. `storage` 已接入 sqlite3 prepared statement，并能执行 `migrations/002.init.sql`。
-6. `ConvertDataTaskAction` 已能创建 worker、入队任务、调用转换脚本并回写状态。
-7. `config/drogon_config.json` 已移除未使用的 Drogon `db_clients`，SQLite 统一由 `Storage_SQL` 管理。
+1. CMake 构建 `software_update_platform`。
+2. Drogon 启动、静态站点、API 路由、SPA fallback。
+3. 首页聚合接口 `/api/v1/portfolio-home`。
+4. 产品列表兼容接口 `/api/v1/products`。
+5. 版本详情、版本列表、更新检查、数据转换任务接口。
+6. SQLite 初始化和首页结构补齐。
+7. Web 首页只展示 Daily 真实作品。
+8. Web 首页准备中和计划中卡片由前端静态生成。
+9. Python 管理入口写入产品、站点资料、未来方向、推荐项目、版本、包、渠道。
+10. Python 数据库迁移、导出、导入脚本。
 
-## 当前 MVP 验证标准
+## 验证标准
 
-1. `cmake --build build -j 2` 成功。
-2. `./build/software_update_platform` 可启动。
-3. `GET /api/v1/products` 返回 `{"code":0,"data":{"items":[]}}` 或实际产品列表。
-4. `GET /` 返回 `web/dist/index.html`。
-5. 空数据库下详情/更新检查返回业务 `404`，服务不崩溃。
-
-## 下一阶段建议
-
-1. 补充 seed/demo 数据，方便端到端演示产品列表、版本详情和更新检查。
-2. 将 `Storage_SQL` 继续拆分为 Product/Release/Task repository，降低单类复杂度。
-3. 为转换任务补 multipart 上传、任务恢复和失败原因记录。
-4. 增加下载接口或签名 URL，避免直接暴露服务器文件路径。
-5. 增加自动化测试：迁移 SQL、storage 查询、Action 返回结构、核心 API smoke test。
-6. 逐步修正历史拼写目录，例如 `CheckUpdataAction`，但重命名前需确认构建脚本和引用路径。
+1. `cmake -S . -B build` 成功。
+2. `cmake --build build -j2` 成功。
+3. `cd web && npm run typecheck` 成功。
+4. `cd web && npm run build` 成功。
+5. `python -m py_compile` 覆盖 `python/admin/*.py` 成功。
+6. `GET /api/v1/portfolio-home` 返回 `profile`、`recommendations`、`products`、`recent_updates`、`future_directions`。
+7. `GET /api/v1/products` 返回 `data.items`。
+8. 首页不渲染非真实上线作品。
