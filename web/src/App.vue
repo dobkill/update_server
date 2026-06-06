@@ -207,4 +207,11 @@ watchEffect(() => {
 .state-card span {
   color: var(--muted);
 }
+
+@media (max-width: 560px) {
+  .state-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
 </style>

@@ -44,5 +44,14 @@ defineProps<{
 .row p {
   margin: 0;
   color: var(--muted);
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 520px) {
+  .row {
+    grid-template-columns: 2.35rem minmax(0, 1fr);
+    gap: 0.75rem;
+    padding: 0.85rem;
+  }
 }
 </style>

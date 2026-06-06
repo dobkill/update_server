@@ -19,7 +19,7 @@ defineProps<{
 <style scoped>
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
   gap: 1rem;
 }
 
@@ -39,5 +39,6 @@ defineProps<{
   margin: 0;
   color: var(--muted);
   line-height: 1.65;
+  overflow-wrap: anywhere;
 }
 </style>

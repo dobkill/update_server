@@ -44,7 +44,7 @@ const props = withDefaults(
 <style scoped>
 .hero {
   display: grid;
-  grid-template-columns: minmax(0, 0.86fr) minmax(260px, 1.14fr);
+  grid-template-columns: minmax(0, 0.86fr) minmax(16rem, 1.14fr);
   gap: 1.25rem;
   align-items: center;
   padding: 1rem;
@@ -56,6 +56,7 @@ const props = withDefaults(
 }
 
 .hero-copy {
+  min-width: 0;
   padding: 1rem;
 }
 
@@ -72,6 +73,7 @@ const props = withDefaults(
   max-width: 13ch;
   font-size: 3.6rem;
   line-height: 1.04;
+  overflow-wrap: anywhere;
 }
 
 .hero p {
@@ -91,10 +93,13 @@ const props = withDefaults(
 
 .actions a {
   display: inline-flex;
+  justify-content: center;
+  max-width: 100%;
   padding: 0.75rem 0.95rem;
   border-radius: 8px;
   background: #f8fbff;
   color: #13233d;
+  text-align: center;
   font-weight: 700;
 }
 
@@ -122,6 +127,28 @@ const props = withDefaults(
 
   .hero h2 {
     font-size: 2.2rem;
+  }
+}
+
+@media (max-width: 520px) {
+  .hero {
+    padding: 0.75rem;
+  }
+
+  .hero-copy {
+    padding: 0.6rem;
+  }
+
+  .hero h2 {
+    font-size: 1.85rem;
+  }
+
+  .actions {
+    align-items: stretch;
+  }
+
+  .actions a {
+    width: 100%;
   }
 }
 </style>

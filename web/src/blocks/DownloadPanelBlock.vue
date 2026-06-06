@@ -59,10 +59,12 @@ withDefaults(
 .panel h3 {
   margin: 0;
   font-size: 2.4rem;
+  overflow-wrap: anywhere;
 }
 
 .panel p {
   color: var(--muted);
+  overflow-wrap: anywhere;
 }
 
 .download-link {
@@ -88,5 +90,21 @@ dt {
 dd {
   margin: 0.25rem 0 0;
   font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 520px) {
+  .panel {
+    padding: 1rem;
+  }
+
+  .panel h3 {
+    font-size: 1.75rem;
+  }
+
+  .download-link {
+    width: 100%;
+    text-align: center;
+  }
 }
 </style>

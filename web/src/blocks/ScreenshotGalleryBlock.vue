@@ -59,7 +59,7 @@ defineProps<{
 
 .gallery-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
   gap: 1rem;
 }
 
@@ -87,5 +87,12 @@ defineProps<{
 
 .shot-card h4 {
   font-size: 1rem;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 520px) {
+  .gallery-head h3 {
+    font-size: 1.3rem;
+  }
 }
 </style>

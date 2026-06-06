@@ -46,6 +46,7 @@ const emit = defineEmits<{
 
 <style scoped>
 .shell {
+  width: 100%;
   min-height: 100vh;
   padding: 1rem 1.25rem 1.5rem;
 }
@@ -55,6 +56,7 @@ const emit = defineEmits<{
   justify-content: space-between;
   gap: 1rem;
   align-items: center;
+  width: min(100%, 78rem);
   max-width: 78rem;
   margin: 0 auto;
   padding: 0.85rem 1.6rem;
@@ -69,6 +71,7 @@ const emit = defineEmits<{
   display: inline-flex;
   gap: 0.85rem;
   align-items: center;
+  min-width: 0;
   padding: 0;
   border: 0;
   background: transparent;
@@ -113,6 +116,7 @@ const emit = defineEmits<{
 .brand-copy {
   display: grid;
   gap: 0.12rem;
+  min-width: 0;
 }
 
 .brand-copy span {
@@ -131,6 +135,7 @@ const emit = defineEmits<{
   justify-content: flex-end;
   gap: 2.1rem;
   align-items: center;
+  min-width: 0;
 }
 
 .topbar-nav a {
@@ -157,8 +162,10 @@ const emit = defineEmits<{
 
 .release-context {
   display: flex;
+  flex-wrap: wrap;
   justify-content: flex-end;
   gap: 0.65rem;
+  width: min(100%, 78rem);
   max-width: 78rem;
   margin: 0.75rem auto 0;
 }
@@ -173,6 +180,7 @@ const emit = defineEmits<{
 }
 
 .content {
+  width: min(100%, 78rem);
   max-width: 78rem;
   margin: 0 auto;
 }
@@ -188,12 +196,22 @@ const emit = defineEmits<{
     padding: 1rem;
   }
 
+  .brand {
+    width: 100%;
+  }
+
+  .brand-copy strong,
+  .brand-copy span {
+    overflow-wrap: anywhere;
+  }
+
   .topbar-nav,
   .release-context {
     justify-content: flex-start;
   }
 
   .topbar-nav {
+    width: 100%;
     gap: 1.2rem;
   }
 }

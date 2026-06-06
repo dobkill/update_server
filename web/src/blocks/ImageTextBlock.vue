@@ -29,7 +29,7 @@ withDefaults(
 <style scoped>
 .panel {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
   gap: 1rem;
   padding: 1rem;
   border: 1px solid var(--line);
@@ -41,6 +41,7 @@ withDefaults(
 .copy p {
   line-height: 1.8;
   color: var(--muted);
+  overflow-wrap: anywhere;
 }
 
 .art {
@@ -60,5 +61,15 @@ withDefaults(
   padding: 1rem;
   text-align: center;
   color: var(--muted);
+}
+
+@media (max-width: 520px) {
+  .panel {
+    padding: 0.85rem;
+  }
+
+  .art {
+    min-height: 160px;
+  }
 }
 </style>

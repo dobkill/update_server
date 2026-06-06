@@ -44,12 +44,15 @@ const props = withDefaults(
 .cta p {
   margin: 0;
   color: rgba(247, 242, 232, 0.76);
+  overflow-wrap: anywhere;
 }
 
 .cta a {
+  max-width: 100%;
   padding: 0.75rem 0.95rem;
   border-radius: 8px;
   background: var(--primary);
+  text-align: center;
   white-space: nowrap;
 }
 
@@ -57,6 +60,10 @@ const props = withDefaults(
   .cta {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .cta a {
+    white-space: normal;
   }
 }
 </style>

@@ -32,11 +32,13 @@ defineProps<{
 
 .faq h3 {
   margin: 0 0 0.75rem;
+  overflow-wrap: anywhere;
 }
 
 .faq p {
   margin: 0;
   color: var(--muted);
   line-height: 1.7;
+  overflow-wrap: anywhere;
 }
 </style>

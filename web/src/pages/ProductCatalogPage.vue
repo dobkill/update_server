@@ -316,7 +316,7 @@ function openWork(product: PortfolioProduct): void {
 <style scoped>
 .portfolio-hero {
   display: grid;
-  grid-template-columns: minmax(0, 0.95fr) minmax(22rem, 0.88fr);
+  grid-template-columns: minmax(0, 0.95fr) minmax(20rem, 0.88fr);
   gap: 3.2rem;
   align-items: center;
   min-height: 23rem;
@@ -326,6 +326,7 @@ function openWork(product: PortfolioProduct): void {
 .hero-copy {
   display: grid;
   gap: 1.35rem;
+  min-width: 0;
   max-width: 40rem;
 }
 
@@ -359,8 +360,10 @@ function openWork(product: PortfolioProduct): void {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  max-width: 100%;
   min-height: 2.75rem;
   border-radius: 8px;
+  text-align: center;
   font-weight: 700;
 }
 
@@ -384,6 +387,7 @@ function openWork(product: PortfolioProduct): void {
 
 .hero-feature {
   position: relative;
+  min-width: 0;
   min-height: 20rem;
 }
 
@@ -422,6 +426,7 @@ function openWork(product: PortfolioProduct): void {
   display: grid;
   grid-template-columns: 0.9fr 1fr;
   gap: 1.2rem;
+  min-width: 0;
   min-height: 18rem;
   padding: 1.15rem;
 }
@@ -438,6 +443,7 @@ function openWork(product: PortfolioProduct): void {
 }
 
 .cover-frame.large {
+  aspect-ratio: 4 / 3;
   min-height: 15.5rem;
 }
 
@@ -494,6 +500,7 @@ function openWork(product: PortfolioProduct): void {
   display: grid;
   align-content: center;
   gap: 0.78rem;
+  min-width: 0;
 }
 
 .eyebrow,
@@ -513,6 +520,8 @@ function openWork(product: PortfolioProduct): void {
 
 .chip-row span {
   padding: 0.28rem 0.54rem;
+  max-width: 100%;
+  overflow-wrap: anywhere;
 }
 
 .muted-chip span {
@@ -542,6 +551,7 @@ function openWork(product: PortfolioProduct): void {
   margin: 0;
   color: #5d687a;
   line-height: 1.72;
+  overflow-wrap: anywhere;
 }
 
 .portfolio-section {
@@ -646,11 +656,11 @@ function openWork(product: PortfolioProduct): void {
 }
 
 .work-grid {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
 }
 
 .direction-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
 }
 
 .work-card {
@@ -697,6 +707,7 @@ function openWork(product: PortfolioProduct): void {
 
 .portfolio-footer nav {
   display: flex;
+  flex-wrap: wrap;
   gap: 1rem;
   align-items: center;
 }
@@ -707,9 +718,10 @@ function openWork(product: PortfolioProduct): void {
     grid-template-columns: 1fr;
   }
 
-  .work-grid,
-  .direction-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .portfolio-hero {
+    gap: 2rem;
+    min-height: auto;
+    padding: 2.4rem 1.5rem 1.6rem;
   }
 }
 
@@ -728,13 +740,58 @@ function openWork(product: PortfolioProduct): void {
     grid-template-columns: 1fr;
   }
 
+  .hero-feature {
+    min-height: auto;
+  }
+
+  .ghost-card {
+    display: none;
+  }
+
+  .spotlight-card {
+    min-height: auto;
+    padding: 0.85rem;
+  }
+
+  .cover-frame.large {
+    min-height: 12rem;
+  }
+
+  .updates-panel {
+    padding: 0.85rem;
+  }
+
   .update-card {
+    flex-direction: column;
     align-items: flex-start;
+  }
+
+  .update-card .cover-frame {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    flex-basis: auto;
+  }
+
+  .work-card {
+    min-height: auto;
   }
 
   .portfolio-footer {
     flex-direction: column;
     align-items: flex-start;
+  }
+}
+
+@media (max-width: 420px) {
+  .hero-actions,
+  .card-actions {
+    align-items: stretch;
+  }
+
+  .primary-action,
+  .secondary-action {
+    width: 100%;
   }
 }
 </style>

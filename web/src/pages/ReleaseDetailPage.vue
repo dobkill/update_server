@@ -92,6 +92,7 @@ const publishedDate = computed(() => props.release.published_at?.slice(0, 10) ??
   display: flex;
   flex-wrap: wrap;
   gap: 0.65rem;
+  min-width: 0;
 }
 
 .release-meta div {
@@ -120,6 +121,22 @@ const publishedDate = computed(() => props.release.published_at?.slice(0, 10) ??
 
   .back-link {
     justify-self: start;
+  }
+
+  .release-meta {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 8rem), 1fr));
+  }
+}
+
+@media (max-width: 520px) {
+  .release-toolbar {
+    margin-top: 0.75rem;
+    padding: 0.85rem;
+  }
+
+  .release-title h1 {
+    font-size: 1.16rem;
   }
 }
 </style>

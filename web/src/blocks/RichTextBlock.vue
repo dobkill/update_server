@@ -30,11 +30,23 @@ withDefaults(
 .block h3 {
   margin: 0 0 0.75rem;
   font-size: 1.7rem;
+  overflow-wrap: anywhere;
 }
 
 .block p {
   margin: 0;
   line-height: 1.8;
   color: var(--muted);
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 520px) {
+  .block {
+    padding: 1rem;
+  }
+
+  .block h3 {
+    font-size: 1.35rem;
+  }
 }
 </style>
