@@ -48,9 +48,21 @@ namespace Storage
                 return json::object();
             }
 
-            const auto page_manifest = findPath(
-                "data/releases/" + product_code + "/" + version + "/vue/page.json");
-            if (!fs::exists(page_manifest) || !fs::is_regular_file(page_manifest))
+            const std::array<fs::path, 2> page_manifests = {
+                findPath("data/releases/" + product_code + "/" + version + "/html/page.json"),
+                findPath("data/releases/" + product_code + "/" + version + "/vue/page.json")};
+
+            fs::path page_manifest;
+            for (const auto &candidate : page_manifests)
+            {
+                if (fs::exists(candidate) && fs::is_regular_file(candidate))
+                {
+                    page_manifest = candidate;
+                    break;
+                }
+            }
+
+            if (page_manifest.empty())
             {
                 return json::object();
             }
@@ -101,7 +113,7 @@ namespace Storage
                 "SELECT "
                 "p.code AS product_code, p.name AS product_name, p.description AS product_summary, "
                 "r.id AS release_id, r.version, r.release_note, r.data_schema_version, "
-                "r.status, r.vue_path, r.published_at, r.created_at, "
+                "r.status, r.html_path, r.published_at, r.created_at, "
                 "a.file_path AS download_url, a.file_size, a.platform, a.arch, a.package_type "
                 "FROM products p "
                 "JOIN release_channels rc ON rc.product_id = p.id "
@@ -124,7 +136,7 @@ namespace Storage
                 "SELECT "
                 "p.code AS product_code, p.name AS product_name, p.description AS product_summary, "
                 "r.id AS release_id, r.version, r.release_note, r.data_schema_version, "
-                "r.status, r.vue_path, r.published_at, r.created_at, "
+                "r.status, r.html_path, r.published_at, r.created_at, "
                 "a.file_path AS download_url, a.file_size, a.platform, a.arch, a.package_type "
                 "FROM products p "
                 "JOIN releases r ON r.product_id = p.id "
@@ -192,7 +204,8 @@ namespace Storage
             {"published_at", jsonString(row, "published_at", jsonString(row, "created_at"))},
             {"release_notes_summary", release_note},
             {"page", {
-                {"vue_entry_url", jsonString(row, "vue_path")},
+                {"html_entry_url", jsonString(row, "html_path")},
+                {"vue_entry_url", jsonString(row, "html_path")},
                 {"page_data", page_data}
             }}
         };

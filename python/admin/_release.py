@@ -18,7 +18,7 @@ def add_release(params: dict) -> dict:
         release_note: str       可选
         data_schema_version: str 可选
         status: str             可选，默认 draft
-        vue_path: str           可选
+        html_path: str           可选
         published_at: str       可选
     """
     product_code = params["product_code"]
@@ -26,7 +26,7 @@ def add_release(params: dict) -> dict:
     release_note = params.get("release_note")
     data_schema_version = params.get("data_schema_version")
     status = params.get("status", "draft")
-    vue_path = params.get("vue_path")
+    html_path = params.get("html_path")
 
     # 查找产品 ID
     try:
@@ -57,10 +57,10 @@ def add_release(params: dict) -> dict:
 
     cur = execute(
         """
-        INSERT INTO releases (product_id, version, release_note, data_schema_version, status, vue_path, published_at)
+        INSERT INTO releases (product_id, version, release_note, data_schema_version, status, html_path, published_at)
         VALUES (?, ?, ?, ?, ?, ?, ?)
         """,
-        (product_id, version, release_note, data_schema_version, status, vue_path, published_at),
+        (product_id, version, release_note, data_schema_version, status, html_path, published_at),
     )
 
     release_id = cur.lastrowid

@@ -127,7 +127,7 @@ CREATE TABLE IF NOT EXISTS releases (
     -- yanked: 已撤回
     status TEXT NOT NULL DEFAULT 'draft',
 
-    vue_path TEXT,
+    html_path TEXT,
 
     created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
     published_at TEXT,

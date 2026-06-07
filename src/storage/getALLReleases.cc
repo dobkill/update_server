@@ -6,7 +6,7 @@ namespace Storage {
        return queryRows(
            "SELECT "
            "r.id, r.version, r.release_note, r.data_schema_version, r.status, "
-           "r.vue_path, r.published_at, r.created_at, r.updated_at "
+           "r.html_path, r.published_at, r.created_at, r.updated_at "
            "FROM releases r "
            "JOIN products p ON p.id = r.product_id "
            "WHERE p.code = ? COLLATE NOCASE "

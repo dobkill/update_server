@@ -44,7 +44,7 @@ version = "v1.0.0"
 release_note = "Daily v1.0.0 首个可用版本，包含每日任务、项目规划和进度复盘页面。"
 data_schema_version = "v1.0.0"
 status = "active"
-vue_path = "/data/releases/Daily/v1.0.0/vue/DailyReleasePage.vue"
+html_path = "/data/releases/Daily/v1.0.0/vue/DailyReleasePage.html"
 
 [[release.asset]]
 platform = "obsidian"

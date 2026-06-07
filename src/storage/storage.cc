@@ -324,6 +324,24 @@ namespace Storage
             return false;
         }
 
+        if (tableExists("releases") && !columnExists("releases", "html_path") &&
+            !executeStatement("ALTER TABLE releases ADD COLUMN html_path TEXT;"))
+        {
+            return false;
+        }
+
+        if (tableExists("releases") && columnExists("releases", "html_path") && columnExists("releases", "vue_path") &&
+            !executeStatement("UPDATE releases SET html_path = vue_path WHERE (html_path IS NULL OR html_path = '') AND vue_path IS NOT NULL AND vue_path <> '';"))
+        {
+            return false;
+        }
+
+        if (tableExists("releases") && columnExists("releases", "html_path") &&
+            !executeStatement("UPDATE releases SET html_path = substr(html_path, 1, length(html_path) - 4) || '.html' WHERE html_path LIKE '%.vue';"))
+        {
+            return false;
+        }
+
         if (!columnExists("recommendations", "sort_order") &&
             !executeStatement("ALTER TABLE recommendations ADD COLUMN sort_order INTEGER NOT NULL DEFAULT 100;"))
         {

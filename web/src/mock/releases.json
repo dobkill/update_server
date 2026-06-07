@@ -1,4 +1,126 @@
 {
+  "Daily": {
+    "latest": "v1.0.0",
+    "versions": {
+      "v1.0.0": {
+        "product_code": "Daily",
+        "resolved_version": "v1.0.0",
+        "channel": "stable",
+        "title": "Daily v1.0.0",
+        "published_at": "2026-06-05T09:00:00Z",
+        "release_notes_summary": "Daily v1.0.0 首个可用版本，包含每日任务、项目规划和进度复盘页面。",
+        "page": {
+          "html_entry_url": "/data/releases/Daily/v1.0.0/vue/DailyReleasePage.html",
+          "page_data": {
+            "blocks": [
+              {
+                "type": "HeroBlock",
+                "props": {
+                  "eyebrow": "Obsidian Plugin",
+                  "title": "Daily",
+                  "subtitle": "任务管理 · 项目规划 · 进度复盘 —— 在 Obsidian 里打通每一天的工作流。支持表格、看板、甘特图、思维导图四种项目视图，配合热力图和趋势图复盘每日进展。",
+                  "primaryText": "下载 v1.0.0",
+                  "primaryHref": "/data/packages/Daily/v1.0.0/Daily-v1.0.0.zip",
+                  "secondaryText": "查看功能详情",
+                  "secondaryHref": "#features",
+                  "image": "/data/releases/Daily/v1.0.0/vue/总览.png"
+                }
+              },
+              {
+                "type": "FeatureGridBlock",
+                "props": {
+                  "items": [
+                    {
+                      "title": "任务总览",
+                      "desc": "今日任务、时间线、30天完成趋势、周任务图、年度热力图，多维度掌握任务节奏。"
+                    },
+                    {
+                      "title": "项目进度",
+                      "desc": "创建项目、管理任务、导出数据。支持项目导入，一站式管理所有项目。"
+                    },
+                    {
+                      "title": "快速记录",
+                      "desc": "写日记、追加笔记、创建任务、导图补充，覆盖不同记录场景。"
+                    },
+                    {
+                      "title": "多视图切换",
+                      "desc": "同一项目可在表格、看板、甘特图和思维导图之间自由切换。"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "RichTextBlock",
+                "props": {
+                  "title": "适合谁使用",
+                  "content": "Daily 面向在 Obsidian 中管理个人项目和每日任务的人。无论备考复习、写作计划还是日常习惯追踪，它都能把零散的记录沉淀为可追踪的任务与项目视图。"
+                }
+              },
+              {
+                "type": "ScreenshotGalleryBlock",
+                "props": {
+                  "title": "总览与数据看板",
+                  "intro": "总览页面提供两种视角：任务总览展示今日任务和各项趋势图；项目进度集中管理所有项目的创建与跟踪。",
+                  "items": [
+                    {
+                      "title": "总览页面",
+                      "desc": "任务总览和项目进度两个 Tab，一屏掌握全局。",
+                      "image": "/data/releases/Daily/v1.0.0/vue/总览.png"
+                    },
+                    {
+                      "title": "年度热力图",
+                      "desc": "类似 GitHub 贡献图的年度活跃热力图，直观展示持续节奏。",
+                      "image": "/data/releases/Daily/v1.0.0/vue/项目总览-热力图.png"
+                    },
+                    {
+                      "title": "项目进度页",
+                      "desc": "集中查看和管理所有项目的整体进度。",
+                      "image": "/data/releases/Daily/v1.0.0/vue/项目进度页.png"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "DownloadPanelBlock",
+                "props": {
+                  "version": "v1.0.0",
+                  "packageType": "obsidian-plugin",
+                  "packageSize": "92.5 KB",
+                  "releaseNote": "Daily v1.0.0 首个可用版本，包含每日任务、项目规划和进度复盘页面。",
+                  "downloadText": "下载 Daily v1.0.0",
+                  "downloadUrl": "/data/packages/Daily/v1.0.0/Daily-v1.0.0.zip"
+                }
+              },
+              {
+                "type": "FaqBlock",
+                "props": {
+                  "items": [
+                    {
+                      "question": "如何安装？",
+                      "answer": "下载 zip 后解压，将 main.js、manifest.json 和 styles.css 放入 Obsidian vault 的 .obsidian/plugins/Daily 目录，然后在社区插件里启用。"
+                    },
+                    {
+                      "question": "支持哪些项目视图？",
+                      "answer": "每个项目支持表格、看板、甘特图和思维导图四种视图。"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "FooterCtaBlock",
+                "props": {
+                  "title": "Daily v1.0.0",
+                  "desc": "每日任务、项目规划和进度复盘已经可以作为一个插件版本发布。",
+                  "actionText": "返回列表",
+                  "actionHref": "/"
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
   "project-manage": {
     "latest": "2.3.1",
     "versions": {
@@ -10,7 +132,7 @@
         "published_at": "2026-05-23T10:00:00Z",
         "release_notes_summary": "修复导出卡死问题，优化首页加载速度，并补充了最新版本的统一下载入口。",
         "page": {
-          "vue_entry_url": "/public/releases/project-manage/2.3.1/entry.js",
+          "html_entry_url": "/public/releases/project-manage/2.3.1/index.html",
           "page_data": {
             "hero": {
               "title": "Project Manage 2.3.1",
@@ -84,7 +206,7 @@
         "published_at": "2026-04-28T09:00:00Z",
         "release_notes_summary": "补齐版本详情页结构，为下载入口和发布说明建立统一的数据模型。",
         "page": {
-          "vue_entry_url": "/public/releases/project-manage/2.3.0/entry.js",
+          "html_entry_url": "/public/releases/project-manage/2.3.0/index.html",
           "page_data": {
             "hero": {
               "title": "Project Manage 2.3.0",
@@ -127,7 +249,7 @@
         "published_at": "2026-05-19T08:30:00Z",
         "release_notes_summary": "增强巡检结果回执说明和下载页可读性。",
         "page": {
-          "vue_entry_url": "/public/releases/smart-ops/1.8.4/entry.js",
+          "html_entry_url": "/public/releases/smart-ops/1.8.4/index.html",
           "page_data": {
             "hero": {
               "title": "Smart Ops 1.8.4",
@@ -170,7 +292,7 @@
         "published_at": "2026-05-11T14:20:00Z",
         "release_notes_summary": "统一转换结果出口和发布页下载文案。",
         "page": {
-          "vue_entry_url": "/public/releases/data-bridge/3.1.0/entry.js",
+          "html_entry_url": "/public/releases/data-bridge/3.1.0/index.html",
           "page_data": {
             "hero": {
               "title": "Data Bridge 3.1.0",

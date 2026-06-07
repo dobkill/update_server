@@ -114,6 +114,7 @@ export type ProductReleaseDetail = {
   published_at: string;
   release_notes_summary: string;
   page: {
+    html_entry_url?: string;
     vue_entry_url?: string;
     page_data?: ReleasePageData;
   };

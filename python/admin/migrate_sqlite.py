@@ -81,6 +81,33 @@ def ensure_schema(conn: sqlite3.Connection) -> None:
     if not column_exists(conn, "products", "github_url"):
         conn.execute("ALTER TABLE products ADD COLUMN github_url TEXT NOT NULL DEFAULT ''")
 
+    if table_exists(conn, "releases") and not column_exists(conn, "releases", "html_path"):
+        conn.execute("ALTER TABLE releases ADD COLUMN html_path TEXT")
+
+    if (
+        table_exists(conn, "releases")
+        and column_exists(conn, "releases", "html_path")
+        and column_exists(conn, "releases", "vue_path")
+    ):
+        conn.execute(
+            """
+            UPDATE releases
+               SET html_path = vue_path
+             WHERE (html_path IS NULL OR html_path = '')
+               AND vue_path IS NOT NULL
+               AND vue_path <> ''
+            """
+        )
+
+    if table_exists(conn, "releases") and column_exists(conn, "releases", "html_path"):
+        conn.execute(
+            """
+            UPDATE releases
+               SET html_path = substr(html_path, 1, length(html_path) - 4) || '.html'
+             WHERE html_path LIKE '%.vue'
+            """
+        )
+
     conn.execute(
         """
         CREATE TABLE IF NOT EXISTS product_careers (
@@ -199,7 +226,7 @@ def migrate(db_path: Path, target: str, force: bool) -> Path | None:
         conn.execute("BEGIN")
         ensure_schema(conn)
         if migration_applied(conn, target) and not force:
-            conn.rollback()
+            conn.commit()
             return backup_path
         seed_defaults(conn)
         conn.execute(

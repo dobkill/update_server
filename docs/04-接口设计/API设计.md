@@ -149,7 +149,7 @@ Query 参数：
     "published_at": "2026-06-05T09:00:00Z",
     "release_notes_summary": "Daily v1.0.0 首个可用版本。",
     "page": {
-      "vue_entry_url": "/data/releases/Daily/v1.0.0/vue/DailyReleasePage.vue",
+      "vue_entry_url": "/data/releases/Daily/v1.0.0/vue/DailyReleasePage.html",
       "page_data": {}
     }
   }

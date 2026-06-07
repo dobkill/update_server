@@ -2,7 +2,7 @@
 
 ## 静态站点
 
-`web` 是 Vue 前端模块。后端服务 `web/dist`，浏览器访问 `/` 返回 `web/dist/index.html`。未知前端路径由 Drogon default handler 回退到同一个 HTML 文件。
+`web` 是 Vite + 原生 TypeScript 前端模块。后端服务 `web/dist`，浏览器访问 `/` 返回 `web/dist/index.html`。未知前端路径由 Drogon default handler 回退到同一个 HTML 文件。
 
 `/data/...` 静态资源映射到项目 `data/` 目录：
 
@@ -41,18 +41,18 @@ fetchPortfolioHome()
 4. `recent_updates`
 5. `future_directions`
 
-## 首页组件
+## 首页渲染
 
 文件：
 
 ```text
-web/src/pages/ProductCatalogPage.vue
+web/src/runtime/htmlRenderer.ts
 ```
 
 输入：
 
 ```text
-home: PortfolioHomeData
+renderCatalogPage(home: PortfolioHomeData)
 ```
 
 页面结构：
@@ -70,7 +70,7 @@ home: PortfolioHomeData
 文件：
 
 ```text
-web/src/shell/AppShell.vue
+web/src/runtime/htmlRenderer.ts
 ```
 
 导航项：
@@ -95,11 +95,12 @@ GET /api/v1/products/{product_code}/document?version=latest&channel=stable
 fetchReleaseDetail()
 ```
 
-后端返回结构匹配 `ProductReleaseDetail`。`page.page_data` 驱动区块渲染。
+后端返回结构匹配 `ProductReleaseDetail`。`page.page_data` 驱动区块渲染，前端不再动态加载产品自己的 Vue 文件。
 
 版本页面清单：
 
 ```text
+data/releases/<product_code>/<version>/html/page.json
 data/releases/<product_code>/<version>/vue/page.json
 ```
 
@@ -108,6 +109,8 @@ Daily 页面清单：
 ```text
 data/releases/Daily/v1.0.0/vue/page.json
 ```
+
+`html/page.json` 是新目录约定，`vue/page.json` 作为历史目录兼容保留。
 
 支持区块：
 
