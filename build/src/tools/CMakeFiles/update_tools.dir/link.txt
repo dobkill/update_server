@@ -1,0 +1,2 @@
+/usr/bin/ar qc libupdate_tools.a CMakeFiles/update_tools.dir/canupgrade.cc.o CMakeFiles/update_tools.dir/md5.cc.o CMakeFiles/update_tools.dir/sha256.cc.o CMakeFiles/update_tools.dir/TimestampString.cc.o
+/usr/bin/ranlib libupdate_tools.a

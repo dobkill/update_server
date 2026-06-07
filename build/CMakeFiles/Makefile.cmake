@@ -21,6 +21,13 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/home/a/Yuan/Code/CPP/updata_server/CMakeLists.txt"
   "CMakeFiles/3.28.3/CMakeCXXCompiler.cmake"
   "CMakeFiles/3.28.3/CMakeSystem.cmake"
+  "/home/a/Yuan/Code/CPP/updata_server/src/CMakeLists.txt"
+  "/home/a/Yuan/Code/CPP/updata_server/src/action/CMakeLists.txt"
+  "/home/a/Yuan/Code/CPP/updata_server/src/bin/CMakeLists.txt"
+  "/home/a/Yuan/Code/CPP/updata_server/src/config/CMakeLists.txt"
+  "/home/a/Yuan/Code/CPP/updata_server/src/service/CMakeLists.txt"
+  "/home/a/Yuan/Code/CPP/updata_server/src/storage/CMakeLists.txt"
+  "/home/a/Yuan/Code/CPP/updata_server/src/tools/CMakeLists.txt"
   "/usr/lib/x86_64-linux-gnu/cmake/spdlog/spdlogConfig.cmake"
   "/usr/lib/x86_64-linux-gnu/cmake/spdlog/spdlogConfigTargets-none.cmake"
   "/usr/lib/x86_64-linux-gnu/cmake/spdlog/spdlogConfigTargets.cmake"
@@ -81,9 +88,21 @@ set(CMAKE_MAKEFILE_OUTPUTS
 # Byproducts of CMake generate step:
 set(CMAKE_MAKEFILE_PRODUCTS
   "CMakeFiles/CMakeDirectoryInformation.cmake"
+  "src/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "src/tools/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "src/config/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "src/storage/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "src/action/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "src/service/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "src/bin/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "CMakeFiles/software_update_platform.dir/DependInfo.cmake"
+  "src/tools/CMakeFiles/update_tools.dir/DependInfo.cmake"
+  "src/config/CMakeFiles/update_config.dir/DependInfo.cmake"
+  "src/storage/CMakeFiles/update_storage.dir/DependInfo.cmake"
+  "src/action/CMakeFiles/update_action.dir/DependInfo.cmake"
+  "src/service/CMakeFiles/update_service.dir/DependInfo.cmake"
+  "src/bin/CMakeFiles/software_update_platform.dir/DependInfo.cmake"
   )
