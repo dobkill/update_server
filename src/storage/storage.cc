@@ -269,7 +269,7 @@ namespace Storage
 
             "CREATE TABLE IF NOT EXISTS site_profile ("
             "id INTEGER PRIMARY KEY CHECK(id = 1), "
-            "owner_name TEXT NOT NULL DEFAULT 'LIANG Y.', "
+            "owner_name TEXT NOT NULL DEFAULT 'Xiang Y.', "
             "site_name TEXT NOT NULL DEFAULT 'Personal Software Lab', "
             "subtitle TEXT NOT NULL DEFAULT 'Self-built apps, tools, systems, and experiments.', "
             "hero_label TEXT NOT NULL DEFAULT 'DEVELOPER & BUILDER', "
@@ -346,7 +346,7 @@ namespace Storage
         }
 
         const std::vector<std::pair<std::string, std::string>> site_columns = {
-            {"owner_name", "TEXT NOT NULL DEFAULT 'LIANG Y.'"},
+            {"owner_name", "TEXT NOT NULL DEFAULT 'Xiang Y.'"},
             {"hero_label", "TEXT NOT NULL DEFAULT 'DEVELOPER & BUILDER'"},
             {"hero_title", "TEXT NOT NULL DEFAULT 'Personal Software Lab'"},
             {"hero_description", "TEXT NOT NULL DEFAULT 'A collection of self-built apps, tools, systems, and experiments — crafted with code and curiosity.'"},
@@ -392,7 +392,7 @@ namespace Storage
                 "id, owner_name, site_name, subtitle, hero_label, hero_title, hero_description, "
                 "github_url, email, resume_url, linkedin_url, twitter_url"
                 ") VALUES ("
-                "1, 'LIANG Y.', 'Personal Software Lab', "
+                "1, 'Xiang Y.', 'Personal Software Lab', "
                 "'Self-built apps, tools, systems, and experiments.', "
                 "'DEVELOPER & BUILDER', 'Personal Software Lab', "
                 "'A collection of self-built apps, tools, systems, and experiments — crafted with code and curiosity.', "
@@ -405,7 +405,7 @@ namespace Storage
 
         if (!executeStatement(
                 "UPDATE site_profile "
-                "SET owner_name = 'LIANG Y.', "
+                "SET owner_name = 'Xiang Y.', "
                 "    site_name = 'Personal Software Lab', "
                 "    subtitle = 'Self-built apps, tools, systems, and experiments.', "
                 "    hero_label = 'DEVELOPER & BUILDER', "

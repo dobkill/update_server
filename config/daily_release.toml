@@ -7,7 +7,7 @@ icon_path = "/data/releases/Daily/v1.0.0/icon/image.png"
 status = "active"
 
 [site_profile]
-owner_name = "LIANG Y."
+owner_name = "XIANG Y."
 site_name = "Personal Software Lab"
 subtitle = "Self-built apps, tools, systems, and experiments."
 hero_label = "DEVELOPER & BUILDER"

@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS schema_migrations (
 -- =========================================================
 CREATE TABLE IF NOT EXISTS site_profile (
     id INTEGER PRIMARY KEY CHECK(id = 1),
-    owner_name TEXT NOT NULL DEFAULT 'LIANG Y.',
+    owner_name TEXT NOT NULL DEFAULT 'Xiang Y.',
     site_name TEXT NOT NULL DEFAULT 'Personal Software Lab',
     subtitle TEXT NOT NULL DEFAULT 'Self-built apps, tools, systems, and experiments.',
     hero_label TEXT NOT NULL DEFAULT 'DEVELOPER & BUILDER',
@@ -94,7 +94,7 @@ INSERT INTO site_profile (
     github_url, email, resume_url, linkedin_url, twitter_url
 )
 VALUES (
-    1, 'LIANG Y.', 'Personal Software Lab', 'Self-built apps, tools, systems, and experiments.',
+    1, 'Xiang Y.', 'Personal Software Lab', 'Self-built apps, tools, systems, and experiments.',
     'DEVELOPER & BUILDER', 'Personal Software Lab',
     'A collection of self-built apps, tools, systems, and experiments — crafted with code and curiosity.',
     '', '', '', '', ''

@@ -41,7 +41,7 @@ GET /api/v1/projects
   "message": "ok",
   "data": {
     "profile": {
-      "ownerName": "LIANG Y.",
+      "ownerName": "Xiang Y.",
       "siteName": "Personal Software Lab",
       "subtitle": "Self-built apps, tools, systems, and experiments.",
       "heroLabel": "DEVELOPER & BUILDER",

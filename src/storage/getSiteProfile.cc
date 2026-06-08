@@ -23,7 +23,7 @@ namespace Storage {
         if (profile.empty())
         {
             return {
-                {"ownerName", "LIANG Y."},
+                {"ownerName", "Xiang Y."},
                 {"siteName", "Personal Software Lab"},
                 {"subtitle", "Self-built apps, tools, systems, and experiments."},
                 {"heroLabel", "DEVELOPER & BUILDER"},

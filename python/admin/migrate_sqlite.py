@@ -119,7 +119,7 @@ def ensure_schema(conn: sqlite3.Connection) -> None:
         """
         CREATE TABLE IF NOT EXISTS site_profile (
             id INTEGER PRIMARY KEY CHECK(id = 1),
-            owner_name TEXT NOT NULL DEFAULT 'LIANG Y.',
+            owner_name TEXT NOT NULL DEFAULT 'Xiang Y.',
             site_name TEXT NOT NULL DEFAULT 'Personal Software Lab',
             subtitle TEXT NOT NULL DEFAULT 'Self-built apps, tools, systems, and experiments.',
             hero_label TEXT NOT NULL DEFAULT 'DEVELOPER & BUILDER',
@@ -137,7 +137,7 @@ def ensure_schema(conn: sqlite3.Connection) -> None:
     )
 
     for column, definition in [
-        ("owner_name", "TEXT NOT NULL DEFAULT 'LIANG Y.'"),
+        ("owner_name", "TEXT NOT NULL DEFAULT 'Xiang Y.'"),
         ("hero_label", "TEXT NOT NULL DEFAULT 'DEVELOPER & BUILDER'"),
         ("hero_title", "TEXT NOT NULL DEFAULT 'Personal Software Lab'"),
         (
@@ -209,7 +209,7 @@ def seed_defaults(conn: sqlite3.Connection) -> None:
             github_url, email, resume_url, linkedin_url, twitter_url
         )
         VALUES (
-            1, 'LIANG Y.', 'Personal Software Lab',
+            1, 'Xiang Y.', 'Personal Software Lab',
             'Self-built apps, tools, systems, and experiments.',
             'DEVELOPER & BUILDER', 'Personal Software Lab',
             'A collection of self-built apps, tools, systems, and experiments — crafted with code and curiosity.',
@@ -221,7 +221,7 @@ def seed_defaults(conn: sqlite3.Connection) -> None:
     conn.execute(
         """
         UPDATE site_profile
-           SET owner_name = 'LIANG Y.',
+           SET owner_name = 'Xiang Y.',
                site_name = 'Personal Software Lab',
                subtitle = 'Self-built apps, tools, systems, and experiments.',
                hero_label = 'DEVELOPER & BUILDER',

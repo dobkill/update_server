@@ -68,7 +68,7 @@ export type ProjectDetailData = {
 };
 
 export const defaultProfile: SiteProfile = {
-  ownerName: "LIANG Y.",
+  ownerName: "Xiang Y.",
   siteName: "Personal Software Lab",
   subtitle: "Self-built apps, tools, systems, and experiments.",
   heroLabel: "DEVELOPER & BUILDER",

@@ -8,7 +8,7 @@ from lib.db import execute, query_one
 
 
 def set_site_profile(params: dict) -> dict:
-    owner_name = params.get("owner_name", "LIANG Y.")
+    owner_name = params.get("owner_name", "Xiang Y.")
     site_name = params.get("site_name", "Personal Software Lab")
     subtitle = params.get("subtitle", "Self-built apps, tools, systems, and experiments.")
     hero_label = params.get("hero_label", "DEVELOPER & BUILDER")

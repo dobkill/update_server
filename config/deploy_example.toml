@@ -2,7 +2,7 @@
 # 运行: ADMIN_CONFIG=config/deploy_example.toml ADMIN_DRY_RUN=1 python python/admin/admin.py
 
 [site_profile]
-owner_name = "LIANG Y."
+owner_name = "Xiang Y."
 site_name = "Personal Software Lab"
 subtitle = "Self-built apps, tools, systems, and experiments."
 hero_label = "DEVELOPER & BUILDER"
