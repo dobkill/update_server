@@ -167,89 +167,33 @@ src/action/CMakeFiles/update_action.dir/DocumentAction/getReleases.cc.s: cmake_f
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/update_action.dir/DocumentAction/getReleases.cc.s"
 	cd /home/a/Yuan/Code/CPP/updata_server/build/src/action && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/a/Yuan/Code/CPP/updata_server/src/action/DocumentAction/getReleases.cc -o CMakeFiles/update_action.dir/DocumentAction/getReleases.cc.s
 
-src/action/CMakeFiles/update_action.dir/ProductsAction/GetFutureDirections.cc.o: src/action/CMakeFiles/update_action.dir/flags.make
-src/action/CMakeFiles/update_action.dir/ProductsAction/GetFutureDirections.cc.o: /home/a/Yuan/Code/CPP/updata_server/src/action/ProductsAction/GetFutureDirections.cc
-src/action/CMakeFiles/update_action.dir/ProductsAction/GetFutureDirections.cc.o: src/action/CMakeFiles/update_action.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/a/Yuan/Code/CPP/updata_server/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object src/action/CMakeFiles/update_action.dir/ProductsAction/GetFutureDirections.cc.o"
-	cd /home/a/Yuan/Code/CPP/updata_server/build/src/action && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/action/CMakeFiles/update_action.dir/ProductsAction/GetFutureDirections.cc.o -MF CMakeFiles/update_action.dir/ProductsAction/GetFutureDirections.cc.o.d -o CMakeFiles/update_action.dir/ProductsAction/GetFutureDirections.cc.o -c /home/a/Yuan/Code/CPP/updata_server/src/action/ProductsAction/GetFutureDirections.cc
+src/action/CMakeFiles/update_action.dir/ProjectsAction/GetProjectDetail.cc.o: src/action/CMakeFiles/update_action.dir/flags.make
+src/action/CMakeFiles/update_action.dir/ProjectsAction/GetProjectDetail.cc.o: /home/a/Yuan/Code/CPP/updata_server/src/action/ProjectsAction/GetProjectDetail.cc
+src/action/CMakeFiles/update_action.dir/ProjectsAction/GetProjectDetail.cc.o: src/action/CMakeFiles/update_action.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/a/Yuan/Code/CPP/updata_server/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object src/action/CMakeFiles/update_action.dir/ProjectsAction/GetProjectDetail.cc.o"
+	cd /home/a/Yuan/Code/CPP/updata_server/build/src/action && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/action/CMakeFiles/update_action.dir/ProjectsAction/GetProjectDetail.cc.o -MF CMakeFiles/update_action.dir/ProjectsAction/GetProjectDetail.cc.o.d -o CMakeFiles/update_action.dir/ProjectsAction/GetProjectDetail.cc.o -c /home/a/Yuan/Code/CPP/updata_server/src/action/ProjectsAction/GetProjectDetail.cc
 
-src/action/CMakeFiles/update_action.dir/ProductsAction/GetFutureDirections.cc.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/update_action.dir/ProductsAction/GetFutureDirections.cc.i"
-	cd /home/a/Yuan/Code/CPP/updata_server/build/src/action && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/a/Yuan/Code/CPP/updata_server/src/action/ProductsAction/GetFutureDirections.cc > CMakeFiles/update_action.dir/ProductsAction/GetFutureDirections.cc.i
+src/action/CMakeFiles/update_action.dir/ProjectsAction/GetProjectDetail.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/update_action.dir/ProjectsAction/GetProjectDetail.cc.i"
+	cd /home/a/Yuan/Code/CPP/updata_server/build/src/action && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/a/Yuan/Code/CPP/updata_server/src/action/ProjectsAction/GetProjectDetail.cc > CMakeFiles/update_action.dir/ProjectsAction/GetProjectDetail.cc.i
 
-src/action/CMakeFiles/update_action.dir/ProductsAction/GetFutureDirections.cc.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/update_action.dir/ProductsAction/GetFutureDirections.cc.s"
-	cd /home/a/Yuan/Code/CPP/updata_server/build/src/action && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/a/Yuan/Code/CPP/updata_server/src/action/ProductsAction/GetFutureDirections.cc -o CMakeFiles/update_action.dir/ProductsAction/GetFutureDirections.cc.s
+src/action/CMakeFiles/update_action.dir/ProjectsAction/GetProjectDetail.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/update_action.dir/ProjectsAction/GetProjectDetail.cc.s"
+	cd /home/a/Yuan/Code/CPP/updata_server/build/src/action && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/a/Yuan/Code/CPP/updata_server/src/action/ProjectsAction/GetProjectDetail.cc -o CMakeFiles/update_action.dir/ProjectsAction/GetProjectDetail.cc.s
 
-src/action/CMakeFiles/update_action.dir/ProductsAction/GetPortfolioHome.cc.o: src/action/CMakeFiles/update_action.dir/flags.make
-src/action/CMakeFiles/update_action.dir/ProductsAction/GetPortfolioHome.cc.o: /home/a/Yuan/Code/CPP/updata_server/src/action/ProductsAction/GetPortfolioHome.cc
-src/action/CMakeFiles/update_action.dir/ProductsAction/GetPortfolioHome.cc.o: src/action/CMakeFiles/update_action.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/a/Yuan/Code/CPP/updata_server/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object src/action/CMakeFiles/update_action.dir/ProductsAction/GetPortfolioHome.cc.o"
-	cd /home/a/Yuan/Code/CPP/updata_server/build/src/action && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/action/CMakeFiles/update_action.dir/ProductsAction/GetPortfolioHome.cc.o -MF CMakeFiles/update_action.dir/ProductsAction/GetPortfolioHome.cc.o.d -o CMakeFiles/update_action.dir/ProductsAction/GetPortfolioHome.cc.o -c /home/a/Yuan/Code/CPP/updata_server/src/action/ProductsAction/GetPortfolioHome.cc
+src/action/CMakeFiles/update_action.dir/ProjectsAction/ListProjects.cc.o: src/action/CMakeFiles/update_action.dir/flags.make
+src/action/CMakeFiles/update_action.dir/ProjectsAction/ListProjects.cc.o: /home/a/Yuan/Code/CPP/updata_server/src/action/ProjectsAction/ListProjects.cc
+src/action/CMakeFiles/update_action.dir/ProjectsAction/ListProjects.cc.o: src/action/CMakeFiles/update_action.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/a/Yuan/Code/CPP/updata_server/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object src/action/CMakeFiles/update_action.dir/ProjectsAction/ListProjects.cc.o"
+	cd /home/a/Yuan/Code/CPP/updata_server/build/src/action && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/action/CMakeFiles/update_action.dir/ProjectsAction/ListProjects.cc.o -MF CMakeFiles/update_action.dir/ProjectsAction/ListProjects.cc.o.d -o CMakeFiles/update_action.dir/ProjectsAction/ListProjects.cc.o -c /home/a/Yuan/Code/CPP/updata_server/src/action/ProjectsAction/ListProjects.cc
 
-src/action/CMakeFiles/update_action.dir/ProductsAction/GetPortfolioHome.cc.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/update_action.dir/ProductsAction/GetPortfolioHome.cc.i"
-	cd /home/a/Yuan/Code/CPP/updata_server/build/src/action && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/a/Yuan/Code/CPP/updata_server/src/action/ProductsAction/GetPortfolioHome.cc > CMakeFiles/update_action.dir/ProductsAction/GetPortfolioHome.cc.i
+src/action/CMakeFiles/update_action.dir/ProjectsAction/ListProjects.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/update_action.dir/ProjectsAction/ListProjects.cc.i"
+	cd /home/a/Yuan/Code/CPP/updata_server/build/src/action && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/a/Yuan/Code/CPP/updata_server/src/action/ProjectsAction/ListProjects.cc > CMakeFiles/update_action.dir/ProjectsAction/ListProjects.cc.i
 
-src/action/CMakeFiles/update_action.dir/ProductsAction/GetPortfolioHome.cc.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/update_action.dir/ProductsAction/GetPortfolioHome.cc.s"
-	cd /home/a/Yuan/Code/CPP/updata_server/build/src/action && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/a/Yuan/Code/CPP/updata_server/src/action/ProductsAction/GetPortfolioHome.cc -o CMakeFiles/update_action.dir/ProductsAction/GetPortfolioHome.cc.s
-
-src/action/CMakeFiles/update_action.dir/ProductsAction/GetRecentUpdates.cc.o: src/action/CMakeFiles/update_action.dir/flags.make
-src/action/CMakeFiles/update_action.dir/ProductsAction/GetRecentUpdates.cc.o: /home/a/Yuan/Code/CPP/updata_server/src/action/ProductsAction/GetRecentUpdates.cc
-src/action/CMakeFiles/update_action.dir/ProductsAction/GetRecentUpdates.cc.o: src/action/CMakeFiles/update_action.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/a/Yuan/Code/CPP/updata_server/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object src/action/CMakeFiles/update_action.dir/ProductsAction/GetRecentUpdates.cc.o"
-	cd /home/a/Yuan/Code/CPP/updata_server/build/src/action && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/action/CMakeFiles/update_action.dir/ProductsAction/GetRecentUpdates.cc.o -MF CMakeFiles/update_action.dir/ProductsAction/GetRecentUpdates.cc.o.d -o CMakeFiles/update_action.dir/ProductsAction/GetRecentUpdates.cc.o -c /home/a/Yuan/Code/CPP/updata_server/src/action/ProductsAction/GetRecentUpdates.cc
-
-src/action/CMakeFiles/update_action.dir/ProductsAction/GetRecentUpdates.cc.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/update_action.dir/ProductsAction/GetRecentUpdates.cc.i"
-	cd /home/a/Yuan/Code/CPP/updata_server/build/src/action && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/a/Yuan/Code/CPP/updata_server/src/action/ProductsAction/GetRecentUpdates.cc > CMakeFiles/update_action.dir/ProductsAction/GetRecentUpdates.cc.i
-
-src/action/CMakeFiles/update_action.dir/ProductsAction/GetRecentUpdates.cc.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/update_action.dir/ProductsAction/GetRecentUpdates.cc.s"
-	cd /home/a/Yuan/Code/CPP/updata_server/build/src/action && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/a/Yuan/Code/CPP/updata_server/src/action/ProductsAction/GetRecentUpdates.cc -o CMakeFiles/update_action.dir/ProductsAction/GetRecentUpdates.cc.s
-
-src/action/CMakeFiles/update_action.dir/ProductsAction/GetRecommendations.cc.o: src/action/CMakeFiles/update_action.dir/flags.make
-src/action/CMakeFiles/update_action.dir/ProductsAction/GetRecommendations.cc.o: /home/a/Yuan/Code/CPP/updata_server/src/action/ProductsAction/GetRecommendations.cc
-src/action/CMakeFiles/update_action.dir/ProductsAction/GetRecommendations.cc.o: src/action/CMakeFiles/update_action.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/a/Yuan/Code/CPP/updata_server/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object src/action/CMakeFiles/update_action.dir/ProductsAction/GetRecommendations.cc.o"
-	cd /home/a/Yuan/Code/CPP/updata_server/build/src/action && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/action/CMakeFiles/update_action.dir/ProductsAction/GetRecommendations.cc.o -MF CMakeFiles/update_action.dir/ProductsAction/GetRecommendations.cc.o.d -o CMakeFiles/update_action.dir/ProductsAction/GetRecommendations.cc.o -c /home/a/Yuan/Code/CPP/updata_server/src/action/ProductsAction/GetRecommendations.cc
-
-src/action/CMakeFiles/update_action.dir/ProductsAction/GetRecommendations.cc.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/update_action.dir/ProductsAction/GetRecommendations.cc.i"
-	cd /home/a/Yuan/Code/CPP/updata_server/build/src/action && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/a/Yuan/Code/CPP/updata_server/src/action/ProductsAction/GetRecommendations.cc > CMakeFiles/update_action.dir/ProductsAction/GetRecommendations.cc.i
-
-src/action/CMakeFiles/update_action.dir/ProductsAction/GetRecommendations.cc.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/update_action.dir/ProductsAction/GetRecommendations.cc.s"
-	cd /home/a/Yuan/Code/CPP/updata_server/build/src/action && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/a/Yuan/Code/CPP/updata_server/src/action/ProductsAction/GetRecommendations.cc -o CMakeFiles/update_action.dir/ProductsAction/GetRecommendations.cc.s
-
-src/action/CMakeFiles/update_action.dir/ProductsAction/GetSiteProfile.cc.o: src/action/CMakeFiles/update_action.dir/flags.make
-src/action/CMakeFiles/update_action.dir/ProductsAction/GetSiteProfile.cc.o: /home/a/Yuan/Code/CPP/updata_server/src/action/ProductsAction/GetSiteProfile.cc
-src/action/CMakeFiles/update_action.dir/ProductsAction/GetSiteProfile.cc.o: src/action/CMakeFiles/update_action.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/a/Yuan/Code/CPP/updata_server/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object src/action/CMakeFiles/update_action.dir/ProductsAction/GetSiteProfile.cc.o"
-	cd /home/a/Yuan/Code/CPP/updata_server/build/src/action && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/action/CMakeFiles/update_action.dir/ProductsAction/GetSiteProfile.cc.o -MF CMakeFiles/update_action.dir/ProductsAction/GetSiteProfile.cc.o.d -o CMakeFiles/update_action.dir/ProductsAction/GetSiteProfile.cc.o -c /home/a/Yuan/Code/CPP/updata_server/src/action/ProductsAction/GetSiteProfile.cc
-
-src/action/CMakeFiles/update_action.dir/ProductsAction/GetSiteProfile.cc.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/update_action.dir/ProductsAction/GetSiteProfile.cc.i"
-	cd /home/a/Yuan/Code/CPP/updata_server/build/src/action && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/a/Yuan/Code/CPP/updata_server/src/action/ProductsAction/GetSiteProfile.cc > CMakeFiles/update_action.dir/ProductsAction/GetSiteProfile.cc.i
-
-src/action/CMakeFiles/update_action.dir/ProductsAction/GetSiteProfile.cc.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/update_action.dir/ProductsAction/GetSiteProfile.cc.s"
-	cd /home/a/Yuan/Code/CPP/updata_server/build/src/action && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/a/Yuan/Code/CPP/updata_server/src/action/ProductsAction/GetSiteProfile.cc -o CMakeFiles/update_action.dir/ProductsAction/GetSiteProfile.cc.s
-
-src/action/CMakeFiles/update_action.dir/ProductsAction/ListProducts.cc.o: src/action/CMakeFiles/update_action.dir/flags.make
-src/action/CMakeFiles/update_action.dir/ProductsAction/ListProducts.cc.o: /home/a/Yuan/Code/CPP/updata_server/src/action/ProductsAction/ListProducts.cc
-src/action/CMakeFiles/update_action.dir/ProductsAction/ListProducts.cc.o: src/action/CMakeFiles/update_action.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/a/Yuan/Code/CPP/updata_server/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object src/action/CMakeFiles/update_action.dir/ProductsAction/ListProducts.cc.o"
-	cd /home/a/Yuan/Code/CPP/updata_server/build/src/action && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/action/CMakeFiles/update_action.dir/ProductsAction/ListProducts.cc.o -MF CMakeFiles/update_action.dir/ProductsAction/ListProducts.cc.o.d -o CMakeFiles/update_action.dir/ProductsAction/ListProducts.cc.o -c /home/a/Yuan/Code/CPP/updata_server/src/action/ProductsAction/ListProducts.cc
-
-src/action/CMakeFiles/update_action.dir/ProductsAction/ListProducts.cc.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/update_action.dir/ProductsAction/ListProducts.cc.i"
-	cd /home/a/Yuan/Code/CPP/updata_server/build/src/action && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/a/Yuan/Code/CPP/updata_server/src/action/ProductsAction/ListProducts.cc > CMakeFiles/update_action.dir/ProductsAction/ListProducts.cc.i
-
-src/action/CMakeFiles/update_action.dir/ProductsAction/ListProducts.cc.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/update_action.dir/ProductsAction/ListProducts.cc.s"
-	cd /home/a/Yuan/Code/CPP/updata_server/build/src/action && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/a/Yuan/Code/CPP/updata_server/src/action/ProductsAction/ListProducts.cc -o CMakeFiles/update_action.dir/ProductsAction/ListProducts.cc.s
+src/action/CMakeFiles/update_action.dir/ProjectsAction/ListProjects.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/update_action.dir/ProjectsAction/ListProjects.cc.s"
+	cd /home/a/Yuan/Code/CPP/updata_server/build/src/action && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/a/Yuan/Code/CPP/updata_server/src/action/ProjectsAction/ListProjects.cc -o CMakeFiles/update_action.dir/ProjectsAction/ListProjects.cc.s
 
 # Object files for target update_action
 update_action_OBJECTS = \
@@ -260,12 +204,8 @@ update_action_OBJECTS = \
 "CMakeFiles/update_action.dir/ConvertDataTaskAction/runt_task.cc.o" \
 "CMakeFiles/update_action.dir/DocumentAction/getDocumnet.cc.o" \
 "CMakeFiles/update_action.dir/DocumentAction/getReleases.cc.o" \
-"CMakeFiles/update_action.dir/ProductsAction/GetFutureDirections.cc.o" \
-"CMakeFiles/update_action.dir/ProductsAction/GetPortfolioHome.cc.o" \
-"CMakeFiles/update_action.dir/ProductsAction/GetRecentUpdates.cc.o" \
-"CMakeFiles/update_action.dir/ProductsAction/GetRecommendations.cc.o" \
-"CMakeFiles/update_action.dir/ProductsAction/GetSiteProfile.cc.o" \
-"CMakeFiles/update_action.dir/ProductsAction/ListProducts.cc.o"
+"CMakeFiles/update_action.dir/ProjectsAction/GetProjectDetail.cc.o" \
+"CMakeFiles/update_action.dir/ProjectsAction/ListProjects.cc.o"
 
 # External object files for target update_action
 update_action_EXTERNAL_OBJECTS =
@@ -277,15 +217,11 @@ src/action/libupdate_action.a: src/action/CMakeFiles/update_action.dir/ConvertDa
 src/action/libupdate_action.a: src/action/CMakeFiles/update_action.dir/ConvertDataTaskAction/runt_task.cc.o
 src/action/libupdate_action.a: src/action/CMakeFiles/update_action.dir/DocumentAction/getDocumnet.cc.o
 src/action/libupdate_action.a: src/action/CMakeFiles/update_action.dir/DocumentAction/getReleases.cc.o
-src/action/libupdate_action.a: src/action/CMakeFiles/update_action.dir/ProductsAction/GetFutureDirections.cc.o
-src/action/libupdate_action.a: src/action/CMakeFiles/update_action.dir/ProductsAction/GetPortfolioHome.cc.o
-src/action/libupdate_action.a: src/action/CMakeFiles/update_action.dir/ProductsAction/GetRecentUpdates.cc.o
-src/action/libupdate_action.a: src/action/CMakeFiles/update_action.dir/ProductsAction/GetRecommendations.cc.o
-src/action/libupdate_action.a: src/action/CMakeFiles/update_action.dir/ProductsAction/GetSiteProfile.cc.o
-src/action/libupdate_action.a: src/action/CMakeFiles/update_action.dir/ProductsAction/ListProducts.cc.o
+src/action/libupdate_action.a: src/action/CMakeFiles/update_action.dir/ProjectsAction/GetProjectDetail.cc.o
+src/action/libupdate_action.a: src/action/CMakeFiles/update_action.dir/ProjectsAction/ListProjects.cc.o
 src/action/libupdate_action.a: src/action/CMakeFiles/update_action.dir/build.make
 src/action/libupdate_action.a: src/action/CMakeFiles/update_action.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/a/Yuan/Code/CPP/updata_server/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Linking CXX static library libupdate_action.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/a/Yuan/Code/CPP/updata_server/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Linking CXX static library libupdate_action.a"
 	cd /home/a/Yuan/Code/CPP/updata_server/build/src/action && $(CMAKE_COMMAND) -P CMakeFiles/update_action.dir/cmake_clean_target.cmake
 	cd /home/a/Yuan/Code/CPP/updata_server/build/src/action && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/update_action.dir/link.txt --verbose=$(VERBOSE)
 

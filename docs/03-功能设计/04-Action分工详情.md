@@ -1,113 +1,98 @@
 # Action 分工详情
 
-## Action 列表
+Action 层负责把 Storage 查询结果组装成 API 响应，不直接处理 HTTP 路由注册。
 
-1. `ProductsAction`
-2. `DocumentAction`
-3. `CheckUpdateAction`
-4. `ConvertDataTaskAction`
+## ProjectsAction
 
-## ProductsAction
+文件：
 
-入口：
-
-```cpp
-json GetPortfolioHome();
-json ListProducts();
+```text
+include/action/ProjectsAction.h
+src/action/ProjectsAction/ListProjects.cc
+src/action/ProjectsAction/GetProjectDetail.cc
 ```
 
-`GetPortfolioHome()` 返回 `/api/v1/portfolio-home`：
+职责：
 
-1. `profile`
-2. `recommendations`
-3. `products`
-4. `recent_updates`
-5. `future_directions`
+1. `ListProjects()` 返回 `/api/v1/projects`。
+2. `GetProjectDetail(slug)` 返回 `/api/v1/projects/{slug}`。
+3. 响应中统一包含 `profile`，让首页和详情页都能独立渲染导航和站点资料。
 
-`ListProducts()` 返回 `/api/v1/products`：
+依赖 Storage 方法：
 
-```json
-{
-  "code": 0,
-  "message": "ok",
-  "data": {
-    "items": []
-  }
-}
-```
-
-内部方法：
-
-1. `GetRecommendations()`
-2. `GetFutureDirections()`
-3. `GetSiteProfile()`
-4. `GetRecentUpdates()`
+1. `getSiteProfile()`
+2. `getPortfolioProjectList()`
+3. `getFeaturedPortfolioProjects()`
+4. `getPortfolioProjectDetail(slug)`
 
 ## DocumentAction
 
-入口：
+文件：
 
-```cpp
-json GetDocument(const std::string &product_code, const std::string &version, const std::string &channel);
-json GetListReleases(const std::string &product_code);
+```text
+include/action/DocumentAction.h
+src/action/DocumentAction/getDocumnet.cc
+src/action/DocumentAction/getReleases.cc
 ```
 
 职责：
 
-1. 查询版本详情页数据。
-2. 支持 `version=latest`，由 storage 根据 `release_channels` 解析。
-3. 返回版本列表。
-4. 支持 `/document` 和 `/Document` 两个路径。
+1. `GetDocument(product_code, version, channel)` 返回软件发布文档。
+2. `GetListReleases(product_code)` 返回版本列表。
+
+接口：
+
+```http
+GET /api/v1/products/{product_code}/document
+GET /api/v1/products/{product_code}/releases
+```
+
+`/document` 只保留小写路径。
 
 ## CheckUpdateAction
 
-入口：
+文件：
 
-```cpp
-json CheckUpdate(
-    const std::string &product_code,
-    const std::string &cur_version,
-    const std::string &platform,
-    const std::string &arch,
-    const std::string &package_type,
-    const std::string &cur_data_schema_version);
+```text
+include/action/CheckUpdateAction.h
+src/action/CheckUpdataAction/checkupdate.cc
 ```
 
 职责：
 
-1. 查询 stable latest release。
-2. 使用 `Tools::canUpgrade()` 比较版本。
-3. 返回全量包路径、大小和摘要。
-4. 根据 `data_schema_version` 返回数据转换标记。
+1. 根据产品、客户端版本、平台、架构、包类型和渠道判断是否有更新。
+2. 返回全量包或增量包信息。
+3. 返回数据结构升级信息。
+
+接口：
+
+```http
+GET /api/v1/products/{product_code}/check-update/{version}
+```
 
 ## ConvertDataTaskAction
 
-入口：
+文件：
 
-```cpp
-json createTask(
-    const std::string &product_code,
-    const std::string &from_version,
-    const std::string &to_version,
-    const std::string &file_path);
-
-json getTaskStatus(const std::string &taskId);
-json getTaskResult(const std::string &taskId);
+```text
+include/action/ConvertDataTaskAction.h
+src/action/ConvertDataTaskAction/createTask.cc
+src/action/ConvertDataTaskAction/getTaskStatus.cc
+src/action/ConvertDataTaskAction/getTaskResult.cc
+src/action/ConvertDataTaskAction/runt_task.cc
 ```
 
 职责：
 
-1. 根据 `product_code` 查询产品。
-2. 根据 `from_version` 和 `to_version` 查询 `convert_rules`。
-3. 创建 `convert_tasks` 记录。
-4. 将任务放入内存队列。
-5. worker 调用 `python/convert/convert_data.py`。
-6. 回写任务状态、输出路径和输出 SHA256。
+1. 创建数据转换任务。
+2. 执行转换脚本。
+3. 查询任务状态。
+4. 查询任务结果。
 
-任务状态：
+接口：
 
-1. `pending`
-2. `running`
-3. `success`
-4. `failed`
-5. `canceled`
+```http
+POST /api/v1/products/{product_code}/convert-tasks
+GET /api/v1/products/{product_code}/convert-tasks/{task_id}/status
+GET /api/v1/products/{product_code}/convert-tasks/{task_id}/result
+```

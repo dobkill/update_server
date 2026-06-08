@@ -34,16 +34,63 @@ def add_release(params: dict) -> dict:
     except ValueError as e:
         return {"section": "release", "action": "error", "reason": str(e)}
 
-    # 校验版本号不重复
     existing = query_one(
-        "SELECT id FROM releases WHERE product_id = ? AND version = ?",
+        """
+        SELECT id, release_note, data_schema_version, status, html_path, published_at
+          FROM releases
+         WHERE product_id = ? AND version = ?
+        """,
         (product_id, version),
     )
     if existing is not None:
+        published_at = params.get("published_at")
+        if published_at is None:
+            if status == "active" and not existing.get("published_at"):
+                published_at = datetime.now(timezone.utc).isoformat()
+            else:
+                published_at = existing.get("published_at")
+
+        next_values = {
+            "release_note": release_note,
+            "data_schema_version": data_schema_version,
+            "status": status,
+            "html_path": html_path,
+            "published_at": published_at,
+        }
+        updates: list[str] = []
+        values: list[object] = []
+        for key, value in next_values.items():
+            if existing.get(key) != value:
+                updates.append(f"{key} = ?")
+                values.append(value)
+
+        if updates:
+            values.append(existing["id"])
+            execute(
+                f"""
+                UPDATE releases
+                   SET {", ".join(updates)},
+                       updated_at = CURRENT_TIMESTAMP
+                 WHERE id = ?
+                """,
+                tuple(values),
+            )
+            return {
+                "section": "release",
+                "action": "updated",
+                "release_id": existing["id"],
+                "product_id": product_id,
+                "product_code": product_code,
+                "version": version,
+                "status": status,
+                "data_schema_version": data_schema_version,
+                "published_at": published_at,
+            }
+
         return {
             "section": "release",
             "action": "skipped",
-            "reason": f"版本已存在 (id={existing['id']}, version={version})",
+            "reason": f"版本已是最新配置 (id={existing['id']}, version={version})",
             "release_id": existing["id"],
             "product_id": product_id,
             "product_code": product_code,

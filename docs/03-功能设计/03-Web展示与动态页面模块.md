@@ -1,45 +1,53 @@
 # Web 展示与动态页面模块
 
+## 定位
+
+`web` 是个人软件作品集站点，展示自研软件、工具、系统和实验项目。Web 展示模型独立于软件更新模型，数据来自 `portfolio_projects`，不再复用 `products/releases` 拼装首页。
+
 ## 静态站点
 
-`web` 是 Vite + 原生 TypeScript 前端模块。后端服务 `web/dist`，浏览器访问 `/` 返回 `web/dist/index.html`。未知前端路径由 Drogon default handler 回退到同一个 HTML 文件。
+`web` 是 Vite + TypeScript 前端模块。后端服务 `web/dist`，浏览器访问 `/` 返回 `web/dist/index.html`。未知前端路径由 Drogon default handler 回退到同一个 HTML 文件。
 
 `/data/...` 静态资源映射到项目 `data/` 目录：
 
 ```http
-GET /data/releases/Daily/v1.0.0/vue/image.png
+GET /data/releases/Daily/v1.0.0/html/总览.png
 GET /data/packages/Daily/v1.0.0/Daily-v1.0.0.zip
 ```
+
+## 页面
+
+| 路径 | 用途 | 数据接口 |
+| --- | --- | --- |
+| `/` | 作品集首页，展示 Hero、Featured Projects、All Projects | `GET /api/v1/projects` |
+| `/projects/{slug}` | 项目案例详情页 | `GET /api/v1/projects/{slug}` |
 
 ## 首页数据
 
 首页请求：
 
 ```http
-GET /api/v1/portfolio-home
+GET /api/v1/projects
 ```
 
 前端方法：
 
 ```ts
-fetchPortfolioHome()
+fetchProjects()
 ```
 
 首页类型：
 
 1. `SiteProfile`
-2. `PortfolioProduct`
-3. `RecentUpdate`
-4. `FutureDirection`
-5. `PortfolioHomeData`
+2. `PortfolioProject`
+3. `ProjectListData`
 
-`PortfolioHomeData` 字段：
+`ProjectListData` 字段：
 
 1. `profile`
-2. `recommendations`
-3. `products`
-4. `recent_updates`
-5. `future_directions`
+2. `featured`
+3. `items`
+4. `filters`
 
 ## 首页渲染
 
@@ -52,101 +60,54 @@ web/src/runtime/htmlRenderer.ts
 输入：
 
 ```text
-renderCatalogPage(home: PortfolioHomeData)
+renderCatalogPage(data, visibleProjects, selectedFilter, searchTerm)
 ```
 
 页面结构：
 
-1. Hero 首屏
-2. 最近更新
-3. 全部作品
-4. 未来方向
-5. Footer
+1. 紧凑 Hero
+2. Featured Project
+3. All Projects
+4. Footer
 
-真实作品来自 `home.products`。准备中和计划中卡片由组件内静态数组生成，不进入数据库。
+交互：
 
-## 顶部导航
+1. 筛选标签按 `category` 过滤。
+2. 搜索框按项目名、简介和技术栈过滤。
+3. 项目卡片跳转到 `/projects/{slug}`。
 
-文件：
+## 项目详情
 
-```text
-web/src/runtime/htmlRenderer.ts
-```
-
-导航项：
-
-1. `作品`
-2. `GitHub`
-
-`GitHub` 链接来自 `profile.github_url`，为空时不渲染。
-
-## 版本详情
-
-版本详情请求：
+详情请求：
 
 ```http
-GET /api/v1/products/{product_code}/Document?version=latest&channel=stable
-GET /api/v1/products/{product_code}/document?version=latest&channel=stable
+GET /api/v1/projects/{slug}
 ```
 
 前端方法：
 
 ```ts
-fetchReleaseDetail()
+fetchProjectDetail(slug)
 ```
 
-后端返回结构匹配 `ProductReleaseDetail`。`page.page_data` 驱动区块渲染，前端不再动态加载产品自己的 Vue 文件。
+详情页结构：
 
-版本页面清单：
+1. 浅色产品案例 Hero
+2. 项目信息条
+3. Overview + Core Features
+4. Screenshots 真实截图
+5. Tech Stack
+6. Architecture
+7. Challenge / Solution / Result
 
-```text
-data/releases/<product_code>/<version>/html/page.json
-data/releases/<product_code>/<version>/vue/page.json
-```
+## 顶部导航
 
-Daily 页面清单：
+导航数据来自 `site_profile`：
 
-```text
-data/releases/Daily/v1.0.0/vue/page.json
-```
-
-`html/page.json` 是新目录约定，`vue/page.json` 作为历史目录兼容保留。
-
-支持区块：
-
-1. `HeroBlock`
-2. `FeatureGridBlock`
-3. `RichTextBlock`
-4. `ImageTextBlock`
-5. `ScreenshotGalleryBlock`
-6. `DownloadPanelBlock`
-7. `TimelineBlock`
-8. `FaqBlock`
-9. `FooterCtaBlock`
-
-## mock 数据
-
-首页兜底文件：
-
-```text
-web/src/mock/portfolioHome.json
-```
-
-该文件只包含 Daily、站点资料、最近更新和未来方向。
-
-版本详情兜底文件：
-
-```text
-web/src/mock/releases.json
-```
-
-产品列表兼容兜底文件：
-
-```text
-web/src/mock/products.json
-```
-
-该文件只包含 Daily。
+1. `ownerName`
+2. `githubUrl`
+3. `email`
+4. `resumeUrl`
 
 ## 构建
 

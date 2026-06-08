@@ -5,7 +5,17 @@ namespace Storage {
     {
         auto profile = queryOne(
             "SELECT "
-            "site_name, subtitle, github_url, email "
+            "owner_name AS ownerName, "
+            "site_name AS siteName, "
+            "subtitle, "
+            "hero_label AS heroLabel, "
+            "hero_title AS heroTitle, "
+            "hero_description AS heroDescription, "
+            "github_url AS githubUrl, "
+            "email, "
+            "resume_url AS resumeUrl, "
+            "linkedin_url AS linkedinUrl, "
+            "twitter_url AS twitterUrl "
             "FROM site_profile "
             "WHERE id = 1 "
             "LIMIT 1;");
@@ -13,10 +23,17 @@ namespace Storage {
         if (profile.empty())
         {
             return {
-                {"site_name", "YXX Works"},
-                {"subtitle", "产品、插件与创作实验"},
-                {"github_url", ""},
-                {"email", ""}
+                {"ownerName", "LIANG Y."},
+                {"siteName", "Personal Software Lab"},
+                {"subtitle", "Self-built apps, tools, systems, and experiments."},
+                {"heroLabel", "DEVELOPER & BUILDER"},
+                {"heroTitle", "Personal Software Lab"},
+                {"heroDescription", "A collection of self-built apps, tools, systems, and experiments — crafted with code and curiosity."},
+                {"githubUrl", ""},
+                {"email", ""},
+                {"resumeUrl", ""},
+                {"linkedinUrl", ""},
+                {"twitterUrl", ""}
             };
         }
 

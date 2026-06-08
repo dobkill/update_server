@@ -6,8 +6,7 @@ std::shared_ptr<ApiRoutes> ApiRoutes::s_instance = nullptr;
 std::mutex ApiRoutes::s_mutex;
 void ApiRoutes::init_routes()
 {
-    register_portfolio_home_routes();
-    register_products_routes();
+    register_projects_routes();
     register_check_update_routes();
     register_convert_task_routes();
     register_convert_task_status_routes();

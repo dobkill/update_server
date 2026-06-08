@@ -2,10 +2,17 @@
 # 运行: ADMIN_CONFIG=config/deploy_example.toml ADMIN_DRY_RUN=1 python python/admin/admin.py
 
 [site_profile]
-site_name = "YXX Works"
-subtitle = "产品、插件与创作实验"
+owner_name = "LIANG Y."
+site_name = "Personal Software Lab"
+subtitle = "Self-built apps, tools, systems, and experiments."
+hero_label = "DEVELOPER & BUILDER"
+hero_title = "Personal Software Lab"
+hero_description = "A collection of self-built apps, tools, systems, and experiments — crafted with code and curiosity."
 github_url = ""
 email = ""
+resume_url = ""
+linkedin_url = ""
+twitter_url = ""
 
 [[product]]
 name = "Daily"
@@ -15,31 +22,35 @@ description = "Obsidian 插件，用来管理每日任务、快速记录和项�
 icon_path = "/data/releases/Daily/v1.0.0/icon/image.png"
 status = "active"
 
-[[future_direction]]
-title = "Obsidian 插件增强"
-comment = "持续优化记录、任务与知识管理体验。"
-icon_path = ""
-sort_order = 10
-status = "active"
-
-[[future_direction]]
-title = "效率工具"
-comment = "开发更轻量、专注的个人效率工具。"
-icon_path = ""
-sort_order = 20
-status = "active"
-
-[[future_direction]]
-title = "Web 实验"
-comment = "尝试小型 Web 产品与交互实验，探索新的表达方式。"
-icon_path = ""
-sort_order = 30
-status = "active"
-
-[[recommendation]]
+[[portfolio_project]]
 product_code = "Daily"
+slug = "daily"
+name = "Daily"
+category = "Tool"
+description = "An Obsidian workflow plugin for daily tasks, quick capture, and project planning progress."
+long_description = "Daily is a personal knowledge workflow plugin that connects daily tasks, quick notes, project progress, and lightweight review pages inside Obsidian."
+featured = true
+status = "Live"
+year = "2026"
+platform = "Obsidian"
+role = "Developer & Designer"
+project_type = "Plugin"
+cover_image_url = "/data/releases/Daily/v1.0.0/html/总览.png"
+hero_image_url = "/data/releases/Daily/v1.0.0/html/总览.png"
+tech_stack = ["TypeScript", "Obsidian API", "Markdown", "SQLite"]
+features = ["任务总览", "项目进度", "今日任务", "快速记录", "四种项目视图", "数据复盘"]
+screenshots = [
+  { title = "总览页面", desc = "任务总览和项目进度两个 Tab，一屏掌握全局。", image = "/data/releases/Daily/v1.0.0/html/总览.png" },
+  { title = "项目进度页", desc = "集中查看和管理所有项目的整体进度。", image = "/data/releases/Daily/v1.0.0/html/项目进度页.png" },
+  { title = "今日任务", desc = "展示今日待办、已完成、未完成和进度百分比。", image = "/data/releases/Daily/v1.0.0/html/今日任务.png" },
+  { title = "快速记录 - 创建任务", desc = "快速创建当天任务或项目记录，支持项目数据导入。", image = "/data/releases/Daily/v1.0.0/html/快速记录-创建.png" }
+]
+architecture = ["Obsidian Plugin", "Local Vault", "Task Parser", "Review Renderer", "Release Updater"]
+challenge = "Daily planning, project notes, and review data were split across too many manual pages."
+solution = "Built an Obsidian plugin that keeps capture, planning, and review workflows in one local-first system."
+result = "Reduced context switching and made recurring project review easier to maintain."
+links = { liveDemo = "", github = "" }
 sort_order = 10
-status = "active"
 
 [[release]]
 product_code = "Daily"
@@ -47,7 +58,7 @@ version = "v1.0.0"
 release_note = "Daily v1.0.0 首个可用版本。"
 data_schema_version = "v1.0.0"
 status = "active"
-html_path = "/data/releases/Daily/v1.0.0/vue/DailyReleasePage.html"
+html_path = "/data/releases/Daily/v1.0.0/html/DailyReleasePage.html"
 
 [[release.asset]]
 platform = "obsidian"

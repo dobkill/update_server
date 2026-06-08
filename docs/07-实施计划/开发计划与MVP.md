@@ -1,25 +1,22 @@
 # 开发计划与 MVP
 
-## 已完成
+## 已完成的设计收敛
 
-1. CMake 构建 `software_update_platform`。
-2. Drogon 启动、静态站点、API 路由、SPA fallback。
-3. 首页聚合接口 `/api/v1/portfolio-home`。
-4. 产品列表兼容接口 `/api/v1/products`。
-5. 版本详情、版本列表、更新检查、数据转换任务接口。
-6. SQLite 初始化和首页结构补齐。
-7. Web 首页只展示 Daily 真实作品。
-8. Web 首页准备中和计划中卡片由前端静态生成。
-9. Python 管理入口写入产品、站点资料、未来方向、推荐项目、版本、包、渠道。
-10. Python 数据库迁移、导出、导入脚本。
+1. Web 展示从旧首页聚合模型切换到独立作品集模型。
+2. 新增 `portfolio_projects` 表。
+3. 新增 `ProjectsAction`。
+4. 新增 `/api/v1/projects` 和 `/api/v1/projects/{slug}`。
+5. 删除旧 Web 兼容接口 `/api/v1/portfolio-home` 和 `/api/v1/products`。
+6. 删除大写 `/api/v1/products/{product_code}/Document` 入口。
+7. 前端删除 mock fallback，改为 API 驱动。
+8. 管理脚本改为 `portfolio_project` 配置块。
 
-## 验证标准
+## MVP 验收
 
-1. `cmake -S . -B build` 成功。
-2. `cmake --build build -j2` 成功。
-3. `cd web && npm run typecheck` 成功。
-4. `cd web && npm run build` 成功。
-5. `python -m py_compile` 覆盖 `python/admin/*.py` 成功。
-6. `GET /api/v1/portfolio-home` 返回 `profile`、`recommendations`、`products`、`recent_updates`、`future_directions`。
-7. `GET /api/v1/products` 返回 `data.items`。
-8. 首页不渲染非真实上线作品。
+1. `cmake --build build` 通过。
+2. `cd web && npm run typecheck && npm run build` 通过。
+3. `GET /api/v1/projects` 返回站点资料、Featured 项目和真实作品集项目。
+4. `GET /api/v1/projects/daily` 返回完整项目详情和真实截图对象。
+5. `/` 可以渲染深色作品集首页。
+6. `/projects/daily` 可以渲染浅色项目案例页。
+7. 更新检查、版本文档和转换任务接口保持可用。

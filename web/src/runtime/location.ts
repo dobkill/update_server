@@ -1,16 +1,13 @@
 export const catalogPath = "/";
-export const latestVersionAlias = "latest";
-export const defaultReleaseChannel = "stable";
+export const projectPathPrefix = "/projects";
 
 export type AppLocation =
   | {
       page: "catalog";
     }
   | {
-      page: "release";
-      productCode: string;
-      version: string;
-      channel: string;
+      page: "project";
+      slug: string;
     };
 
 export function normalizePath(pathname: string): string {
@@ -22,24 +19,12 @@ export function normalizePath(pathname: string): string {
   return withLeadingSlash.endsWith("/") ? withLeadingSlash.slice(0, -1) : withLeadingSlash;
 }
 
-export function normalizeProductCode(productCode?: string | null): string {
-  return (productCode ?? "").trim();
+export function normalizeSlug(slug?: string | null): string {
+  return (slug ?? "").trim().toLowerCase();
 }
 
-export function normalizeVersion(version?: string | null): string {
-  const normalized = (version ?? "").trim();
-  return normalized || latestVersionAlias;
-}
-
-export function normalizeChannel(channel?: string | null): string {
-  const normalized = (channel ?? "").trim().toLowerCase();
-  return normalized || defaultReleaseChannel;
-}
-
-export function resolveAppLocation(pathname: string, search = ""): AppLocation {
+export function resolveAppLocation(pathname: string): AppLocation {
   const normalizedPath = normalizePath(pathname);
-  const channel = normalizeChannel(new URLSearchParams(search).get("channel"));
-
   if (normalizedPath === catalogPath) {
     return { page: "catalog" };
   }
@@ -49,55 +34,23 @@ export function resolveAppLocation(pathname: string, search = ""): AppLocation {
     .filter(Boolean)
     .map((segment) => decodeURIComponent(segment));
 
-  const productCode = normalizeProductCode(segments[0]);
-  const version = normalizeVersion(segments[1]);
-
-  if (!productCode) {
-    return { page: "catalog" };
+  if (segments[0] === "projects") {
+    const slug = normalizeSlug(segments[1]);
+    return slug ? { page: "project", slug } : { page: "catalog" };
   }
 
-  return {
-    page: "release",
-    productCode,
-    version,
-    channel
-  };
+  return { page: "catalog" };
 }
 
 export function getCurrentAppLocation(): AppLocation {
-  return resolveAppLocation(window.location.pathname, window.location.search);
+  return resolveAppLocation(window.location.pathname);
 }
 
 export function buildCatalogUrl(): string {
   return catalogPath;
 }
 
-export function buildReleaseUrl(
-  productCode: string,
-  version = latestVersionAlias,
-  channel = defaultReleaseChannel
-): string {
-  const normalizedProductCode = encodeURIComponent(normalizeProductCode(productCode));
-  const normalizedVersion = normalizeVersion(version);
-
-  if (!normalizedProductCode) {
-    return catalogPath;
-  }
-
-  const basePath =
-    normalizedVersion === latestVersionAlias
-      ? `/${normalizedProductCode}`
-      : `/${normalizedProductCode}/${encodeURIComponent(normalizedVersion)}`;
-
-  if (normalizeChannel(channel) === defaultReleaseChannel) {
-    return basePath;
-  }
-
-  const url = new URL(basePath, window.location.origin);
-  url.searchParams.set("channel", normalizeChannel(channel));
-  return `${url.pathname}${url.search}`;
-}
-
-export function attachProductCodeToHref(href: string): string {
-  return href;
+export function buildProjectUrl(slug: string): string {
+  const normalizedSlug = normalizeSlug(slug);
+  return normalizedSlug ? `${projectPathPrefix}/${encodeURIComponent(normalizedSlug)}` : catalogPath;
 }

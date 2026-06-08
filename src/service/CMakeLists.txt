@@ -5,8 +5,7 @@ add_library(update_service STATIC
     register_convert_task_routes.cc
     register_convert_task_status_routes.cc
     register_document_routes.cc
-    register_portfolio_home_routes.cc
-    register_products_routes.cc
+    register_projects_routes.cc
     register_release_routes.cc
 )
 

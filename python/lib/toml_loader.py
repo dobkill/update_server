@@ -57,21 +57,16 @@ def validate_deploy_config(config: dict) -> list[str]:
         if "subtitle" in profile and not profile.get("subtitle"):
             messages.append("site_profile: subtitle 不能为空")
 
-    for i, item in enumerate(config.get("future_direction", [])):
-        if not item.get("title"):
-            messages.append(f"future_direction[{i}]: 缺少 title")
-        if not item.get("comment"):
-            messages.append(f"future_direction[{i}]: 缺少 comment")
-        status = item.get("status", "active")
-        if status not in ("active", "disabled"):
-            messages.append(f"future_direction[{i}]: status='{status}' 不合法")
-
-    for i, item in enumerate(config.get("recommendation", [])):
-        if not item.get("product_code"):
-            messages.append(f"recommendation[{i}]: 缺少 product_code")
-        status = item.get("status", "active")
-        if status not in ("active", "disabled"):
-            messages.append(f"recommendation[{i}]: status='{status}' 不合法")
+    for i, item in enumerate(config.get("portfolio_project", [])):
+        if not item.get("slug"):
+            messages.append(f"portfolio_project[{i}]: 缺少 slug")
+        if not item.get("name"):
+            messages.append(f"portfolio_project[{i}]: 缺少 name")
+        if not item.get("category"):
+            messages.append(f"portfolio_project[{i}]: 缺少 category")
+        visibility = item.get("visibility", "public")
+        if visibility not in ("public", "hidden"):
+            messages.append(f"portfolio_project[{i}]: visibility='{visibility}' 不合法")
 
     # 校验 release
     for i, r in enumerate(config.get("release", [])):

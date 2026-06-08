@@ -298,149 +298,53 @@ DocumentAction/getReleases.cc.s:
 	cd /home/a/Yuan/Code/CPP/updata_server/build && $(MAKE) $(MAKESILENT) -f src/action/CMakeFiles/update_action.dir/build.make src/action/CMakeFiles/update_action.dir/DocumentAction/getReleases.cc.s
 .PHONY : DocumentAction/getReleases.cc.s
 
-ProductsAction/GetFutureDirections.o: ProductsAction/GetFutureDirections.cc.o
-.PHONY : ProductsAction/GetFutureDirections.o
+ProjectsAction/GetProjectDetail.o: ProjectsAction/GetProjectDetail.cc.o
+.PHONY : ProjectsAction/GetProjectDetail.o
 
 # target to build an object file
-ProductsAction/GetFutureDirections.cc.o:
-	cd /home/a/Yuan/Code/CPP/updata_server/build && $(MAKE) $(MAKESILENT) -f src/action/CMakeFiles/update_action.dir/build.make src/action/CMakeFiles/update_action.dir/ProductsAction/GetFutureDirections.cc.o
-.PHONY : ProductsAction/GetFutureDirections.cc.o
+ProjectsAction/GetProjectDetail.cc.o:
+	cd /home/a/Yuan/Code/CPP/updata_server/build && $(MAKE) $(MAKESILENT) -f src/action/CMakeFiles/update_action.dir/build.make src/action/CMakeFiles/update_action.dir/ProjectsAction/GetProjectDetail.cc.o
+.PHONY : ProjectsAction/GetProjectDetail.cc.o
 
-ProductsAction/GetFutureDirections.i: ProductsAction/GetFutureDirections.cc.i
-.PHONY : ProductsAction/GetFutureDirections.i
+ProjectsAction/GetProjectDetail.i: ProjectsAction/GetProjectDetail.cc.i
+.PHONY : ProjectsAction/GetProjectDetail.i
 
 # target to preprocess a source file
-ProductsAction/GetFutureDirections.cc.i:
-	cd /home/a/Yuan/Code/CPP/updata_server/build && $(MAKE) $(MAKESILENT) -f src/action/CMakeFiles/update_action.dir/build.make src/action/CMakeFiles/update_action.dir/ProductsAction/GetFutureDirections.cc.i
-.PHONY : ProductsAction/GetFutureDirections.cc.i
+ProjectsAction/GetProjectDetail.cc.i:
+	cd /home/a/Yuan/Code/CPP/updata_server/build && $(MAKE) $(MAKESILENT) -f src/action/CMakeFiles/update_action.dir/build.make src/action/CMakeFiles/update_action.dir/ProjectsAction/GetProjectDetail.cc.i
+.PHONY : ProjectsAction/GetProjectDetail.cc.i
 
-ProductsAction/GetFutureDirections.s: ProductsAction/GetFutureDirections.cc.s
-.PHONY : ProductsAction/GetFutureDirections.s
+ProjectsAction/GetProjectDetail.s: ProjectsAction/GetProjectDetail.cc.s
+.PHONY : ProjectsAction/GetProjectDetail.s
 
 # target to generate assembly for a file
-ProductsAction/GetFutureDirections.cc.s:
-	cd /home/a/Yuan/Code/CPP/updata_server/build && $(MAKE) $(MAKESILENT) -f src/action/CMakeFiles/update_action.dir/build.make src/action/CMakeFiles/update_action.dir/ProductsAction/GetFutureDirections.cc.s
-.PHONY : ProductsAction/GetFutureDirections.cc.s
+ProjectsAction/GetProjectDetail.cc.s:
+	cd /home/a/Yuan/Code/CPP/updata_server/build && $(MAKE) $(MAKESILENT) -f src/action/CMakeFiles/update_action.dir/build.make src/action/CMakeFiles/update_action.dir/ProjectsAction/GetProjectDetail.cc.s
+.PHONY : ProjectsAction/GetProjectDetail.cc.s
 
-ProductsAction/GetPortfolioHome.o: ProductsAction/GetPortfolioHome.cc.o
-.PHONY : ProductsAction/GetPortfolioHome.o
+ProjectsAction/ListProjects.o: ProjectsAction/ListProjects.cc.o
+.PHONY : ProjectsAction/ListProjects.o
 
 # target to build an object file
-ProductsAction/GetPortfolioHome.cc.o:
-	cd /home/a/Yuan/Code/CPP/updata_server/build && $(MAKE) $(MAKESILENT) -f src/action/CMakeFiles/update_action.dir/build.make src/action/CMakeFiles/update_action.dir/ProductsAction/GetPortfolioHome.cc.o
-.PHONY : ProductsAction/GetPortfolioHome.cc.o
+ProjectsAction/ListProjects.cc.o:
+	cd /home/a/Yuan/Code/CPP/updata_server/build && $(MAKE) $(MAKESILENT) -f src/action/CMakeFiles/update_action.dir/build.make src/action/CMakeFiles/update_action.dir/ProjectsAction/ListProjects.cc.o
+.PHONY : ProjectsAction/ListProjects.cc.o
 
-ProductsAction/GetPortfolioHome.i: ProductsAction/GetPortfolioHome.cc.i
-.PHONY : ProductsAction/GetPortfolioHome.i
-
-# target to preprocess a source file
-ProductsAction/GetPortfolioHome.cc.i:
-	cd /home/a/Yuan/Code/CPP/updata_server/build && $(MAKE) $(MAKESILENT) -f src/action/CMakeFiles/update_action.dir/build.make src/action/CMakeFiles/update_action.dir/ProductsAction/GetPortfolioHome.cc.i
-.PHONY : ProductsAction/GetPortfolioHome.cc.i
-
-ProductsAction/GetPortfolioHome.s: ProductsAction/GetPortfolioHome.cc.s
-.PHONY : ProductsAction/GetPortfolioHome.s
-
-# target to generate assembly for a file
-ProductsAction/GetPortfolioHome.cc.s:
-	cd /home/a/Yuan/Code/CPP/updata_server/build && $(MAKE) $(MAKESILENT) -f src/action/CMakeFiles/update_action.dir/build.make src/action/CMakeFiles/update_action.dir/ProductsAction/GetPortfolioHome.cc.s
-.PHONY : ProductsAction/GetPortfolioHome.cc.s
-
-ProductsAction/GetRecentUpdates.o: ProductsAction/GetRecentUpdates.cc.o
-.PHONY : ProductsAction/GetRecentUpdates.o
-
-# target to build an object file
-ProductsAction/GetRecentUpdates.cc.o:
-	cd /home/a/Yuan/Code/CPP/updata_server/build && $(MAKE) $(MAKESILENT) -f src/action/CMakeFiles/update_action.dir/build.make src/action/CMakeFiles/update_action.dir/ProductsAction/GetRecentUpdates.cc.o
-.PHONY : ProductsAction/GetRecentUpdates.cc.o
-
-ProductsAction/GetRecentUpdates.i: ProductsAction/GetRecentUpdates.cc.i
-.PHONY : ProductsAction/GetRecentUpdates.i
+ProjectsAction/ListProjects.i: ProjectsAction/ListProjects.cc.i
+.PHONY : ProjectsAction/ListProjects.i
 
 # target to preprocess a source file
-ProductsAction/GetRecentUpdates.cc.i:
-	cd /home/a/Yuan/Code/CPP/updata_server/build && $(MAKE) $(MAKESILENT) -f src/action/CMakeFiles/update_action.dir/build.make src/action/CMakeFiles/update_action.dir/ProductsAction/GetRecentUpdates.cc.i
-.PHONY : ProductsAction/GetRecentUpdates.cc.i
+ProjectsAction/ListProjects.cc.i:
+	cd /home/a/Yuan/Code/CPP/updata_server/build && $(MAKE) $(MAKESILENT) -f src/action/CMakeFiles/update_action.dir/build.make src/action/CMakeFiles/update_action.dir/ProjectsAction/ListProjects.cc.i
+.PHONY : ProjectsAction/ListProjects.cc.i
 
-ProductsAction/GetRecentUpdates.s: ProductsAction/GetRecentUpdates.cc.s
-.PHONY : ProductsAction/GetRecentUpdates.s
-
-# target to generate assembly for a file
-ProductsAction/GetRecentUpdates.cc.s:
-	cd /home/a/Yuan/Code/CPP/updata_server/build && $(MAKE) $(MAKESILENT) -f src/action/CMakeFiles/update_action.dir/build.make src/action/CMakeFiles/update_action.dir/ProductsAction/GetRecentUpdates.cc.s
-.PHONY : ProductsAction/GetRecentUpdates.cc.s
-
-ProductsAction/GetRecommendations.o: ProductsAction/GetRecommendations.cc.o
-.PHONY : ProductsAction/GetRecommendations.o
-
-# target to build an object file
-ProductsAction/GetRecommendations.cc.o:
-	cd /home/a/Yuan/Code/CPP/updata_server/build && $(MAKE) $(MAKESILENT) -f src/action/CMakeFiles/update_action.dir/build.make src/action/CMakeFiles/update_action.dir/ProductsAction/GetRecommendations.cc.o
-.PHONY : ProductsAction/GetRecommendations.cc.o
-
-ProductsAction/GetRecommendations.i: ProductsAction/GetRecommendations.cc.i
-.PHONY : ProductsAction/GetRecommendations.i
-
-# target to preprocess a source file
-ProductsAction/GetRecommendations.cc.i:
-	cd /home/a/Yuan/Code/CPP/updata_server/build && $(MAKE) $(MAKESILENT) -f src/action/CMakeFiles/update_action.dir/build.make src/action/CMakeFiles/update_action.dir/ProductsAction/GetRecommendations.cc.i
-.PHONY : ProductsAction/GetRecommendations.cc.i
-
-ProductsAction/GetRecommendations.s: ProductsAction/GetRecommendations.cc.s
-.PHONY : ProductsAction/GetRecommendations.s
+ProjectsAction/ListProjects.s: ProjectsAction/ListProjects.cc.s
+.PHONY : ProjectsAction/ListProjects.s
 
 # target to generate assembly for a file
-ProductsAction/GetRecommendations.cc.s:
-	cd /home/a/Yuan/Code/CPP/updata_server/build && $(MAKE) $(MAKESILENT) -f src/action/CMakeFiles/update_action.dir/build.make src/action/CMakeFiles/update_action.dir/ProductsAction/GetRecommendations.cc.s
-.PHONY : ProductsAction/GetRecommendations.cc.s
-
-ProductsAction/GetSiteProfile.o: ProductsAction/GetSiteProfile.cc.o
-.PHONY : ProductsAction/GetSiteProfile.o
-
-# target to build an object file
-ProductsAction/GetSiteProfile.cc.o:
-	cd /home/a/Yuan/Code/CPP/updata_server/build && $(MAKE) $(MAKESILENT) -f src/action/CMakeFiles/update_action.dir/build.make src/action/CMakeFiles/update_action.dir/ProductsAction/GetSiteProfile.cc.o
-.PHONY : ProductsAction/GetSiteProfile.cc.o
-
-ProductsAction/GetSiteProfile.i: ProductsAction/GetSiteProfile.cc.i
-.PHONY : ProductsAction/GetSiteProfile.i
-
-# target to preprocess a source file
-ProductsAction/GetSiteProfile.cc.i:
-	cd /home/a/Yuan/Code/CPP/updata_server/build && $(MAKE) $(MAKESILENT) -f src/action/CMakeFiles/update_action.dir/build.make src/action/CMakeFiles/update_action.dir/ProductsAction/GetSiteProfile.cc.i
-.PHONY : ProductsAction/GetSiteProfile.cc.i
-
-ProductsAction/GetSiteProfile.s: ProductsAction/GetSiteProfile.cc.s
-.PHONY : ProductsAction/GetSiteProfile.s
-
-# target to generate assembly for a file
-ProductsAction/GetSiteProfile.cc.s:
-	cd /home/a/Yuan/Code/CPP/updata_server/build && $(MAKE) $(MAKESILENT) -f src/action/CMakeFiles/update_action.dir/build.make src/action/CMakeFiles/update_action.dir/ProductsAction/GetSiteProfile.cc.s
-.PHONY : ProductsAction/GetSiteProfile.cc.s
-
-ProductsAction/ListProducts.o: ProductsAction/ListProducts.cc.o
-.PHONY : ProductsAction/ListProducts.o
-
-# target to build an object file
-ProductsAction/ListProducts.cc.o:
-	cd /home/a/Yuan/Code/CPP/updata_server/build && $(MAKE) $(MAKESILENT) -f src/action/CMakeFiles/update_action.dir/build.make src/action/CMakeFiles/update_action.dir/ProductsAction/ListProducts.cc.o
-.PHONY : ProductsAction/ListProducts.cc.o
-
-ProductsAction/ListProducts.i: ProductsAction/ListProducts.cc.i
-.PHONY : ProductsAction/ListProducts.i
-
-# target to preprocess a source file
-ProductsAction/ListProducts.cc.i:
-	cd /home/a/Yuan/Code/CPP/updata_server/build && $(MAKE) $(MAKESILENT) -f src/action/CMakeFiles/update_action.dir/build.make src/action/CMakeFiles/update_action.dir/ProductsAction/ListProducts.cc.i
-.PHONY : ProductsAction/ListProducts.cc.i
-
-ProductsAction/ListProducts.s: ProductsAction/ListProducts.cc.s
-.PHONY : ProductsAction/ListProducts.s
-
-# target to generate assembly for a file
-ProductsAction/ListProducts.cc.s:
-	cd /home/a/Yuan/Code/CPP/updata_server/build && $(MAKE) $(MAKESILENT) -f src/action/CMakeFiles/update_action.dir/build.make src/action/CMakeFiles/update_action.dir/ProductsAction/ListProducts.cc.s
-.PHONY : ProductsAction/ListProducts.cc.s
+ProjectsAction/ListProjects.cc.s:
+	cd /home/a/Yuan/Code/CPP/updata_server/build && $(MAKE) $(MAKESILENT) -f src/action/CMakeFiles/update_action.dir/build.make src/action/CMakeFiles/update_action.dir/ProjectsAction/ListProjects.cc.s
+.PHONY : ProjectsAction/ListProjects.cc.s
 
 # Help Target
 help:
@@ -472,24 +376,12 @@ help:
 	@echo "... DocumentAction/getReleases.o"
 	@echo "... DocumentAction/getReleases.i"
 	@echo "... DocumentAction/getReleases.s"
-	@echo "... ProductsAction/GetFutureDirections.o"
-	@echo "... ProductsAction/GetFutureDirections.i"
-	@echo "... ProductsAction/GetFutureDirections.s"
-	@echo "... ProductsAction/GetPortfolioHome.o"
-	@echo "... ProductsAction/GetPortfolioHome.i"
-	@echo "... ProductsAction/GetPortfolioHome.s"
-	@echo "... ProductsAction/GetRecentUpdates.o"
-	@echo "... ProductsAction/GetRecentUpdates.i"
-	@echo "... ProductsAction/GetRecentUpdates.s"
-	@echo "... ProductsAction/GetRecommendations.o"
-	@echo "... ProductsAction/GetRecommendations.i"
-	@echo "... ProductsAction/GetRecommendations.s"
-	@echo "... ProductsAction/GetSiteProfile.o"
-	@echo "... ProductsAction/GetSiteProfile.i"
-	@echo "... ProductsAction/GetSiteProfile.s"
-	@echo "... ProductsAction/ListProducts.o"
-	@echo "... ProductsAction/ListProducts.i"
-	@echo "... ProductsAction/ListProducts.s"
+	@echo "... ProjectsAction/GetProjectDetail.o"
+	@echo "... ProjectsAction/GetProjectDetail.i"
+	@echo "... ProjectsAction/GetProjectDetail.s"
+	@echo "... ProjectsAction/ListProjects.o"
+	@echo "... ProjectsAction/ListProjects.i"
+	@echo "... ProjectsAction/ListProjects.s"
 .PHONY : help
 
 

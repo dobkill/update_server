@@ -208,7 +208,7 @@ namespace Storage
         {
             std::cout << "Database already exists, skipping initialization" << std::endl;
         }
-        return ensurePortfolioSchema();
+        return ensurePortfolioProjectSchema();
     }
 
     std::shared_ptr<Storage_SQL> Storage_SQL::Instance()
@@ -252,7 +252,7 @@ namespace Storage
         return false;
     }
 
-    bool Storage_SQL::ensurePortfolioSchema()
+    bool Storage_SQL::ensurePortfolioProjectSchema()
     {
         if (!tableExists("products"))
         {
@@ -267,50 +267,71 @@ namespace Storage
             "note TEXT NOT NULL DEFAULT ''"
             ");",
 
-            "CREATE TABLE IF NOT EXISTS product_careers ("
-            "id INTEGER PRIMARY KEY AUTOINCREMENT, "
-            "product_id INTEGER NOT NULL, "
-            "career TEXT NOT NULL, "
-            "created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP, "
-            "updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP, "
-            "FOREIGN KEY(product_id) REFERENCES products(id), "
-            "UNIQUE(product_id, career)"
-            ");",
-
-            "CREATE TABLE IF NOT EXISTS recommendations ("
-            "id INTEGER PRIMARY KEY AUTOINCREMENT, "
-            "product_id INTEGER NOT NULL, "
-            "status TEXT NOT NULL DEFAULT 'active', "
-            "sort_order INTEGER NOT NULL DEFAULT 100, "
-            "created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP, "
-            "updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP, "
-            "FOREIGN KEY(product_id) REFERENCES products(id), "
-            "CHECK(status IN ('active', 'disabled'))"
-            ");",
-
             "CREATE TABLE IF NOT EXISTS site_profile ("
             "id INTEGER PRIMARY KEY CHECK(id = 1), "
-            "site_name TEXT NOT NULL DEFAULT 'YXX Works', "
-            "subtitle TEXT NOT NULL DEFAULT '产品、插件与创作实验', "
+            "owner_name TEXT NOT NULL DEFAULT 'LIANG Y.', "
+            "site_name TEXT NOT NULL DEFAULT 'Personal Software Lab', "
+            "subtitle TEXT NOT NULL DEFAULT 'Self-built apps, tools, systems, and experiments.', "
+            "hero_label TEXT NOT NULL DEFAULT 'DEVELOPER & BUILDER', "
+            "hero_title TEXT NOT NULL DEFAULT 'Personal Software Lab', "
+            "hero_description TEXT NOT NULL DEFAULT 'A collection of self-built apps, tools, systems, and experiments — crafted with code and curiosity.', "
             "github_url TEXT NOT NULL DEFAULT '', "
             "email TEXT NOT NULL DEFAULT '', "
+            "resume_url TEXT NOT NULL DEFAULT '', "
+            "linkedin_url TEXT NOT NULL DEFAULT '', "
+            "twitter_url TEXT NOT NULL DEFAULT '', "
             "created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP, "
             "updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP"
             ");",
 
-            "CREATE TABLE IF NOT EXISTS future_directions ("
+            "CREATE TABLE IF NOT EXISTS portfolio_projects ("
             "id INTEGER PRIMARY KEY AUTOINCREMENT, "
-            "title TEXT NOT NULL, "
-            "comment TEXT NOT NULL, "
-            "icon_path TEXT NOT NULL DEFAULT '', "
-            "status TEXT NOT NULL DEFAULT 'active', "
+            "product_id INTEGER, "
+            "slug TEXT NOT NULL UNIQUE, "
+            "name TEXT NOT NULL, "
+            "category TEXT NOT NULL, "
+            "description TEXT NOT NULL DEFAULT '', "
+            "long_description TEXT NOT NULL DEFAULT '', "
+            "featured INTEGER NOT NULL DEFAULT 0, "
+            "status TEXT NOT NULL DEFAULT 'Live', "
+            "year TEXT NOT NULL DEFAULT '', "
+            "platform TEXT NOT NULL DEFAULT '', "
+            "role TEXT NOT NULL DEFAULT '', "
+            "project_type TEXT NOT NULL DEFAULT '', "
+            "cover_image_url TEXT NOT NULL DEFAULT '', "
+            "hero_image_url TEXT NOT NULL DEFAULT '', "
+            "tech_stack_json TEXT NOT NULL DEFAULT '[]', "
+            "features_json TEXT NOT NULL DEFAULT '[]', "
+            "screenshots_json TEXT NOT NULL DEFAULT '[]', "
+            "architecture_json TEXT NOT NULL DEFAULT '[]', "
+            "challenge TEXT NOT NULL DEFAULT '', "
+            "solution TEXT NOT NULL DEFAULT '', "
+            "result TEXT NOT NULL DEFAULT '', "
+            "links_json TEXT NOT NULL DEFAULT '{}', "
+            "visibility TEXT NOT NULL DEFAULT 'public', "
             "sort_order INTEGER NOT NULL DEFAULT 100, "
             "created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP, "
             "updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP, "
-            "CHECK(status IN ('active', 'disabled'))"
+            "FOREIGN KEY(product_id) REFERENCES products(id), "
+            "CHECK(featured IN (0, 1)), "
+            "CHECK(visibility IN ('public', 'hidden'))"
             ");"};
 
         for (const auto &statement : statements)
+        {
+            if (!executeStatement(statement))
+            {
+                return false;
+            }
+        }
+
+        const std::vector<std::string> project_indexes = {
+            "CREATE INDEX IF NOT EXISTS idx_portfolio_projects_public_order "
+            "ON portfolio_projects(visibility, sort_order, id);",
+            "CREATE INDEX IF NOT EXISTS idx_portfolio_projects_category "
+            "ON portfolio_projects(category, visibility, sort_order);"};
+
+        for (const auto &statement : project_indexes)
         {
             if (!executeStatement(statement))
             {
@@ -322,6 +343,24 @@ namespace Storage
             !executeStatement("ALTER TABLE products ADD COLUMN github_url TEXT NOT NULL DEFAULT '';"))
         {
             return false;
+        }
+
+        const std::vector<std::pair<std::string, std::string>> site_columns = {
+            {"owner_name", "TEXT NOT NULL DEFAULT 'LIANG Y.'"},
+            {"hero_label", "TEXT NOT NULL DEFAULT 'DEVELOPER & BUILDER'"},
+            {"hero_title", "TEXT NOT NULL DEFAULT 'Personal Software Lab'"},
+            {"hero_description", "TEXT NOT NULL DEFAULT 'A collection of self-built apps, tools, systems, and experiments — crafted with code and curiosity.'"},
+            {"resume_url", "TEXT NOT NULL DEFAULT ''"},
+            {"linkedin_url", "TEXT NOT NULL DEFAULT ''"},
+            {"twitter_url", "TEXT NOT NULL DEFAULT ''"}};
+
+        for (const auto &[column, definition] : site_columns)
+        {
+            if (!columnExists("site_profile", column) &&
+                !executeStatement("ALTER TABLE site_profile ADD COLUMN " + column + " " + definition + ";"))
+            {
+                return false;
+            }
         }
 
         if (tableExists("releases") && !columnExists("releases", "html_path") &&
@@ -342,56 +381,57 @@ namespace Storage
             return false;
         }
 
-        if (!columnExists("recommendations", "sort_order") &&
-            !executeStatement("ALTER TABLE recommendations ADD COLUMN sort_order INTEGER NOT NULL DEFAULT 100;"))
-        {
-            return false;
-        }
-
-        if (!columnExists("future_directions", "sort_order") &&
-            !executeStatement("ALTER TABLE future_directions ADD COLUMN sort_order INTEGER NOT NULL DEFAULT 100;"))
+        if (tableExists("releases") && columnExists("releases", "html_path") &&
+            !executeStatement("UPDATE releases SET html_path = replace(html_path, '/vue/', '/html/') WHERE html_path LIKE '%/vue/%';"))
         {
             return false;
         }
 
         if (!executeStatement(
-                "INSERT INTO site_profile (id, site_name, subtitle, github_url, email) "
-                "VALUES (1, 'YXX Works', '产品、插件与创作实验', '', '') "
+                "INSERT INTO site_profile ("
+                "id, owner_name, site_name, subtitle, hero_label, hero_title, hero_description, "
+                "github_url, email, resume_url, linkedin_url, twitter_url"
+                ") VALUES ("
+                "1, 'LIANG Y.', 'Personal Software Lab', "
+                "'Self-built apps, tools, systems, and experiments.', "
+                "'DEVELOPER & BUILDER', 'Personal Software Lab', "
+                "'A collection of self-built apps, tools, systems, and experiments — crafted with code and curiosity.', "
+                "'', '', '', '', ''"
+                ") "
                 "ON CONFLICT(id) DO NOTHING;"))
         {
             return false;
         }
 
-        const std::vector<std::vector<std::string>> directions = {
-            {"Obsidian 插件增强", "持续优化记录、任务与知识管理体验。", "10"},
-            {"效率工具", "开发更轻量、专注的个人效率工具。", "20"},
-            {"Web 实验", "尝试小型 Web 产品与交互实验，探索新的表达方式。", "30"}};
-
-        for (const auto &direction : directions)
+        if (!executeStatement(
+                "UPDATE site_profile "
+                "SET owner_name = 'LIANG Y.', "
+                "    site_name = 'Personal Software Lab', "
+                "    subtitle = 'Self-built apps, tools, systems, and experiments.', "
+                "    hero_label = 'DEVELOPER & BUILDER', "
+                "    hero_title = 'Personal Software Lab', "
+                "    hero_description = 'A collection of self-built apps, tools, systems, and experiments — crafted with code and curiosity.' "
+                "WHERE id = 1 "
+                "  AND site_name = 'YXX Works' "
+                "  AND subtitle = '产品、插件与创作实验';"))
         {
-            if (!executeStatement(
-                    "INSERT INTO future_directions (title, comment, icon_path, status, sort_order) "
-                    "SELECT ?, ?, '', 'active', ? "
-                    "WHERE NOT EXISTS (SELECT 1 FROM future_directions WHERE title = ?);",
-                    {direction[0], direction[1], direction[2], direction[0]}))
-            {
-                return false;
-            }
+            return false;
         }
 
         if (!executeStatement(
-                "INSERT INTO recommendations (product_id, status, sort_order) "
-                "SELECT id, 'active', 10 FROM products "
-                "WHERE code = 'Daily' COLLATE NOCASE "
-                "  AND status = 'active' "
-                "  AND NOT EXISTS (SELECT 1 FROM recommendations WHERE product_id = products.id);"))
+                "DELETE FROM portfolio_projects "
+                "WHERE product_id IS NULL "
+                "  AND slug IN ("
+                "'insightboard', 'autoreport', 'datacanvas', 'promptflow', 'taskpilot', "
+                "'codesnip', 'serverlens', 'notestream', 'datapulse', 'shipgate'"
+                ");"))
         {
             return false;
         }
 
         return executeStatement(
             "INSERT INTO schema_migrations (version, note) "
-            "VALUES ('20260606_portfolio_home', 'portfolio home schema') "
+            "VALUES ('20260607_portfolio_projects', 'portfolio project schema') "
             "ON CONFLICT(version) DO NOTHING;");
     }
 

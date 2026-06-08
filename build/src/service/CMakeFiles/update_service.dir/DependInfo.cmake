@@ -14,8 +14,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/a/Yuan/Code/CPP/updata_server/src/service/register_convert_task_routes.cc" "src/service/CMakeFiles/update_service.dir/register_convert_task_routes.cc.o" "gcc" "src/service/CMakeFiles/update_service.dir/register_convert_task_routes.cc.o.d"
   "/home/a/Yuan/Code/CPP/updata_server/src/service/register_convert_task_status_routes.cc" "src/service/CMakeFiles/update_service.dir/register_convert_task_status_routes.cc.o" "gcc" "src/service/CMakeFiles/update_service.dir/register_convert_task_status_routes.cc.o.d"
   "/home/a/Yuan/Code/CPP/updata_server/src/service/register_document_routes.cc" "src/service/CMakeFiles/update_service.dir/register_document_routes.cc.o" "gcc" "src/service/CMakeFiles/update_service.dir/register_document_routes.cc.o.d"
-  "/home/a/Yuan/Code/CPP/updata_server/src/service/register_portfolio_home_routes.cc" "src/service/CMakeFiles/update_service.dir/register_portfolio_home_routes.cc.o" "gcc" "src/service/CMakeFiles/update_service.dir/register_portfolio_home_routes.cc.o.d"
-  "/home/a/Yuan/Code/CPP/updata_server/src/service/register_products_routes.cc" "src/service/CMakeFiles/update_service.dir/register_products_routes.cc.o" "gcc" "src/service/CMakeFiles/update_service.dir/register_products_routes.cc.o.d"
+  "/home/a/Yuan/Code/CPP/updata_server/src/service/register_projects_routes.cc" "src/service/CMakeFiles/update_service.dir/register_projects_routes.cc.o" "gcc" "src/service/CMakeFiles/update_service.dir/register_projects_routes.cc.o.d"
   "/home/a/Yuan/Code/CPP/updata_server/src/service/register_release_routes.cc" "src/service/CMakeFiles/update_service.dir/register_release_routes.cc.o" "gcc" "src/service/CMakeFiles/update_service.dir/register_release_routes.cc.o.d"
   )
 

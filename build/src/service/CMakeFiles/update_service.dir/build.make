@@ -153,38 +153,24 @@ src/service/CMakeFiles/update_service.dir/register_document_routes.cc.s: cmake_f
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/update_service.dir/register_document_routes.cc.s"
 	cd /home/a/Yuan/Code/CPP/updata_server/build/src/service && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/a/Yuan/Code/CPP/updata_server/src/service/register_document_routes.cc -o CMakeFiles/update_service.dir/register_document_routes.cc.s
 
-src/service/CMakeFiles/update_service.dir/register_portfolio_home_routes.cc.o: src/service/CMakeFiles/update_service.dir/flags.make
-src/service/CMakeFiles/update_service.dir/register_portfolio_home_routes.cc.o: /home/a/Yuan/Code/CPP/updata_server/src/service/register_portfolio_home_routes.cc
-src/service/CMakeFiles/update_service.dir/register_portfolio_home_routes.cc.o: src/service/CMakeFiles/update_service.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/a/Yuan/Code/CPP/updata_server/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object src/service/CMakeFiles/update_service.dir/register_portfolio_home_routes.cc.o"
-	cd /home/a/Yuan/Code/CPP/updata_server/build/src/service && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/service/CMakeFiles/update_service.dir/register_portfolio_home_routes.cc.o -MF CMakeFiles/update_service.dir/register_portfolio_home_routes.cc.o.d -o CMakeFiles/update_service.dir/register_portfolio_home_routes.cc.o -c /home/a/Yuan/Code/CPP/updata_server/src/service/register_portfolio_home_routes.cc
+src/service/CMakeFiles/update_service.dir/register_projects_routes.cc.o: src/service/CMakeFiles/update_service.dir/flags.make
+src/service/CMakeFiles/update_service.dir/register_projects_routes.cc.o: /home/a/Yuan/Code/CPP/updata_server/src/service/register_projects_routes.cc
+src/service/CMakeFiles/update_service.dir/register_projects_routes.cc.o: src/service/CMakeFiles/update_service.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/a/Yuan/Code/CPP/updata_server/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object src/service/CMakeFiles/update_service.dir/register_projects_routes.cc.o"
+	cd /home/a/Yuan/Code/CPP/updata_server/build/src/service && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/service/CMakeFiles/update_service.dir/register_projects_routes.cc.o -MF CMakeFiles/update_service.dir/register_projects_routes.cc.o.d -o CMakeFiles/update_service.dir/register_projects_routes.cc.o -c /home/a/Yuan/Code/CPP/updata_server/src/service/register_projects_routes.cc
 
-src/service/CMakeFiles/update_service.dir/register_portfolio_home_routes.cc.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/update_service.dir/register_portfolio_home_routes.cc.i"
-	cd /home/a/Yuan/Code/CPP/updata_server/build/src/service && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/a/Yuan/Code/CPP/updata_server/src/service/register_portfolio_home_routes.cc > CMakeFiles/update_service.dir/register_portfolio_home_routes.cc.i
+src/service/CMakeFiles/update_service.dir/register_projects_routes.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/update_service.dir/register_projects_routes.cc.i"
+	cd /home/a/Yuan/Code/CPP/updata_server/build/src/service && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/a/Yuan/Code/CPP/updata_server/src/service/register_projects_routes.cc > CMakeFiles/update_service.dir/register_projects_routes.cc.i
 
-src/service/CMakeFiles/update_service.dir/register_portfolio_home_routes.cc.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/update_service.dir/register_portfolio_home_routes.cc.s"
-	cd /home/a/Yuan/Code/CPP/updata_server/build/src/service && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/a/Yuan/Code/CPP/updata_server/src/service/register_portfolio_home_routes.cc -o CMakeFiles/update_service.dir/register_portfolio_home_routes.cc.s
-
-src/service/CMakeFiles/update_service.dir/register_products_routes.cc.o: src/service/CMakeFiles/update_service.dir/flags.make
-src/service/CMakeFiles/update_service.dir/register_products_routes.cc.o: /home/a/Yuan/Code/CPP/updata_server/src/service/register_products_routes.cc
-src/service/CMakeFiles/update_service.dir/register_products_routes.cc.o: src/service/CMakeFiles/update_service.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/a/Yuan/Code/CPP/updata_server/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object src/service/CMakeFiles/update_service.dir/register_products_routes.cc.o"
-	cd /home/a/Yuan/Code/CPP/updata_server/build/src/service && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/service/CMakeFiles/update_service.dir/register_products_routes.cc.o -MF CMakeFiles/update_service.dir/register_products_routes.cc.o.d -o CMakeFiles/update_service.dir/register_products_routes.cc.o -c /home/a/Yuan/Code/CPP/updata_server/src/service/register_products_routes.cc
-
-src/service/CMakeFiles/update_service.dir/register_products_routes.cc.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/update_service.dir/register_products_routes.cc.i"
-	cd /home/a/Yuan/Code/CPP/updata_server/build/src/service && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/a/Yuan/Code/CPP/updata_server/src/service/register_products_routes.cc > CMakeFiles/update_service.dir/register_products_routes.cc.i
-
-src/service/CMakeFiles/update_service.dir/register_products_routes.cc.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/update_service.dir/register_products_routes.cc.s"
-	cd /home/a/Yuan/Code/CPP/updata_server/build/src/service && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/a/Yuan/Code/CPP/updata_server/src/service/register_products_routes.cc -o CMakeFiles/update_service.dir/register_products_routes.cc.s
+src/service/CMakeFiles/update_service.dir/register_projects_routes.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/update_service.dir/register_projects_routes.cc.s"
+	cd /home/a/Yuan/Code/CPP/updata_server/build/src/service && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/a/Yuan/Code/CPP/updata_server/src/service/register_projects_routes.cc -o CMakeFiles/update_service.dir/register_projects_routes.cc.s
 
 src/service/CMakeFiles/update_service.dir/register_release_routes.cc.o: src/service/CMakeFiles/update_service.dir/flags.make
 src/service/CMakeFiles/update_service.dir/register_release_routes.cc.o: /home/a/Yuan/Code/CPP/updata_server/src/service/register_release_routes.cc
 src/service/CMakeFiles/update_service.dir/register_release_routes.cc.o: src/service/CMakeFiles/update_service.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/a/Yuan/Code/CPP/updata_server/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object src/service/CMakeFiles/update_service.dir/register_release_routes.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/a/Yuan/Code/CPP/updata_server/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object src/service/CMakeFiles/update_service.dir/register_release_routes.cc.o"
 	cd /home/a/Yuan/Code/CPP/updata_server/build/src/service && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/service/CMakeFiles/update_service.dir/register_release_routes.cc.o -MF CMakeFiles/update_service.dir/register_release_routes.cc.o.d -o CMakeFiles/update_service.dir/register_release_routes.cc.o -c /home/a/Yuan/Code/CPP/updata_server/src/service/register_release_routes.cc
 
 src/service/CMakeFiles/update_service.dir/register_release_routes.cc.i: cmake_force
@@ -203,8 +189,7 @@ update_service_OBJECTS = \
 "CMakeFiles/update_service.dir/register_convert_task_routes.cc.o" \
 "CMakeFiles/update_service.dir/register_convert_task_status_routes.cc.o" \
 "CMakeFiles/update_service.dir/register_document_routes.cc.o" \
-"CMakeFiles/update_service.dir/register_portfolio_home_routes.cc.o" \
-"CMakeFiles/update_service.dir/register_products_routes.cc.o" \
+"CMakeFiles/update_service.dir/register_projects_routes.cc.o" \
 "CMakeFiles/update_service.dir/register_release_routes.cc.o"
 
 # External object files for target update_service
@@ -216,12 +201,11 @@ src/service/libupdate_service.a: src/service/CMakeFiles/update_service.dir/regis
 src/service/libupdate_service.a: src/service/CMakeFiles/update_service.dir/register_convert_task_routes.cc.o
 src/service/libupdate_service.a: src/service/CMakeFiles/update_service.dir/register_convert_task_status_routes.cc.o
 src/service/libupdate_service.a: src/service/CMakeFiles/update_service.dir/register_document_routes.cc.o
-src/service/libupdate_service.a: src/service/CMakeFiles/update_service.dir/register_portfolio_home_routes.cc.o
-src/service/libupdate_service.a: src/service/CMakeFiles/update_service.dir/register_products_routes.cc.o
+src/service/libupdate_service.a: src/service/CMakeFiles/update_service.dir/register_projects_routes.cc.o
 src/service/libupdate_service.a: src/service/CMakeFiles/update_service.dir/register_release_routes.cc.o
 src/service/libupdate_service.a: src/service/CMakeFiles/update_service.dir/build.make
 src/service/libupdate_service.a: src/service/CMakeFiles/update_service.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/a/Yuan/Code/CPP/updata_server/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Linking CXX static library libupdate_service.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/a/Yuan/Code/CPP/updata_server/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX static library libupdate_service.a"
 	cd /home/a/Yuan/Code/CPP/updata_server/build/src/service && $(CMAKE_COMMAND) -P CMakeFiles/update_service.dir/cmake_clean_target.cmake
 	cd /home/a/Yuan/Code/CPP/updata_server/build/src/service && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/update_service.dir/link.txt --verbose=$(VERBOSE)
 

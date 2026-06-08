@@ -1,7 +1,5 @@
 # API 设计
 
-## 响应结构
-
 接口统一挂载在 `/api/v1` 下，响应体为 JSON。
 
 ```json
@@ -12,26 +10,27 @@
 }
 ```
 
-`code = 0` 表示业务成功。业务错误使用 JSON `code` 表达。
+`code = 0` 表示业务成功。业务错误使用 JSON `code` 表达，并同步设置合理的 HTTP 状态码。
 
 ## API 总览
 
-| 方法 | 路径 | Action |
-| --- | --- | --- |
-| `GET` | `/api/v1/portfolio-home` | `ProductsAction::GetPortfolioHome()` |
-| `GET` | `/api/v1/products` | `ProductsAction::ListProducts()` |
-| `GET` | `/api/v1/products/{product_code}/document` | `DocumentAction::GetDocument()` |
-| `GET` | `/api/v1/products/{product_code}/Document` | `DocumentAction::GetDocument()` |
-| `GET` | `/api/v1/products/{product_code}/releases` | `DocumentAction::GetListReleases()` |
-| `GET` | `/api/v1/products/{product_code}/check-update/{version}` | `CheckUpdateAction::CheckUpdate()` |
-| `POST` | `/api/v1/products/{product_code}/convert-tasks` | `ConvertDataTaskAction::createTask()` |
-| `GET` | `/api/v1/products/{product_code}/convert-tasks/{task_id}/status` | `ConvertDataTaskAction::getTaskStatus()` |
-| `GET` | `/api/v1/products/{product_code}/convert-tasks/{task_id}/result` | `ConvertDataTaskAction::getTaskResult()` |
+| 方法 | 路径 | Action | 用途 |
+| --- | --- | --- | --- |
+| `GET` | `/api/v1/projects` | `ProjectsAction::ListProjects()` | 作品集首页项目列表 |
+| `GET` | `/api/v1/projects/{slug}` | `ProjectsAction::GetProjectDetail()` | 作品集项目详情 |
+| `GET` | `/api/v1/products/{product_code}/document` | `DocumentAction::GetDocument()` | 软件发布文档 |
+| `GET` | `/api/v1/products/{product_code}/releases` | `DocumentAction::GetListReleases()` | 软件版本列表 |
+| `GET` | `/api/v1/products/{product_code}/check-update/{version}` | `CheckUpdateAction::CheckUpdate()` | 客户端更新检查 |
+| `POST` | `/api/v1/products/{product_code}/convert-tasks` | `ConvertDataTaskAction::createTask()` | 创建数据转换任务 |
+| `GET` | `/api/v1/products/{product_code}/convert-tasks/{task_id}/status` | `ConvertDataTaskAction::getTaskStatus()` | 查询转换任务状态 |
+| `GET` | `/api/v1/products/{product_code}/convert-tasks/{task_id}/result` | `ConvertDataTaskAction::getTaskResult()` | 查询转换任务结果 |
 
-## 首页聚合
+Web 作品集只使用 `/api/v1/projects` 和 `/api/v1/projects/{slug}`。软件更新能力仍使用 `/api/v1/products/...` 下的发布、更新检查和转换任务接口。
+
+## 作品集项目列表
 
 ```http
-GET /api/v1/portfolio-home
+GET /api/v1/projects
 ```
 
 成功响应：
@@ -42,58 +41,57 @@ GET /api/v1/portfolio-home
   "message": "ok",
   "data": {
     "profile": {
-      "site_name": "YXX Works",
-      "subtitle": "产品、插件与创作实验",
-      "github_url": "",
-      "email": ""
+      "ownerName": "LIANG Y.",
+      "siteName": "Personal Software Lab",
+      "subtitle": "Self-built apps, tools, systems, and experiments.",
+      "heroLabel": "DEVELOPER & BUILDER",
+      "heroTitle": "Personal Software Lab",
+      "heroDescription": "A collection of self-built apps, tools, systems, and experiments — crafted with code and curiosity.",
+      "githubUrl": "",
+      "email": "",
+      "resumeUrl": "",
+      "linkedinUrl": "",
+      "twitterUrl": ""
     },
-    "recommendations": [],
-    "products": [],
-    "recent_updates": [],
-    "future_directions": []
+    "featured": [],
+    "items": [],
+    "filters": ["All", "Tool"]
   }
 }
 ```
 
-`data.profile` 字段：
+`data.items` 和 `data.featured` 中的项目字段：
 
-1. `site_name`
-2. `subtitle`
-3. `github_url`
-4. `email`
-
-`data.recommendations` 和 `data.products` 字段：
-
-1. `product_code`
+1. `slug`
 2. `name`
-3. `summary`
-4. `cover_image_url`
-5. `github_url`
-6. `latest_version`
-7. `published_at`
-8. `updated_at`
-9. `tag`
-10. `status_label`
+3. `category`
+4. `description`
+5. `longDescription`
+6. `featured`
+7. `status`
+8. `year`
+9. `platform`
+10. `role`
+11. `type`
+12. `coverImageUrl`
+13. `heroImageUrl`
+14. `techStack`
+15. `features`
+16. `screenshots`
+17. `architecture`
+18. `challenge`
+19. `solution`
+20. `result`
+21. `links`
+22. `sortOrder`
+23. `productCode`
 
-`data.recent_updates` 字段：
+`screenshots` 为对象数组，每项包含 `title`、`desc` 和 `image`。`image` 使用可直接访问的静态资源路径，例如 `/data/releases/Daily/v1.0.0/html/总览.png`。
 
-1. `product_code`
-2. `name`
-3. `version`
-4. `published_at`
-5. `title`
-6. `description`
-
-`data.future_directions` 字段：
-
-1. `title`
-2. `comment`
-3. `icon_path`
-
-## 产品列表
+## 作品集项目详情
 
 ```http
-GET /api/v1/products
+GET /api/v1/projects/{slug}
 ```
 
 成功响应：
@@ -103,28 +101,59 @@ GET /api/v1/products
   "code": 0,
   "message": "ok",
   "data": {
-    "items": []
+    "profile": {},
+    "project": {
+      "slug": "daily",
+      "name": "Daily",
+      "category": "Tool",
+      "description": "An Obsidian workflow plugin for daily tasks, quick capture, and project planning progress.",
+      "longDescription": "Daily is a personal knowledge workflow plugin that connects daily tasks, quick notes, project progress, and lightweight review pages inside Obsidian.",
+      "featured": true,
+      "status": "Live",
+      "year": "2026",
+      "platform": "Obsidian",
+      "role": "Developer & Designer",
+      "type": "Plugin",
+      "coverImageUrl": "/data/releases/Daily/v1.0.0/html/总览.png",
+      "heroImageUrl": "/data/releases/Daily/v1.0.0/html/总览.png",
+      "techStack": ["TypeScript", "Obsidian API", "Markdown", "SQLite"],
+      "features": ["任务总览", "项目进度", "今日任务"],
+      "screenshots": [
+        {
+          "title": "总览页面",
+          "desc": "任务总览和项目进度两个 Tab，一屏掌握全局。",
+          "image": "/data/releases/Daily/v1.0.0/html/总览.png"
+        }
+      ],
+      "architecture": [],
+      "challenge": "",
+      "solution": "",
+      "result": "",
+      "links": {
+        "liveDemo": "",
+        "github": "https://github.com/dobkill/obsidian-daily"
+      }
+    }
   }
 }
 ```
 
-`items` 字段：
+未找到项目：
 
-1. `product_code`
-2. `name`
-3. `summary`
-4. `cover_image_url`
-5. `github_url`
-6. `latest_version`
-7. `updated_at`
-8. `tag`
-9. `status_label`
+```json
+{
+  "code": 404,
+  "message": "project not found",
+  "data": {
+    "slug": "missing"
+  }
+}
+```
 
-## 版本详情文档
+## 发布文档
 
 ```http
 GET /api/v1/products/{product_code}/document?version=latest&channel=stable
-GET /api/v1/products/{product_code}/Document?version=latest&channel=stable
 ```
 
 Query 参数：
@@ -149,22 +178,9 @@ Query 参数：
     "published_at": "2026-06-05T09:00:00Z",
     "release_notes_summary": "Daily v1.0.0 首个可用版本。",
     "page": {
-      "vue_entry_url": "/data/releases/Daily/v1.0.0/vue/DailyReleasePage.html",
+      "html_entry_url": "/data/releases/Daily/v1.0.0/html/DailyReleasePage.html",
       "page_data": {}
     }
-  }
-}
-```
-
-未找到版本：
-
-```json
-{
-  "code": 404,
-  "message": "release document not found",
-  "data": {
-    "product_code": "Daily",
-    "requested_version": "latest"
   }
 }
 ```
@@ -192,22 +208,6 @@ GET /api/v1/products/{product_code}/releases
 ```http
 GET /api/v1/products/{product_code}/check-update/{version}?platform=windows&arch=x64&package_type=portable&data_schema_version=1
 ```
-
-Path 参数：
-
-| 参数 | 说明 |
-| --- | --- |
-| `product_code` | 产品编码 |
-| `version` | 客户端软件版本 |
-
-Query 参数：
-
-| 参数 | 默认值 | 说明 |
-| --- | --- | --- |
-| `platform` | `windows` | 平台 |
-| `arch` | `x64` | 架构 |
-| `package_type` | `portable` | 包类型 |
-| `data_schema_version` | 空 | 客户端数据结构版本 |
 
 成功响应包含：
 
@@ -257,12 +257,3 @@ GET /api/v1/products/{product_code}/convert-tasks/{task_id}/result
 ```
 
 任务完成后结果响应包含 `output_file_path` 和 `download_url`。
-
-## 静态资源
-
-`/data/...` 映射到项目 `data/` 目录下的真实文件，并拒绝路径穿越。
-
-```http
-GET /data/releases/Daily/v1.0.0/vue/image.png
-GET /data/packages/Daily/v1.0.0/Daily-v1.0.0.zip
-```

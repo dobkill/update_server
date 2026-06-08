@@ -1,31 +1,35 @@
 import "./style.css";
-import { defaultReleaseChannel, fetchPortfolioHome, fetchReleaseDetail } from "./runtime/api";
-import type { PortfolioHomeData, ProductReleaseDetail, SiteProfile } from "./runtime/api";
+import {
+  defaultProfile,
+  fetchProjectDetail,
+  fetchProjects,
+  type PortfolioProject,
+  type ProjectListData,
+  type SiteProfile
+} from "./runtime/api";
 import {
   renderCatalogPage,
   renderErrorState,
   renderLoadingState,
-  renderReleasePage,
-  renderShell,
-  renderSoftErrorBar
+  renderProjectDetail,
+  renderShell
 } from "./runtime/htmlRenderer";
-import { getMockPortfolioHome, getMockReleaseDetail } from "./runtime/mockData";
-import { composeReleaseBlocks } from "./runtime/pageComposer";
 import {
   buildCatalogUrl,
-  buildReleaseUrl,
+  buildProjectUrl,
   getCurrentAppLocation,
-  latestVersionAlias
+  type AppLocation
 } from "./runtime/location";
-import type { AppLocation } from "./runtime/location";
 
 type AppState = {
   currentLocation: AppLocation;
-  portfolioHome: PortfolioHomeData;
-  release: ProductReleaseDetail | null;
+  projectList: ProjectListData | null;
+  projectDetail: PortfolioProject | null;
+  profile: SiteProfile;
   loading: boolean;
   error: string;
-  mobileMenuOpen: boolean;
+  selectedFilter: string;
+  searchTerm: string;
 };
 
 const root = document.querySelector<HTMLDivElement>("#app");
@@ -36,50 +40,36 @@ if (!root) {
 
 const appRoot = root;
 
-const emptyProfile: SiteProfile = {
-  site_name: "YXX Works",
-  subtitle: "产品、插件与创作实验",
-  github_url: "",
-  email: ""
-};
-
 const state: AppState = {
   currentLocation: getCurrentAppLocation(),
-  portfolioHome: getMockPortfolioHome(),
-  release: null,
+  projectList: null,
+  projectDetail: null,
+  profile: defaultProfile,
   loading: true,
   error: "",
-  mobileMenuOpen: false
+  selectedFilter: "All",
+  searchTerm: ""
 };
 
-function getTitle(): string {
-  if (state.currentLocation.page === "catalog") {
-    const profile = state.portfolioHome.profile;
-    return `${profile.site_name || "YXX Works"} | ${profile.subtitle || "产品、插件与创作实验"}`;
+function visibleProjects(data: ProjectListData): PortfolioProject[] {
+  const query = state.searchTerm.trim().toLowerCase();
+  return data.items.filter((project) => {
+    const matchesFilter =
+      state.selectedFilter === "All" || project.category === state.selectedFilter;
+    const matchesQuery =
+      !query ||
+      project.name.toLowerCase().includes(query) ||
+      project.description.toLowerCase().includes(query) ||
+      project.techStack.some((item) => item.toLowerCase().includes(query));
+    return matchesFilter && matchesQuery;
+  });
+}
+
+function pageTitle(): string {
+  if (state.currentLocation.page === "project" && state.projectDetail) {
+    return `${state.projectDetail.name} | ${state.profile.siteName}`;
   }
-
-  return state.release
-    ? `${state.release.title} | ${state.release.product_code}`
-    : "版本详情 | 更新平台";
-}
-
-function getShellProfile(): SiteProfile {
-  return state.portfolioHome?.profile ?? emptyProfile;
-}
-
-function getCurrentProductCode(): string {
-  return state.currentLocation.page === "release" ? state.currentLocation.productCode : "";
-}
-
-function getCurrentVersion(): string {
-  if (state.currentLocation.page !== "release") {
-    return "";
-  }
-  return state.release ? state.release.resolved_version : state.currentLocation.version;
-}
-
-function getCurrentChannel(): string {
-  return state.currentLocation.page === "release" ? state.currentLocation.channel : defaultReleaseChannel;
+  return `${state.profile.siteName} | ${state.profile.subtitle}`;
 }
 
 function render(): void {
@@ -87,68 +77,53 @@ function render(): void {
 
   if (state.loading) {
     content = renderLoadingState();
-  } else if (state.error && !state.release) {
+  } else if (state.error) {
     content = renderErrorState(state.error);
-  } else if (state.currentLocation.page === "catalog") {
-    content = renderCatalogPage(state.portfolioHome);
-  } else if (state.release) {
-    content = renderReleasePage(state.release, composeReleaseBlocks(state.release));
+  } else if (state.currentLocation.page === "catalog" && state.projectList) {
+    content = renderCatalogPage(
+      state.projectList,
+      visibleProjects(state.projectList),
+      state.selectedFilter,
+      state.searchTerm
+    );
+  } else if (state.currentLocation.page === "project" && state.projectDetail) {
+    content = renderProjectDetail(state.projectDetail, state.profile);
   } else {
-    content = renderErrorState("页面状态异常，请返回产品列表后重试。");
+    content = renderErrorState("页面状态异常，请返回项目列表后重试。");
   }
 
-  appRoot.innerHTML =
-    renderShell(content, {
-      currentProductCode: getCurrentProductCode(),
-      currentVersion: getCurrentVersion(),
-      mobileMenuOpen: state.mobileMenuOpen,
-      profile: getShellProfile()
-    }) + (state.error && state.release ? renderSoftErrorBar(state.error) : "");
-
-  document.title = getTitle();
+  appRoot.innerHTML = renderShell(content, state.profile);
+  document.title = pageTitle();
 }
 
 async function loadCatalogPage(): Promise<void> {
   state.loading = true;
   state.error = "";
-  state.release = null;
+  state.projectDetail = null;
   render();
 
-  const remoteHome = await fetchPortfolioHome();
-  state.portfolioHome = remoteHome ?? getMockPortfolioHome();
+  const data = await fetchProjects();
+  state.projectList = data;
+  state.profile = data.profile;
   state.loading = false;
   render();
 }
 
-async function loadReleasePage(productCode: string, version: string, channel: string): Promise<void> {
+async function loadProjectPage(slug: string): Promise<void> {
   state.loading = true;
   state.error = "";
+  state.projectDetail = null;
   render();
 
-  const remoteRelease = await fetchReleaseDetail(productCode, version, channel);
-  if (remoteRelease) {
-    state.release = remoteRelease;
-    state.loading = false;
-    render();
-    return;
-  }
-
-  const fallbackRelease = getMockReleaseDetail(productCode, version, channel);
-  if (fallbackRelease) {
-    state.release = fallbackRelease;
-    state.error = `接口暂不可用，当前显示 ${channel} 渠道的本地示例数据。`;
-  } else {
-    state.release = null;
-    state.error = `未找到 ${productCode} ${version} 的 ${channel} 渠道数据。`;
-  }
-
+  const data = await fetchProjectDetail(slug);
+  state.profile = data.profile;
+  state.projectDetail = data.project;
   state.loading = false;
   render();
 }
 
 function syncFromLocation(): void {
   state.currentLocation = getCurrentAppLocation();
-  state.mobileMenuOpen = false;
 }
 
 async function loadCurrentPage(): Promise<void> {
@@ -157,11 +132,7 @@ async function loadCurrentPage(): Promise<void> {
     return;
   }
 
-  await loadReleasePage(
-    state.currentLocation.productCode,
-    state.currentLocation.version,
-    state.currentLocation.channel
-  );
+  await loadProjectPage(state.currentLocation.slug);
 }
 
 function scrollToHash(): void {
@@ -191,15 +162,7 @@ async function navigate(targetUrl: string): Promise<void> {
   scrollToHash();
 }
 
-function openCatalog(): void {
-  void navigate(buildCatalogUrl());
-}
-
-function openProduct(productCode: string): void {
-  void navigate(buildReleaseUrl(productCode, latestVersionAlias, getCurrentChannel()));
-}
-
-function handleAction(element: HTMLElement, event: MouseEvent): boolean {
+function handleAction(element: HTMLElement, event: Event): boolean {
   const action = element.dataset.action;
   if (!action) {
     return false;
@@ -207,24 +170,21 @@ function handleAction(element: HTMLElement, event: MouseEvent): boolean {
 
   switch (action) {
     case "home":
-    case "back":
       event.preventDefault();
-      openCatalog();
+      void navigate(buildCatalogUrl());
       return true;
-    case "toggle-menu":
+    case "open-project": {
       event.preventDefault();
-      state.mobileMenuOpen = !state.mobileMenuOpen;
-      render();
-      return true;
-    case "close-menu":
-      state.mobileMenuOpen = false;
-      return false;
-    case "open-product": {
-      event.preventDefault();
-      const productCode = element.dataset.productCode;
-      if (productCode) {
-        openProduct(productCode);
+      const slug = element.dataset.slug;
+      if (slug) {
+        void navigate(buildProjectUrl(slug));
       }
+      return true;
+    }
+    case "set-filter": {
+      event.preventDefault();
+      state.selectedFilter = element.dataset.filter || "All";
+      render();
       return true;
     }
     default:
@@ -247,19 +207,17 @@ function handleInternalLink(anchor: HTMLAnchorElement, event: MouseEvent): void 
     return;
   }
 
-  if (url.pathname === window.location.pathname && url.search === window.location.search && url.hash) {
+  if (url.pathname === window.location.pathname && url.hash) {
     event.preventDefault();
-    state.mobileMenuOpen = false;
-    if (`${url.pathname}${url.search}${url.hash}` !== `${window.location.pathname}${window.location.search}${window.location.hash}`) {
-      window.history.pushState({}, "", `${url.pathname}${url.search}${url.hash}`);
+    if (`${url.pathname}${url.hash}` !== `${window.location.pathname}${window.location.hash}`) {
+      window.history.pushState({}, "", `${url.pathname}${url.hash}`);
     }
-    render();
     scrollToHash();
     return;
   }
 
   event.preventDefault();
-  void navigate(`${url.pathname}${url.search}${url.hash}`);
+  void navigate(`${url.pathname}${url.hash}`);
 }
 
 appRoot.addEventListener("click", (event) => {
@@ -279,14 +237,28 @@ appRoot.addEventListener("click", (event) => {
   }
 });
 
+appRoot.addEventListener("input", (event) => {
+  const target = event.target;
+  if (!(target instanceof HTMLInputElement) || target.dataset.action !== "search-projects") {
+    return;
+  }
+
+  state.searchTerm = target.value;
+  render();
+  const nextInput = appRoot.querySelector<HTMLInputElement>('[data-action="search-projects"]');
+  nextInput?.focus();
+});
+
 window.addEventListener("popstate", () => {
   syncFromLocation();
   void loadCurrentPage();
 });
 
 render();
-void loadCurrentPage().catch((error: unknown) => {
-  state.loading = false;
-  state.error = `页面加载失败：${error instanceof Error ? error.message : String(error)}`;
-  render();
-});
+void loadCurrentPage()
+  .then(scrollToHash)
+  .catch((error: unknown) => {
+    state.loading = false;
+    state.error = error instanceof Error ? error.message : String(error);
+    render();
+  });

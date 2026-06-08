@@ -111,24 +111,10 @@ src/storage/CMakeFiles/update_storage.dir/getALLPackages.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/update_storage.dir/getALLPackages.cc.s"
 	cd /home/a/Yuan/Code/CPP/updata_server/build/src/storage && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/a/Yuan/Code/CPP/updata_server/src/storage/getALLPackages.cc -o CMakeFiles/update_storage.dir/getALLPackages.cc.s
 
-src/storage/CMakeFiles/update_storage.dir/getALLProducts.cc.o: src/storage/CMakeFiles/update_storage.dir/flags.make
-src/storage/CMakeFiles/update_storage.dir/getALLProducts.cc.o: /home/a/Yuan/Code/CPP/updata_server/src/storage/getALLProducts.cc
-src/storage/CMakeFiles/update_storage.dir/getALLProducts.cc.o: src/storage/CMakeFiles/update_storage.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/a/Yuan/Code/CPP/updata_server/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object src/storage/CMakeFiles/update_storage.dir/getALLProducts.cc.o"
-	cd /home/a/Yuan/Code/CPP/updata_server/build/src/storage && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/storage/CMakeFiles/update_storage.dir/getALLProducts.cc.o -MF CMakeFiles/update_storage.dir/getALLProducts.cc.o.d -o CMakeFiles/update_storage.dir/getALLProducts.cc.o -c /home/a/Yuan/Code/CPP/updata_server/src/storage/getALLProducts.cc
-
-src/storage/CMakeFiles/update_storage.dir/getALLProducts.cc.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/update_storage.dir/getALLProducts.cc.i"
-	cd /home/a/Yuan/Code/CPP/updata_server/build/src/storage && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/a/Yuan/Code/CPP/updata_server/src/storage/getALLProducts.cc > CMakeFiles/update_storage.dir/getALLProducts.cc.i
-
-src/storage/CMakeFiles/update_storage.dir/getALLProducts.cc.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/update_storage.dir/getALLProducts.cc.s"
-	cd /home/a/Yuan/Code/CPP/updata_server/build/src/storage && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/a/Yuan/Code/CPP/updata_server/src/storage/getALLProducts.cc -o CMakeFiles/update_storage.dir/getALLProducts.cc.s
-
 src/storage/CMakeFiles/update_storage.dir/getALLReleases.cc.o: src/storage/CMakeFiles/update_storage.dir/flags.make
 src/storage/CMakeFiles/update_storage.dir/getALLReleases.cc.o: /home/a/Yuan/Code/CPP/updata_server/src/storage/getALLReleases.cc
 src/storage/CMakeFiles/update_storage.dir/getALLReleases.cc.o: src/storage/CMakeFiles/update_storage.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/a/Yuan/Code/CPP/updata_server/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object src/storage/CMakeFiles/update_storage.dir/getALLReleases.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/a/Yuan/Code/CPP/updata_server/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object src/storage/CMakeFiles/update_storage.dir/getALLReleases.cc.o"
 	cd /home/a/Yuan/Code/CPP/updata_server/build/src/storage && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/storage/CMakeFiles/update_storage.dir/getALLReleases.cc.o -MF CMakeFiles/update_storage.dir/getALLReleases.cc.o.d -o CMakeFiles/update_storage.dir/getALLReleases.cc.o -c /home/a/Yuan/Code/CPP/updata_server/src/storage/getALLReleases.cc
 
 src/storage/CMakeFiles/update_storage.dir/getALLReleases.cc.i: cmake_force
@@ -142,7 +128,7 @@ src/storage/CMakeFiles/update_storage.dir/getALLReleases.cc.s: cmake_force
 src/storage/CMakeFiles/update_storage.dir/getConvertRule.cc.o: src/storage/CMakeFiles/update_storage.dir/flags.make
 src/storage/CMakeFiles/update_storage.dir/getConvertRule.cc.o: /home/a/Yuan/Code/CPP/updata_server/src/storage/getConvertRule.cc
 src/storage/CMakeFiles/update_storage.dir/getConvertRule.cc.o: src/storage/CMakeFiles/update_storage.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/a/Yuan/Code/CPP/updata_server/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object src/storage/CMakeFiles/update_storage.dir/getConvertRule.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/a/Yuan/Code/CPP/updata_server/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object src/storage/CMakeFiles/update_storage.dir/getConvertRule.cc.o"
 	cd /home/a/Yuan/Code/CPP/updata_server/build/src/storage && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/storage/CMakeFiles/update_storage.dir/getConvertRule.cc.o -MF CMakeFiles/update_storage.dir/getConvertRule.cc.o.d -o CMakeFiles/update_storage.dir/getConvertRule.cc.o -c /home/a/Yuan/Code/CPP/updata_server/src/storage/getConvertRule.cc
 
 src/storage/CMakeFiles/update_storage.dir/getConvertRule.cc.i: cmake_force
@@ -156,7 +142,7 @@ src/storage/CMakeFiles/update_storage.dir/getConvertRule.cc.s: cmake_force
 src/storage/CMakeFiles/update_storage.dir/getDocument.cc.o: src/storage/CMakeFiles/update_storage.dir/flags.make
 src/storage/CMakeFiles/update_storage.dir/getDocument.cc.o: /home/a/Yuan/Code/CPP/updata_server/src/storage/getDocument.cc
 src/storage/CMakeFiles/update_storage.dir/getDocument.cc.o: src/storage/CMakeFiles/update_storage.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/a/Yuan/Code/CPP/updata_server/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object src/storage/CMakeFiles/update_storage.dir/getDocument.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/a/Yuan/Code/CPP/updata_server/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object src/storage/CMakeFiles/update_storage.dir/getDocument.cc.o"
 	cd /home/a/Yuan/Code/CPP/updata_server/build/src/storage && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/storage/CMakeFiles/update_storage.dir/getDocument.cc.o -MF CMakeFiles/update_storage.dir/getDocument.cc.o.d -o CMakeFiles/update_storage.dir/getDocument.cc.o -c /home/a/Yuan/Code/CPP/updata_server/src/storage/getDocument.cc
 
 src/storage/CMakeFiles/update_storage.dir/getDocument.cc.i: cmake_force
@@ -167,24 +153,10 @@ src/storage/CMakeFiles/update_storage.dir/getDocument.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/update_storage.dir/getDocument.cc.s"
 	cd /home/a/Yuan/Code/CPP/updata_server/build/src/storage && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/a/Yuan/Code/CPP/updata_server/src/storage/getDocument.cc -o CMakeFiles/update_storage.dir/getDocument.cc.s
 
-src/storage/CMakeFiles/update_storage.dir/getFutureDirections.cc.o: src/storage/CMakeFiles/update_storage.dir/flags.make
-src/storage/CMakeFiles/update_storage.dir/getFutureDirections.cc.o: /home/a/Yuan/Code/CPP/updata_server/src/storage/getFutureDirections.cc
-src/storage/CMakeFiles/update_storage.dir/getFutureDirections.cc.o: src/storage/CMakeFiles/update_storage.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/a/Yuan/Code/CPP/updata_server/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object src/storage/CMakeFiles/update_storage.dir/getFutureDirections.cc.o"
-	cd /home/a/Yuan/Code/CPP/updata_server/build/src/storage && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/storage/CMakeFiles/update_storage.dir/getFutureDirections.cc.o -MF CMakeFiles/update_storage.dir/getFutureDirections.cc.o.d -o CMakeFiles/update_storage.dir/getFutureDirections.cc.o -c /home/a/Yuan/Code/CPP/updata_server/src/storage/getFutureDirections.cc
-
-src/storage/CMakeFiles/update_storage.dir/getFutureDirections.cc.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/update_storage.dir/getFutureDirections.cc.i"
-	cd /home/a/Yuan/Code/CPP/updata_server/build/src/storage && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/a/Yuan/Code/CPP/updata_server/src/storage/getFutureDirections.cc > CMakeFiles/update_storage.dir/getFutureDirections.cc.i
-
-src/storage/CMakeFiles/update_storage.dir/getFutureDirections.cc.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/update_storage.dir/getFutureDirections.cc.s"
-	cd /home/a/Yuan/Code/CPP/updata_server/build/src/storage && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/a/Yuan/Code/CPP/updata_server/src/storage/getFutureDirections.cc -o CMakeFiles/update_storage.dir/getFutureDirections.cc.s
-
 src/storage/CMakeFiles/update_storage.dir/getLatestRelease.cc.o: src/storage/CMakeFiles/update_storage.dir/flags.make
 src/storage/CMakeFiles/update_storage.dir/getLatestRelease.cc.o: /home/a/Yuan/Code/CPP/updata_server/src/storage/getLatestRelease.cc
 src/storage/CMakeFiles/update_storage.dir/getLatestRelease.cc.o: src/storage/CMakeFiles/update_storage.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/a/Yuan/Code/CPP/updata_server/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object src/storage/CMakeFiles/update_storage.dir/getLatestRelease.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/a/Yuan/Code/CPP/updata_server/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object src/storage/CMakeFiles/update_storage.dir/getLatestRelease.cc.o"
 	cd /home/a/Yuan/Code/CPP/updata_server/build/src/storage && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/storage/CMakeFiles/update_storage.dir/getLatestRelease.cc.o -MF CMakeFiles/update_storage.dir/getLatestRelease.cc.o.d -o CMakeFiles/update_storage.dir/getLatestRelease.cc.o -c /home/a/Yuan/Code/CPP/updata_server/src/storage/getLatestRelease.cc
 
 src/storage/CMakeFiles/update_storage.dir/getLatestRelease.cc.i: cmake_force
@@ -195,38 +167,24 @@ src/storage/CMakeFiles/update_storage.dir/getLatestRelease.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/update_storage.dir/getLatestRelease.cc.s"
 	cd /home/a/Yuan/Code/CPP/updata_server/build/src/storage && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/a/Yuan/Code/CPP/updata_server/src/storage/getLatestRelease.cc -o CMakeFiles/update_storage.dir/getLatestRelease.cc.s
 
-src/storage/CMakeFiles/update_storage.dir/getRecentUpdates.cc.o: src/storage/CMakeFiles/update_storage.dir/flags.make
-src/storage/CMakeFiles/update_storage.dir/getRecentUpdates.cc.o: /home/a/Yuan/Code/CPP/updata_server/src/storage/getRecentUpdates.cc
-src/storage/CMakeFiles/update_storage.dir/getRecentUpdates.cc.o: src/storage/CMakeFiles/update_storage.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/a/Yuan/Code/CPP/updata_server/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object src/storage/CMakeFiles/update_storage.dir/getRecentUpdates.cc.o"
-	cd /home/a/Yuan/Code/CPP/updata_server/build/src/storage && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/storage/CMakeFiles/update_storage.dir/getRecentUpdates.cc.o -MF CMakeFiles/update_storage.dir/getRecentUpdates.cc.o.d -o CMakeFiles/update_storage.dir/getRecentUpdates.cc.o -c /home/a/Yuan/Code/CPP/updata_server/src/storage/getRecentUpdates.cc
+src/storage/CMakeFiles/update_storage.dir/getPortfolioProjects.cc.o: src/storage/CMakeFiles/update_storage.dir/flags.make
+src/storage/CMakeFiles/update_storage.dir/getPortfolioProjects.cc.o: /home/a/Yuan/Code/CPP/updata_server/src/storage/getPortfolioProjects.cc
+src/storage/CMakeFiles/update_storage.dir/getPortfolioProjects.cc.o: src/storage/CMakeFiles/update_storage.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/a/Yuan/Code/CPP/updata_server/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object src/storage/CMakeFiles/update_storage.dir/getPortfolioProjects.cc.o"
+	cd /home/a/Yuan/Code/CPP/updata_server/build/src/storage && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/storage/CMakeFiles/update_storage.dir/getPortfolioProjects.cc.o -MF CMakeFiles/update_storage.dir/getPortfolioProjects.cc.o.d -o CMakeFiles/update_storage.dir/getPortfolioProjects.cc.o -c /home/a/Yuan/Code/CPP/updata_server/src/storage/getPortfolioProjects.cc
 
-src/storage/CMakeFiles/update_storage.dir/getRecentUpdates.cc.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/update_storage.dir/getRecentUpdates.cc.i"
-	cd /home/a/Yuan/Code/CPP/updata_server/build/src/storage && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/a/Yuan/Code/CPP/updata_server/src/storage/getRecentUpdates.cc > CMakeFiles/update_storage.dir/getRecentUpdates.cc.i
+src/storage/CMakeFiles/update_storage.dir/getPortfolioProjects.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/update_storage.dir/getPortfolioProjects.cc.i"
+	cd /home/a/Yuan/Code/CPP/updata_server/build/src/storage && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/a/Yuan/Code/CPP/updata_server/src/storage/getPortfolioProjects.cc > CMakeFiles/update_storage.dir/getPortfolioProjects.cc.i
 
-src/storage/CMakeFiles/update_storage.dir/getRecentUpdates.cc.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/update_storage.dir/getRecentUpdates.cc.s"
-	cd /home/a/Yuan/Code/CPP/updata_server/build/src/storage && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/a/Yuan/Code/CPP/updata_server/src/storage/getRecentUpdates.cc -o CMakeFiles/update_storage.dir/getRecentUpdates.cc.s
-
-src/storage/CMakeFiles/update_storage.dir/getRecommendations.cc.o: src/storage/CMakeFiles/update_storage.dir/flags.make
-src/storage/CMakeFiles/update_storage.dir/getRecommendations.cc.o: /home/a/Yuan/Code/CPP/updata_server/src/storage/getRecommendations.cc
-src/storage/CMakeFiles/update_storage.dir/getRecommendations.cc.o: src/storage/CMakeFiles/update_storage.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/a/Yuan/Code/CPP/updata_server/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object src/storage/CMakeFiles/update_storage.dir/getRecommendations.cc.o"
-	cd /home/a/Yuan/Code/CPP/updata_server/build/src/storage && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/storage/CMakeFiles/update_storage.dir/getRecommendations.cc.o -MF CMakeFiles/update_storage.dir/getRecommendations.cc.o.d -o CMakeFiles/update_storage.dir/getRecommendations.cc.o -c /home/a/Yuan/Code/CPP/updata_server/src/storage/getRecommendations.cc
-
-src/storage/CMakeFiles/update_storage.dir/getRecommendations.cc.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/update_storage.dir/getRecommendations.cc.i"
-	cd /home/a/Yuan/Code/CPP/updata_server/build/src/storage && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/a/Yuan/Code/CPP/updata_server/src/storage/getRecommendations.cc > CMakeFiles/update_storage.dir/getRecommendations.cc.i
-
-src/storage/CMakeFiles/update_storage.dir/getRecommendations.cc.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/update_storage.dir/getRecommendations.cc.s"
-	cd /home/a/Yuan/Code/CPP/updata_server/build/src/storage && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/a/Yuan/Code/CPP/updata_server/src/storage/getRecommendations.cc -o CMakeFiles/update_storage.dir/getRecommendations.cc.s
+src/storage/CMakeFiles/update_storage.dir/getPortfolioProjects.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/update_storage.dir/getPortfolioProjects.cc.s"
+	cd /home/a/Yuan/Code/CPP/updata_server/build/src/storage && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/a/Yuan/Code/CPP/updata_server/src/storage/getPortfolioProjects.cc -o CMakeFiles/update_storage.dir/getPortfolioProjects.cc.s
 
 src/storage/CMakeFiles/update_storage.dir/getSiteProfile.cc.o: src/storage/CMakeFiles/update_storage.dir/flags.make
 src/storage/CMakeFiles/update_storage.dir/getSiteProfile.cc.o: /home/a/Yuan/Code/CPP/updata_server/src/storage/getSiteProfile.cc
 src/storage/CMakeFiles/update_storage.dir/getSiteProfile.cc.o: src/storage/CMakeFiles/update_storage.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/a/Yuan/Code/CPP/updata_server/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object src/storage/CMakeFiles/update_storage.dir/getSiteProfile.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/a/Yuan/Code/CPP/updata_server/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object src/storage/CMakeFiles/update_storage.dir/getSiteProfile.cc.o"
 	cd /home/a/Yuan/Code/CPP/updata_server/build/src/storage && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/storage/CMakeFiles/update_storage.dir/getSiteProfile.cc.o -MF CMakeFiles/update_storage.dir/getSiteProfile.cc.o.d -o CMakeFiles/update_storage.dir/getSiteProfile.cc.o -c /home/a/Yuan/Code/CPP/updata_server/src/storage/getSiteProfile.cc
 
 src/storage/CMakeFiles/update_storage.dir/getSiteProfile.cc.i: cmake_force
@@ -240,7 +198,7 @@ src/storage/CMakeFiles/update_storage.dir/getSiteProfile.cc.s: cmake_force
 src/storage/CMakeFiles/update_storage.dir/getTask.cc.o: src/storage/CMakeFiles/update_storage.dir/flags.make
 src/storage/CMakeFiles/update_storage.dir/getTask.cc.o: /home/a/Yuan/Code/CPP/updata_server/src/storage/getTask.cc
 src/storage/CMakeFiles/update_storage.dir/getTask.cc.o: src/storage/CMakeFiles/update_storage.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/a/Yuan/Code/CPP/updata_server/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object src/storage/CMakeFiles/update_storage.dir/getTask.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/a/Yuan/Code/CPP/updata_server/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object src/storage/CMakeFiles/update_storage.dir/getTask.cc.o"
 	cd /home/a/Yuan/Code/CPP/updata_server/build/src/storage && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/storage/CMakeFiles/update_storage.dir/getTask.cc.o -MF CMakeFiles/update_storage.dir/getTask.cc.o.d -o CMakeFiles/update_storage.dir/getTask.cc.o -c /home/a/Yuan/Code/CPP/updata_server/src/storage/getTask.cc
 
 src/storage/CMakeFiles/update_storage.dir/getTask.cc.i: cmake_force
@@ -254,7 +212,7 @@ src/storage/CMakeFiles/update_storage.dir/getTask.cc.s: cmake_force
 src/storage/CMakeFiles/update_storage.dir/updateTask.cc.o: src/storage/CMakeFiles/update_storage.dir/flags.make
 src/storage/CMakeFiles/update_storage.dir/updateTask.cc.o: /home/a/Yuan/Code/CPP/updata_server/src/storage/updateTask.cc
 src/storage/CMakeFiles/update_storage.dir/updateTask.cc.o: src/storage/CMakeFiles/update_storage.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/a/Yuan/Code/CPP/updata_server/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object src/storage/CMakeFiles/update_storage.dir/updateTask.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/a/Yuan/Code/CPP/updata_server/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object src/storage/CMakeFiles/update_storage.dir/updateTask.cc.o"
 	cd /home/a/Yuan/Code/CPP/updata_server/build/src/storage && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/storage/CMakeFiles/update_storage.dir/updateTask.cc.o -MF CMakeFiles/update_storage.dir/updateTask.cc.o.d -o CMakeFiles/update_storage.dir/updateTask.cc.o -c /home/a/Yuan/Code/CPP/updata_server/src/storage/updateTask.cc
 
 src/storage/CMakeFiles/update_storage.dir/updateTask.cc.i: cmake_force
@@ -270,14 +228,11 @@ update_storage_OBJECTS = \
 "CMakeFiles/update_storage.dir/storage.cc.o" \
 "CMakeFiles/update_storage.dir/addTask.cc.o" \
 "CMakeFiles/update_storage.dir/getALLPackages.cc.o" \
-"CMakeFiles/update_storage.dir/getALLProducts.cc.o" \
 "CMakeFiles/update_storage.dir/getALLReleases.cc.o" \
 "CMakeFiles/update_storage.dir/getConvertRule.cc.o" \
 "CMakeFiles/update_storage.dir/getDocument.cc.o" \
-"CMakeFiles/update_storage.dir/getFutureDirections.cc.o" \
 "CMakeFiles/update_storage.dir/getLatestRelease.cc.o" \
-"CMakeFiles/update_storage.dir/getRecentUpdates.cc.o" \
-"CMakeFiles/update_storage.dir/getRecommendations.cc.o" \
+"CMakeFiles/update_storage.dir/getPortfolioProjects.cc.o" \
 "CMakeFiles/update_storage.dir/getSiteProfile.cc.o" \
 "CMakeFiles/update_storage.dir/getTask.cc.o" \
 "CMakeFiles/update_storage.dir/updateTask.cc.o"
@@ -288,20 +243,17 @@ update_storage_EXTERNAL_OBJECTS =
 src/storage/libupdate_storage.a: src/storage/CMakeFiles/update_storage.dir/storage.cc.o
 src/storage/libupdate_storage.a: src/storage/CMakeFiles/update_storage.dir/addTask.cc.o
 src/storage/libupdate_storage.a: src/storage/CMakeFiles/update_storage.dir/getALLPackages.cc.o
-src/storage/libupdate_storage.a: src/storage/CMakeFiles/update_storage.dir/getALLProducts.cc.o
 src/storage/libupdate_storage.a: src/storage/CMakeFiles/update_storage.dir/getALLReleases.cc.o
 src/storage/libupdate_storage.a: src/storage/CMakeFiles/update_storage.dir/getConvertRule.cc.o
 src/storage/libupdate_storage.a: src/storage/CMakeFiles/update_storage.dir/getDocument.cc.o
-src/storage/libupdate_storage.a: src/storage/CMakeFiles/update_storage.dir/getFutureDirections.cc.o
 src/storage/libupdate_storage.a: src/storage/CMakeFiles/update_storage.dir/getLatestRelease.cc.o
-src/storage/libupdate_storage.a: src/storage/CMakeFiles/update_storage.dir/getRecentUpdates.cc.o
-src/storage/libupdate_storage.a: src/storage/CMakeFiles/update_storage.dir/getRecommendations.cc.o
+src/storage/libupdate_storage.a: src/storage/CMakeFiles/update_storage.dir/getPortfolioProjects.cc.o
 src/storage/libupdate_storage.a: src/storage/CMakeFiles/update_storage.dir/getSiteProfile.cc.o
 src/storage/libupdate_storage.a: src/storage/CMakeFiles/update_storage.dir/getTask.cc.o
 src/storage/libupdate_storage.a: src/storage/CMakeFiles/update_storage.dir/updateTask.cc.o
 src/storage/libupdate_storage.a: src/storage/CMakeFiles/update_storage.dir/build.make
 src/storage/libupdate_storage.a: src/storage/CMakeFiles/update_storage.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/a/Yuan/Code/CPP/updata_server/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Linking CXX static library libupdate_storage.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/a/Yuan/Code/CPP/updata_server/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Linking CXX static library libupdate_storage.a"
 	cd /home/a/Yuan/Code/CPP/updata_server/build/src/storage && $(CMAKE_COMMAND) -P CMakeFiles/update_storage.dir/cmake_clean_target.cmake
 	cd /home/a/Yuan/Code/CPP/updata_server/build/src/storage && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/update_storage.dir/link.txt --verbose=$(VERBOSE)
 

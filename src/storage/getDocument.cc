@@ -48,21 +48,9 @@ namespace Storage
                 return json::object();
             }
 
-            const std::array<fs::path, 2> page_manifests = {
-                findPath("data/releases/" + product_code + "/" + version + "/html/page.json"),
-                findPath("data/releases/" + product_code + "/" + version + "/vue/page.json")};
+            const auto page_manifest = findPath("data/releases/" + product_code + "/" + version + "/html/page.json");
 
-            fs::path page_manifest;
-            for (const auto &candidate : page_manifests)
-            {
-                if (fs::exists(candidate) && fs::is_regular_file(candidate))
-                {
-                    page_manifest = candidate;
-                    break;
-                }
-            }
-
-            if (page_manifest.empty())
+            if (!fs::exists(page_manifest) || !fs::is_regular_file(page_manifest))
             {
                 return json::object();
             }
@@ -205,7 +193,6 @@ namespace Storage
             {"release_notes_summary", release_note},
             {"page", {
                 {"html_entry_url", jsonString(row, "html_path")},
-                {"vue_entry_url", jsonString(row, "html_path")},
                 {"page_data", page_data}
             }}
         };

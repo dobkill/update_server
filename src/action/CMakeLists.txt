@@ -6,12 +6,8 @@ add_library(update_action STATIC
     ConvertDataTaskAction/runt_task.cc
     DocumentAction/getDocumnet.cc
     DocumentAction/getReleases.cc
-    ProductsAction/GetFutureDirections.cc
-    ProductsAction/GetPortfolioHome.cc
-    ProductsAction/GetRecentUpdates.cc
-    ProductsAction/GetRecommendations.cc
-    ProductsAction/GetSiteProfile.cc
-    ProductsAction/ListProducts.cc
+    ProjectsAction/GetProjectDetail.cc
+    ProjectsAction/ListProjects.cc
 )
 
 target_include_directories(update_action

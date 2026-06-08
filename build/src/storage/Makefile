@@ -178,30 +178,6 @@ getALLPackages.cc.s:
 	cd /home/a/Yuan/Code/CPP/updata_server/build && $(MAKE) $(MAKESILENT) -f src/storage/CMakeFiles/update_storage.dir/build.make src/storage/CMakeFiles/update_storage.dir/getALLPackages.cc.s
 .PHONY : getALLPackages.cc.s
 
-getALLProducts.o: getALLProducts.cc.o
-.PHONY : getALLProducts.o
-
-# target to build an object file
-getALLProducts.cc.o:
-	cd /home/a/Yuan/Code/CPP/updata_server/build && $(MAKE) $(MAKESILENT) -f src/storage/CMakeFiles/update_storage.dir/build.make src/storage/CMakeFiles/update_storage.dir/getALLProducts.cc.o
-.PHONY : getALLProducts.cc.o
-
-getALLProducts.i: getALLProducts.cc.i
-.PHONY : getALLProducts.i
-
-# target to preprocess a source file
-getALLProducts.cc.i:
-	cd /home/a/Yuan/Code/CPP/updata_server/build && $(MAKE) $(MAKESILENT) -f src/storage/CMakeFiles/update_storage.dir/build.make src/storage/CMakeFiles/update_storage.dir/getALLProducts.cc.i
-.PHONY : getALLProducts.cc.i
-
-getALLProducts.s: getALLProducts.cc.s
-.PHONY : getALLProducts.s
-
-# target to generate assembly for a file
-getALLProducts.cc.s:
-	cd /home/a/Yuan/Code/CPP/updata_server/build && $(MAKE) $(MAKESILENT) -f src/storage/CMakeFiles/update_storage.dir/build.make src/storage/CMakeFiles/update_storage.dir/getALLProducts.cc.s
-.PHONY : getALLProducts.cc.s
-
 getALLReleases.o: getALLReleases.cc.o
 .PHONY : getALLReleases.o
 
@@ -274,30 +250,6 @@ getDocument.cc.s:
 	cd /home/a/Yuan/Code/CPP/updata_server/build && $(MAKE) $(MAKESILENT) -f src/storage/CMakeFiles/update_storage.dir/build.make src/storage/CMakeFiles/update_storage.dir/getDocument.cc.s
 .PHONY : getDocument.cc.s
 
-getFutureDirections.o: getFutureDirections.cc.o
-.PHONY : getFutureDirections.o
-
-# target to build an object file
-getFutureDirections.cc.o:
-	cd /home/a/Yuan/Code/CPP/updata_server/build && $(MAKE) $(MAKESILENT) -f src/storage/CMakeFiles/update_storage.dir/build.make src/storage/CMakeFiles/update_storage.dir/getFutureDirections.cc.o
-.PHONY : getFutureDirections.cc.o
-
-getFutureDirections.i: getFutureDirections.cc.i
-.PHONY : getFutureDirections.i
-
-# target to preprocess a source file
-getFutureDirections.cc.i:
-	cd /home/a/Yuan/Code/CPP/updata_server/build && $(MAKE) $(MAKESILENT) -f src/storage/CMakeFiles/update_storage.dir/build.make src/storage/CMakeFiles/update_storage.dir/getFutureDirections.cc.i
-.PHONY : getFutureDirections.cc.i
-
-getFutureDirections.s: getFutureDirections.cc.s
-.PHONY : getFutureDirections.s
-
-# target to generate assembly for a file
-getFutureDirections.cc.s:
-	cd /home/a/Yuan/Code/CPP/updata_server/build && $(MAKE) $(MAKESILENT) -f src/storage/CMakeFiles/update_storage.dir/build.make src/storage/CMakeFiles/update_storage.dir/getFutureDirections.cc.s
-.PHONY : getFutureDirections.cc.s
-
 getLatestRelease.o: getLatestRelease.cc.o
 .PHONY : getLatestRelease.o
 
@@ -322,53 +274,29 @@ getLatestRelease.cc.s:
 	cd /home/a/Yuan/Code/CPP/updata_server/build && $(MAKE) $(MAKESILENT) -f src/storage/CMakeFiles/update_storage.dir/build.make src/storage/CMakeFiles/update_storage.dir/getLatestRelease.cc.s
 .PHONY : getLatestRelease.cc.s
 
-getRecentUpdates.o: getRecentUpdates.cc.o
-.PHONY : getRecentUpdates.o
+getPortfolioProjects.o: getPortfolioProjects.cc.o
+.PHONY : getPortfolioProjects.o
 
 # target to build an object file
-getRecentUpdates.cc.o:
-	cd /home/a/Yuan/Code/CPP/updata_server/build && $(MAKE) $(MAKESILENT) -f src/storage/CMakeFiles/update_storage.dir/build.make src/storage/CMakeFiles/update_storage.dir/getRecentUpdates.cc.o
-.PHONY : getRecentUpdates.cc.o
+getPortfolioProjects.cc.o:
+	cd /home/a/Yuan/Code/CPP/updata_server/build && $(MAKE) $(MAKESILENT) -f src/storage/CMakeFiles/update_storage.dir/build.make src/storage/CMakeFiles/update_storage.dir/getPortfolioProjects.cc.o
+.PHONY : getPortfolioProjects.cc.o
 
-getRecentUpdates.i: getRecentUpdates.cc.i
-.PHONY : getRecentUpdates.i
-
-# target to preprocess a source file
-getRecentUpdates.cc.i:
-	cd /home/a/Yuan/Code/CPP/updata_server/build && $(MAKE) $(MAKESILENT) -f src/storage/CMakeFiles/update_storage.dir/build.make src/storage/CMakeFiles/update_storage.dir/getRecentUpdates.cc.i
-.PHONY : getRecentUpdates.cc.i
-
-getRecentUpdates.s: getRecentUpdates.cc.s
-.PHONY : getRecentUpdates.s
-
-# target to generate assembly for a file
-getRecentUpdates.cc.s:
-	cd /home/a/Yuan/Code/CPP/updata_server/build && $(MAKE) $(MAKESILENT) -f src/storage/CMakeFiles/update_storage.dir/build.make src/storage/CMakeFiles/update_storage.dir/getRecentUpdates.cc.s
-.PHONY : getRecentUpdates.cc.s
-
-getRecommendations.o: getRecommendations.cc.o
-.PHONY : getRecommendations.o
-
-# target to build an object file
-getRecommendations.cc.o:
-	cd /home/a/Yuan/Code/CPP/updata_server/build && $(MAKE) $(MAKESILENT) -f src/storage/CMakeFiles/update_storage.dir/build.make src/storage/CMakeFiles/update_storage.dir/getRecommendations.cc.o
-.PHONY : getRecommendations.cc.o
-
-getRecommendations.i: getRecommendations.cc.i
-.PHONY : getRecommendations.i
+getPortfolioProjects.i: getPortfolioProjects.cc.i
+.PHONY : getPortfolioProjects.i
 
 # target to preprocess a source file
-getRecommendations.cc.i:
-	cd /home/a/Yuan/Code/CPP/updata_server/build && $(MAKE) $(MAKESILENT) -f src/storage/CMakeFiles/update_storage.dir/build.make src/storage/CMakeFiles/update_storage.dir/getRecommendations.cc.i
-.PHONY : getRecommendations.cc.i
+getPortfolioProjects.cc.i:
+	cd /home/a/Yuan/Code/CPP/updata_server/build && $(MAKE) $(MAKESILENT) -f src/storage/CMakeFiles/update_storage.dir/build.make src/storage/CMakeFiles/update_storage.dir/getPortfolioProjects.cc.i
+.PHONY : getPortfolioProjects.cc.i
 
-getRecommendations.s: getRecommendations.cc.s
-.PHONY : getRecommendations.s
+getPortfolioProjects.s: getPortfolioProjects.cc.s
+.PHONY : getPortfolioProjects.s
 
 # target to generate assembly for a file
-getRecommendations.cc.s:
-	cd /home/a/Yuan/Code/CPP/updata_server/build && $(MAKE) $(MAKESILENT) -f src/storage/CMakeFiles/update_storage.dir/build.make src/storage/CMakeFiles/update_storage.dir/getRecommendations.cc.s
-.PHONY : getRecommendations.cc.s
+getPortfolioProjects.cc.s:
+	cd /home/a/Yuan/Code/CPP/updata_server/build && $(MAKE) $(MAKESILENT) -f src/storage/CMakeFiles/update_storage.dir/build.make src/storage/CMakeFiles/update_storage.dir/getPortfolioProjects.cc.s
+.PHONY : getPortfolioProjects.cc.s
 
 getSiteProfile.o: getSiteProfile.cc.o
 .PHONY : getSiteProfile.o
@@ -481,9 +409,6 @@ help:
 	@echo "... getALLPackages.o"
 	@echo "... getALLPackages.i"
 	@echo "... getALLPackages.s"
-	@echo "... getALLProducts.o"
-	@echo "... getALLProducts.i"
-	@echo "... getALLProducts.s"
 	@echo "... getALLReleases.o"
 	@echo "... getALLReleases.i"
 	@echo "... getALLReleases.s"
@@ -493,18 +418,12 @@ help:
 	@echo "... getDocument.o"
 	@echo "... getDocument.i"
 	@echo "... getDocument.s"
-	@echo "... getFutureDirections.o"
-	@echo "... getFutureDirections.i"
-	@echo "... getFutureDirections.s"
 	@echo "... getLatestRelease.o"
 	@echo "... getLatestRelease.i"
 	@echo "... getLatestRelease.s"
-	@echo "... getRecentUpdates.o"
-	@echo "... getRecentUpdates.i"
-	@echo "... getRecentUpdates.s"
-	@echo "... getRecommendations.o"
-	@echo "... getRecommendations.i"
-	@echo "... getRecommendations.s"
+	@echo "... getPortfolioProjects.o"
+	@echo "... getPortfolioProjects.i"
+	@echo "... getPortfolioProjects.s"
 	@echo "... getSiteProfile.o"
 	@echo "... getSiteProfile.i"
 	@echo "... getSiteProfile.s"

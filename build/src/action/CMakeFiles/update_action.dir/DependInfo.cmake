@@ -15,12 +15,8 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/a/Yuan/Code/CPP/updata_server/src/action/ConvertDataTaskAction/runt_task.cc" "src/action/CMakeFiles/update_action.dir/ConvertDataTaskAction/runt_task.cc.o" "gcc" "src/action/CMakeFiles/update_action.dir/ConvertDataTaskAction/runt_task.cc.o.d"
   "/home/a/Yuan/Code/CPP/updata_server/src/action/DocumentAction/getDocumnet.cc" "src/action/CMakeFiles/update_action.dir/DocumentAction/getDocumnet.cc.o" "gcc" "src/action/CMakeFiles/update_action.dir/DocumentAction/getDocumnet.cc.o.d"
   "/home/a/Yuan/Code/CPP/updata_server/src/action/DocumentAction/getReleases.cc" "src/action/CMakeFiles/update_action.dir/DocumentAction/getReleases.cc.o" "gcc" "src/action/CMakeFiles/update_action.dir/DocumentAction/getReleases.cc.o.d"
-  "/home/a/Yuan/Code/CPP/updata_server/src/action/ProductsAction/GetFutureDirections.cc" "src/action/CMakeFiles/update_action.dir/ProductsAction/GetFutureDirections.cc.o" "gcc" "src/action/CMakeFiles/update_action.dir/ProductsAction/GetFutureDirections.cc.o.d"
-  "/home/a/Yuan/Code/CPP/updata_server/src/action/ProductsAction/GetPortfolioHome.cc" "src/action/CMakeFiles/update_action.dir/ProductsAction/GetPortfolioHome.cc.o" "gcc" "src/action/CMakeFiles/update_action.dir/ProductsAction/GetPortfolioHome.cc.o.d"
-  "/home/a/Yuan/Code/CPP/updata_server/src/action/ProductsAction/GetRecentUpdates.cc" "src/action/CMakeFiles/update_action.dir/ProductsAction/GetRecentUpdates.cc.o" "gcc" "src/action/CMakeFiles/update_action.dir/ProductsAction/GetRecentUpdates.cc.o.d"
-  "/home/a/Yuan/Code/CPP/updata_server/src/action/ProductsAction/GetRecommendations.cc" "src/action/CMakeFiles/update_action.dir/ProductsAction/GetRecommendations.cc.o" "gcc" "src/action/CMakeFiles/update_action.dir/ProductsAction/GetRecommendations.cc.o.d"
-  "/home/a/Yuan/Code/CPP/updata_server/src/action/ProductsAction/GetSiteProfile.cc" "src/action/CMakeFiles/update_action.dir/ProductsAction/GetSiteProfile.cc.o" "gcc" "src/action/CMakeFiles/update_action.dir/ProductsAction/GetSiteProfile.cc.o.d"
-  "/home/a/Yuan/Code/CPP/updata_server/src/action/ProductsAction/ListProducts.cc" "src/action/CMakeFiles/update_action.dir/ProductsAction/ListProducts.cc.o" "gcc" "src/action/CMakeFiles/update_action.dir/ProductsAction/ListProducts.cc.o.d"
+  "/home/a/Yuan/Code/CPP/updata_server/src/action/ProjectsAction/GetProjectDetail.cc" "src/action/CMakeFiles/update_action.dir/ProjectsAction/GetProjectDetail.cc.o" "gcc" "src/action/CMakeFiles/update_action.dir/ProjectsAction/GetProjectDetail.cc.o.d"
+  "/home/a/Yuan/Code/CPP/updata_server/src/action/ProjectsAction/ListProjects.cc" "src/action/CMakeFiles/update_action.dir/ProjectsAction/ListProjects.cc.o" "gcc" "src/action/CMakeFiles/update_action.dir/ProjectsAction/ListProjects.cc.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

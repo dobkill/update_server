@@ -274,53 +274,29 @@ register_document_routes.cc.s:
 	cd /home/a/Yuan/Code/CPP/updata_server/build && $(MAKE) $(MAKESILENT) -f src/service/CMakeFiles/update_service.dir/build.make src/service/CMakeFiles/update_service.dir/register_document_routes.cc.s
 .PHONY : register_document_routes.cc.s
 
-register_portfolio_home_routes.o: register_portfolio_home_routes.cc.o
-.PHONY : register_portfolio_home_routes.o
+register_projects_routes.o: register_projects_routes.cc.o
+.PHONY : register_projects_routes.o
 
 # target to build an object file
-register_portfolio_home_routes.cc.o:
-	cd /home/a/Yuan/Code/CPP/updata_server/build && $(MAKE) $(MAKESILENT) -f src/service/CMakeFiles/update_service.dir/build.make src/service/CMakeFiles/update_service.dir/register_portfolio_home_routes.cc.o
-.PHONY : register_portfolio_home_routes.cc.o
+register_projects_routes.cc.o:
+	cd /home/a/Yuan/Code/CPP/updata_server/build && $(MAKE) $(MAKESILENT) -f src/service/CMakeFiles/update_service.dir/build.make src/service/CMakeFiles/update_service.dir/register_projects_routes.cc.o
+.PHONY : register_projects_routes.cc.o
 
-register_portfolio_home_routes.i: register_portfolio_home_routes.cc.i
-.PHONY : register_portfolio_home_routes.i
-
-# target to preprocess a source file
-register_portfolio_home_routes.cc.i:
-	cd /home/a/Yuan/Code/CPP/updata_server/build && $(MAKE) $(MAKESILENT) -f src/service/CMakeFiles/update_service.dir/build.make src/service/CMakeFiles/update_service.dir/register_portfolio_home_routes.cc.i
-.PHONY : register_portfolio_home_routes.cc.i
-
-register_portfolio_home_routes.s: register_portfolio_home_routes.cc.s
-.PHONY : register_portfolio_home_routes.s
-
-# target to generate assembly for a file
-register_portfolio_home_routes.cc.s:
-	cd /home/a/Yuan/Code/CPP/updata_server/build && $(MAKE) $(MAKESILENT) -f src/service/CMakeFiles/update_service.dir/build.make src/service/CMakeFiles/update_service.dir/register_portfolio_home_routes.cc.s
-.PHONY : register_portfolio_home_routes.cc.s
-
-register_products_routes.o: register_products_routes.cc.o
-.PHONY : register_products_routes.o
-
-# target to build an object file
-register_products_routes.cc.o:
-	cd /home/a/Yuan/Code/CPP/updata_server/build && $(MAKE) $(MAKESILENT) -f src/service/CMakeFiles/update_service.dir/build.make src/service/CMakeFiles/update_service.dir/register_products_routes.cc.o
-.PHONY : register_products_routes.cc.o
-
-register_products_routes.i: register_products_routes.cc.i
-.PHONY : register_products_routes.i
+register_projects_routes.i: register_projects_routes.cc.i
+.PHONY : register_projects_routes.i
 
 # target to preprocess a source file
-register_products_routes.cc.i:
-	cd /home/a/Yuan/Code/CPP/updata_server/build && $(MAKE) $(MAKESILENT) -f src/service/CMakeFiles/update_service.dir/build.make src/service/CMakeFiles/update_service.dir/register_products_routes.cc.i
-.PHONY : register_products_routes.cc.i
+register_projects_routes.cc.i:
+	cd /home/a/Yuan/Code/CPP/updata_server/build && $(MAKE) $(MAKESILENT) -f src/service/CMakeFiles/update_service.dir/build.make src/service/CMakeFiles/update_service.dir/register_projects_routes.cc.i
+.PHONY : register_projects_routes.cc.i
 
-register_products_routes.s: register_products_routes.cc.s
-.PHONY : register_products_routes.s
+register_projects_routes.s: register_projects_routes.cc.s
+.PHONY : register_projects_routes.s
 
 # target to generate assembly for a file
-register_products_routes.cc.s:
-	cd /home/a/Yuan/Code/CPP/updata_server/build && $(MAKE) $(MAKESILENT) -f src/service/CMakeFiles/update_service.dir/build.make src/service/CMakeFiles/update_service.dir/register_products_routes.cc.s
-.PHONY : register_products_routes.cc.s
+register_projects_routes.cc.s:
+	cd /home/a/Yuan/Code/CPP/updata_server/build && $(MAKE) $(MAKESILENT) -f src/service/CMakeFiles/update_service.dir/build.make src/service/CMakeFiles/update_service.dir/register_projects_routes.cc.s
+.PHONY : register_projects_routes.cc.s
 
 register_release_routes.o: register_release_routes.cc.o
 .PHONY : register_release_routes.o
@@ -373,12 +349,9 @@ help:
 	@echo "... register_document_routes.o"
 	@echo "... register_document_routes.i"
 	@echo "... register_document_routes.s"
-	@echo "... register_portfolio_home_routes.o"
-	@echo "... register_portfolio_home_routes.i"
-	@echo "... register_portfolio_home_routes.s"
-	@echo "... register_products_routes.o"
-	@echo "... register_products_routes.i"
-	@echo "... register_products_routes.s"
+	@echo "... register_projects_routes.o"
+	@echo "... register_projects_routes.i"
+	@echo "... register_projects_routes.s"
 	@echo "... register_release_routes.o"
 	@echo "... register_release_routes.i"
 	@echo "... register_release_routes.s"

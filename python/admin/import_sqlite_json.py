@@ -20,16 +20,14 @@ from lib.db import get_db_path
 
 TABLE_ORDER = [
     "products",
-    "product_careers",
+    "portfolio_projects",
     "releases",
     "release_assets",
     "release_channels",
     "update_packages",
     "convert_rules",
     "convert_tasks",
-    "recommendations",
     "site_profile",
-    "future_directions",
     "schema_migrations",
 ]
 

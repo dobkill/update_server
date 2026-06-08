@@ -2,14 +2,11 @@ add_library(update_storage STATIC
     storage.cc
     addTask.cc
     getALLPackages.cc
-    getALLProducts.cc
     getALLReleases.cc
     getConvertRule.cc
     getDocument.cc
-    getFutureDirections.cc
     getLatestRelease.cc
-    getRecentUpdates.cc
-    getRecommendations.cc
+    getPortfolioProjects.cc
     getSiteProfile.cc
     getTask.cc
     updateTask.cc

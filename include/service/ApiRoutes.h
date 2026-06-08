@@ -2,7 +2,7 @@
 #include <nlohmann/json.hpp>
 #include <drogon/HttpResponse.h>
 #include <drogon/drogon.h>
-#include <action/ProductsAction.h>
+#include <action/ProjectsAction.h>
 #include <action/CheckUpdateAction.h>
 #include <action/ConvertDataTaskAction.h>
 #include <action/DocumentAction.h>
@@ -27,7 +27,7 @@ namespace Router
         static std::mutex s_mutex;
 
     private:
-        Action::ProductsAction m_productsAction;
+        Action::ProjectsAction m_projectsAction;
         Action::CheckUpdateAction m_checkUpdateAction;
         Action::ConvertDataTaskAction m_convertTaskAction;
         Action::DocumentAction m_documentAction;
@@ -35,8 +35,7 @@ namespace Router
     private:
         void init_routes();
 
-        void register_portfolio_home_routes(); // 获取首页聚合信息
-        void register_products_routes(); // 获取真实产品列表
+        void register_projects_routes(); // 获取作品集项目列表与详情
         void register_document_routes(); // 软件详情页
         void register_release_routes();  // 获取全部产品版本
 

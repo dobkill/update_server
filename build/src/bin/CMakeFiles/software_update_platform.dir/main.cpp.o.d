@@ -458,7 +458,7 @@ src/bin/CMakeFiles/software_update_platform.dir/main.cpp.o: \
  /home/a/Yuan/APP/miniconda/include/nlohmann/detail/macro_unscope.hpp \
  /home/a/Yuan/APP/miniconda/include/nlohmann/thirdparty/hedley/hedley_undef.hpp \
  /home/a/Yuan/Code/CPP/updata_server/include/service/ApiRoutes.h \
- /home/a/Yuan/Code/CPP/updata_server/include/action/ProductsAction.h \
+ /home/a/Yuan/Code/CPP/updata_server/include/action/ProjectsAction.h \
  /home/a/Yuan/Code/CPP/updata_server/include/storage/storage.h \
  /home/a/Yuan/APP/miniconda/include/sqlite3.h \
  /home/a/Yuan/Code/CPP/updata_server/include/action/CheckUpdateAction.h \

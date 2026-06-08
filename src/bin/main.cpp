@@ -62,6 +62,21 @@ int main()
         [webIndex, dataRoot](const drogon::HttpRequestPtr &req,
                    std::function<void(const drogon::HttpResponsePtr &)> &&callback) {
             const auto requestPath = req->path();
+            if (requestPath.rfind("/api/", 0) == 0)
+            {
+                json body = {
+                    {"code", 404},
+                    {"message", "api route not found"},
+                    {"data", {{"path", requestPath}}}
+                };
+                auto resp = drogon::HttpResponse::newHttpResponse();
+                resp->setStatusCode(drogon::k404NotFound);
+                resp->setContentTypeCode(drogon::CT_APPLICATION_JSON);
+                resp->setBody(body.dump());
+                callback(resp);
+                return;
+            }
+
             if (requestPath.rfind("/data/", 0) == 0)
             {
                 auto relativePath = fs::path(requestPath.substr(std::string_view("/data/").size()));

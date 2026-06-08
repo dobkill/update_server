@@ -1,219 +1,138 @@
 type ApiPayload<T> = {
   code: number;
   message: string;
-  request_id?: string;
   data: T;
 };
 
-export type ReleaseChannel = string;
-export const defaultReleaseChannel = "stable";
-
-export type PageBlock = {
-  type: string;
-  props?: Record<string, unknown>;
-};
-
-export type ProductSummary = {
-  product_code: string;
-  name: string;
-  summary: string;
-  cover_image_url?: string;
-  github_url?: string;
-  latest_version?: string;
-  updated_at?: string;
-  tag?: string;
-  status_label?: string;
-};
-
 export type SiteProfile = {
-  site_name: string;
+  ownerName: string;
+  siteName: string;
   subtitle: string;
-  github_url: string;
+  heroLabel: string;
+  heroTitle: string;
+  heroDescription: string;
+  githubUrl: string;
   email: string;
+  resumeUrl: string;
+  linkedinUrl: string;
+  twitterUrl: string;
 };
 
-export type PortfolioProduct = ProductSummary & {
-  published_at?: string;
+export type ProjectLinks = {
+  liveDemo?: string;
+  github?: string;
 };
 
-export type RecentUpdate = {
-  product_code: string;
+export type ProjectScreenshot = {
+  title: string;
+  desc?: string;
+  image: string;
+};
+
+export type PortfolioProject = {
+  slug: string;
   name: string;
-  version: string;
-  published_at: string;
-  title: string;
+  category: string;
   description: string;
+  longDescription: string;
+  featured: boolean;
+  status: string;
+  year: string;
+  platform: string;
+  role: string;
+  type: string;
+  coverImageUrl?: string;
+  heroImageUrl?: string;
+  techStack: string[];
+  features: string[];
+  screenshots: ProjectScreenshot[];
+  architecture: string[];
+  challenge: string;
+  solution: string;
+  result: string;
+  links: ProjectLinks;
+  sortOrder: number;
+  productCode?: string;
 };
 
-export type FutureDirection = {
-  title: string;
-  comment: string;
-  icon_path?: string;
-};
-
-export type PortfolioHomeData = {
+export type ProjectListData = {
   profile: SiteProfile;
-  recommendations: PortfolioProduct[];
-  products: PortfolioProduct[];
-  recent_updates: RecentUpdate[];
-  future_directions: FutureDirection[];
+  featured: PortfolioProject[];
+  items: PortfolioProject[];
+  filters: string[];
 };
 
-export type ReleasePageData = {
-  blocks?: PageBlock[];
-  hero?: {
-    title?: string;
-    subtitle?: string;
-    primary_text?: string;
-    primary_href?: string;
-  };
-  summary?: {
-    title?: string;
-    content?: string;
-  };
-  highlights?: {
-    items?: Array<{
-      title: string;
-      desc: string;
-    }>;
-  };
-  timeline?: {
-    items?: string[];
-  };
-  download?: {
-    version?: string;
-    package_type?: string;
-    package_size?: string;
-    release_note?: string;
-    download_text?: string;
-    download_url?: string;
-    platform?: string;
-    arch?: string;
-    channel?: string;
-  };
-  faq?: {
-    items?: Array<{
-      question: string;
-      answer: string;
-    }>;
-  };
-  footer_cta?: {
-    title?: string;
-    desc?: string;
-    action_text?: string;
-    action_href?: string;
-  };
+export type ProjectDetailData = {
+  profile: SiteProfile;
+  project: PortfolioProject;
 };
 
-export type ProductReleaseDetail = {
-  product_code: string;
-  requested_version: string;
-  resolved_version: string;
-  channel: string;
-  title: string;
-  published_at: string;
-  release_notes_summary: string;
-  page: {
-    html_entry_url?: string;
-    vue_entry_url?: string;
-    page_data?: ReleasePageData;
-  };
+export const defaultProfile: SiteProfile = {
+  ownerName: "LIANG Y.",
+  siteName: "Personal Software Lab",
+  subtitle: "Self-built apps, tools, systems, and experiments.",
+  heroLabel: "DEVELOPER & BUILDER",
+  heroTitle: "Personal Software Lab",
+  heroDescription:
+    "A collection of self-built apps, tools, systems, and experiments — crafted with code and curiosity.",
+  githubUrl: "",
+  email: "",
+  resumeUrl: "",
+  linkedinUrl: "",
+  twitterUrl: ""
 };
 
-export async function fetchProducts(): Promise<ProductSummary[] | null> {
-  try {
-    const response = await fetch("/api/v1/products", {
-      headers: {
-        Accept: "application/json"
-      }
-    });
-
-    if (!response.ok) {
-      return null;
-    }
-
-    const payload = (await response.json()) as ApiPayload<{
-      items?: ProductSummary[];
-    }>;
-
-    if (payload.code !== 0 || !Array.isArray(payload.data?.items)) {
-      return null;
-    }
-
-    return payload.data.items;
-  } catch (error) {
-    console.warn("fetchProducts fallback", error);
-    return null;
-  }
+function isProject(value: unknown): value is PortfolioProject {
+  const candidate = value as PortfolioProject;
+  return Boolean(
+    candidate &&
+      typeof candidate.slug === "string" &&
+      typeof candidate.name === "string" &&
+      Array.isArray(candidate.techStack) &&
+      Array.isArray(candidate.features) &&
+      Array.isArray(candidate.screenshots) &&
+      candidate.screenshots.every(
+        (item) =>
+          item &&
+          typeof item.title === "string" &&
+          typeof item.image === "string" &&
+          (item.desc === undefined || typeof item.desc === "string")
+      )
+  );
 }
 
-export async function fetchPortfolioHome(): Promise<PortfolioHomeData | null> {
-  try {
-    const response = await fetch("/api/v1/portfolio-home", {
-      headers: {
-        Accept: "application/json"
-      }
-    });
-
-    if (!response.ok) {
-      return null;
+async function fetchJson<T>(url: string): Promise<T> {
+  const response = await fetch(url, {
+    headers: {
+      Accept: "application/json"
     }
+  });
 
-    const payload = (await response.json()) as ApiPayload<PortfolioHomeData>;
-
-    if (
-      payload.code !== 0 ||
-      !payload.data?.profile ||
-      !Array.isArray(payload.data.products) ||
-      !Array.isArray(payload.data.recommendations) ||
-      !Array.isArray(payload.data.recent_updates) ||
-      !Array.isArray(payload.data.future_directions)
-    ) {
-      return null;
-    }
-
-    return payload.data;
-  } catch (error) {
-    console.warn("fetchPortfolioHome fallback", error);
-    return null;
+  const payload = (await response.json()) as ApiPayload<T>;
+  if (!response.ok || payload.code !== 0) {
+    throw new Error(payload.message || `Request failed: ${response.status}`);
   }
+  return payload.data;
 }
 
-export async function fetchReleaseDetail(
-  productCode: string,
-  version: string,
-  channel = defaultReleaseChannel
-): Promise<ProductReleaseDetail | null> {
-  try {
-    const path = `/api/v1/products/${encodeURIComponent(productCode)}/Document`;
-    const url = new URL(path, window.location.origin);
-    url.searchParams.set("version", version || "latest");
-    url.searchParams.set("channel", channel);
+export async function fetchProjects(): Promise<ProjectListData> {
+  const data = await fetchJson<ProjectListData>("/api/v1/projects");
 
-    const response = await fetch(url.pathname + url.search, {
-      headers: {
-        Accept: "application/json"
-      }
-    });
-
-    if (!response.ok) {
-      return null;
-    }
-
-    const payload = (await response.json()) as ApiPayload<ProductReleaseDetail>;
-
-    if (
-      payload.code !== 0 ||
-      !payload.data?.product_code ||
-      !payload.data?.requested_version ||
-      !payload.data?.resolved_version
-    ) {
-      return null;
-    }
-
-    return payload.data;
-  } catch (error) {
-    console.warn("fetchReleaseDetail fallback", error);
-    return null;
+  if (!data.profile || !Array.isArray(data.items) || !data.items.every(isProject)) {
+    throw new Error("项目列表接口返回结构不完整");
   }
+
+  return {
+    ...data,
+    featured: Array.isArray(data.featured) ? data.featured.filter(isProject) : [],
+    filters: Array.isArray(data.filters) ? data.filters : ["All"]
+  };
+}
+
+export async function fetchProjectDetail(slug: string): Promise<ProjectDetailData> {
+  const data = await fetchJson<ProjectDetailData>(`/api/v1/projects/${encodeURIComponent(slug)}`);
+  if (!data.profile || !isProject(data.project)) {
+    throw new Error("项目详情接口返回结构不完整");
+  }
+  return data;
 }
