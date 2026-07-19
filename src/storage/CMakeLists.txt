@@ -1,27 +1,16 @@
-add_library(update_storage STATIC
+add_library(showcase_storage STATIC
     storage.cc
-    addTask.cc
-    getALLPackages.cc
-    getALLReleases.cc
-    getConvertRule.cc
-    getDocument.cc
-    getLatestRelease.cc
-    getPortfolioProjects.cc
-    getSiteProfile.cc
-    getTask.cc
-    updateTask.cc
 )
 
-target_include_directories(update_storage
+target_include_directories(showcase_storage
     PUBLIC
         ${PROJECT_SOURCE_DIR}/include
 )
 
-target_link_libraries(update_storage
+target_link_libraries(showcase_storage
     PUBLIC
-        update_config
+        showcase_config
     PRIVATE
-        update_tools
         sqlite3
         nlohmann_json::nlohmann_json
 )

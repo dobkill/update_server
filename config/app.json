@@ -1,20 +1,10 @@
 {
-  "app_name": "software-update-platform",
-  "database_name": "default",
-  "database_path": "./data/database/update_platform.db",
+  "app_name": "personal-project-showcase",
+  "database_path": "./data/database/showcase.db",
   "storage_root": "./data",
-  "upload_task_dir": "./data/uploads/convert",
-  "download_task_dir": "./data/downloads/convert",
-  "converted_dir": "./data/converted",
-  "failed_dir": "./data/failed",
-  "package_dir": "./data/packages",
-  "page_staging_dir": "./data/releases/staging",
-  "page_active_dir": "./data/releases/active",
-  "page_archive_dir": "./data/releases/archive",
+  "assets_dir": "./data/assets",
+  "web_dist_dir": "./web/dist",
   "log_dir": "./data/logs",
-  "convert_script": "./python/convert/convert_data.py",
-  "max_upload_size_bytes": 52428800,
-  "convert_result_retention_days": 7,
-  "worker_num": 1,
-  "sql_file": "migrations/002.init.sql"
+  "sql_file": "migrations/001_init_showcase.sql",
+  "sqlite_busy_timeout_ms": 5000
 }

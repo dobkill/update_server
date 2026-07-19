@@ -1,7 +1,7 @@
 type ApiPayload<T> = {
-  code: number;
-  message: string;
+  success: boolean;
   data: T;
+  error?: { code: string; message: string; details?: unknown };
 };
 
 export type SiteProfile = {
@@ -20,13 +20,24 @@ export type SiteProfile = {
 
 export type ProjectLinks = {
   liveDemo?: string;
+  demo?: string;
   github?: string;
+  download?: string;
 };
 
 export type ProjectScreenshot = {
   title: string;
   desc?: string;
   image: string;
+};
+
+export type ProjectPage = {
+  slug: string;
+  title: string;
+  summary: string;
+  sortOrder: number;
+  projectSlug: string;
+  htmlUrl: string;
 };
 
 export type PortfolioProject = {
@@ -52,7 +63,7 @@ export type PortfolioProject = {
   result: string;
   links: ProjectLinks;
   sortOrder: number;
-  productCode?: string;
+  pages?: ProjectPage[];
 };
 
 export type ProjectListData = {
@@ -63,7 +74,6 @@ export type ProjectListData = {
 };
 
 export type ProjectDetailData = {
-  profile: SiteProfile;
   project: PortfolioProject;
 };
 
@@ -109,29 +119,36 @@ async function fetchJson<T>(url: string): Promise<T> {
   });
 
   const payload = (await response.json()) as ApiPayload<T>;
-  if (!response.ok || payload.code !== 0) {
-    throw new Error(payload.message || `Request failed: ${response.status}`);
+  if (!response.ok || !payload.success) {
+    const message = payload.error?.message || `Request failed: ${response.status}`;
+    throw new Error(message);
   }
   return payload.data;
 }
 
-export async function fetchProjects(): Promise<ProjectListData> {
-  const data = await fetchJson<ProjectListData>("/api/v1/projects");
+export async function fetchHome(): Promise<ProjectListData> {
+  const data = await fetchJson<ProjectListData>("/api/v1/home");
 
-  if (!data.profile || !Array.isArray(data.items) || !data.items.every(isProject)) {
-    throw new Error("项目列表接口返回结构不完整");
-  }
+  const profile = data.profile ?? defaultProfile;
+  const items = Array.isArray(data.items) ? data.items.filter(isProject) : [];
+  const featured = Array.isArray(data.featured)
+    ? data.featured.filter(isProject)
+    : items.filter((item) => item.featured);
+  const filters = Array.isArray(data.filters) ? data.filters : ["All"];
 
-  return {
-    ...data,
-    featured: Array.isArray(data.featured) ? data.featured.filter(isProject) : [],
-    filters: Array.isArray(data.filters) ? data.filters : ["All"]
-  };
+  return { profile, featured, items, filters };
+}
+
+export async function fetchProjects(): Promise<PortfolioProject[]> {
+  const data = await fetchJson<{ items: PortfolioProject[] }>("/api/v1/projects");
+  return Array.isArray(data.items) ? data.items.filter(isProject) : [];
 }
 
 export async function fetchProjectDetail(slug: string): Promise<ProjectDetailData> {
-  const data = await fetchJson<ProjectDetailData>(`/api/v1/projects/${encodeURIComponent(slug)}`);
-  if (!data.profile || !isProject(data.project)) {
+  const data = await fetchJson<ProjectDetailData>(
+    `/api/v1/projects/${encodeURIComponent(slug)}`
+  );
+  if (!isProject(data.project)) {
     throw new Error("项目详情接口返回结构不完整");
   }
   return data;

@@ -384,6 +384,31 @@ export function renderProjectDetail(project: PortfolioProject, profile: SiteProf
           )
           .join("")}
       </section>
+
+      ${
+        Array.isArray(project.pages) && project.pages.length
+          ? `
+        <section class="case-section">
+          <div class="section-heading light">
+            <p>PROJECT PAGES</p>
+            <h2>Exclusive showcase pages</h2>
+          </div>
+          <div class="architecture-flow">
+            ${project.pages
+              .map(
+                (page) => `
+                  <a href="${escapeHtml(page.htmlUrl)}" class="page-link-card">
+                    <span>${escapeHtml(page.title)}</span>
+                    <strong>${escapeHtml(page.summary || page.slug)}</strong>
+                  </a>
+                `
+              )
+              .join("")}
+          </div>
+        </section>
+      `
+          : ""
+      }
     </article>
   `;
 }

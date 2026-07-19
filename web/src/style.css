@@ -782,6 +782,33 @@ main {
   padding: 24px;
 }
 
+.page-link-card {
+  display: grid;
+  align-content: space-between;
+  min-height: 112px;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.86);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+}
+
+.page-link-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(191, 114, 22, 0.52);
+  background: var(--surface);
+}
+
+.page-link-card span {
+  color: var(--accent);
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.page-link-card strong {
+  color: var(--ink);
+}
+
 .state-panel {
   min-height: calc(100vh - 88px);
   display: grid;

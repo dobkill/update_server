@@ -1,8 +1,8 @@
 import "./style.css";
 import {
   defaultProfile,
+  fetchHome,
   fetchProjectDetail,
-  fetchProjects,
   type PortfolioProject,
   type ProjectListData,
   type SiteProfile
@@ -102,7 +102,7 @@ async function loadCatalogPage(): Promise<void> {
   state.projectDetail = null;
   render();
 
-  const data = await fetchProjects();
+  const data = await fetchHome();
   state.projectList = data;
   state.profile = data.profile;
   state.loading = false;
@@ -116,7 +116,7 @@ async function loadProjectPage(slug: string): Promise<void> {
   render();
 
   const data = await fetchProjectDetail(slug);
-  state.profile = data.profile;
+  state.profile = state.projectList?.profile ?? defaultProfile;
   state.projectDetail = data.project;
   state.loading = false;
   render();
@@ -203,7 +203,11 @@ function handleInternalLink(anchor: HTMLAnchorElement, event: MouseEvent): void 
   }
 
   const url = new URL(anchor.href);
-  if (url.origin !== window.location.origin || url.pathname.startsWith("/data/") || url.pathname.startsWith("/api/")) {
+  if (url.origin !== window.location.origin || url.pathname.startsWith("/assets/")) {
+    return;
+  }
+
+  if (url.pathname.includes("/pages/")) {
     return;
   }
 

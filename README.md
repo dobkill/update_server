@@ -1,11 +1,18 @@
-# update_server
+# personal-project-showcase
 
-C++/Drogon 软件更新平台，当前已接入后端 API、SQLite 存储、数据转换任务和 `web/dist` 静态页面。
+C++/Drogon 个人作品展示站，提供站点首页、项目列表、项目详情和项目专属 HTML 展示页。
+
+## 定位
+
+- 单机展示站点，不支持多用户、不提供软件更新服务。
+- 后端只读取 `data/database/showcase.db` 和 `data/assets`。
+- 内容管理通过 Python CLI 写入数据库和资源目录。
 
 ## Build
 
 ```bash
-cmake --build build -j 2
+cmake -S . -B build
+cmake --build build -j
 ```
 
 ## Run
@@ -14,13 +21,25 @@ cmake --build build -j 2
 ./build/software_update_platform
 ```
 
-默认监听 `http://127.0.0.1:8080`。
+默认监听 `http://0.0.0.0:8080`。
 
-## Smoke Test
+## 初始化数据
 
 ```bash
-curl http://127.0.0.1:8080/api/v1/products
-curl "http://127.0.0.1:8080/api/v1/products/demo/check-update/1.0.0?platform=windows&arch=x64&package_type=portable"
+python python/admin/admin.py init-db
+python python/admin/admin.py apply config/showcase.toml
 ```
 
-更多说明见 [docs/项目设计.md](docs/项目设计.md)。
+## 接口
+
+```http
+GET /api/v1/site
+GET /api/v1/home
+GET /api/v1/projects
+GET /api/v1/projects/{slug}
+GET /api/v1/projects/{slug}/pages
+GET /assets/{asset_key}
+GET /projects/{slug}/pages/{page_slug}
+```
+
+更多说明见 `docs/`。

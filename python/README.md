@@ -1,69 +1,70 @@
 # Python 模块说明
 
-本目录包含后端调用的数据转换脚本，以及管理员用于写入 SQLite 的配置驱动工具。
+本目录是展示站的 Python 管理后台 CLI，直接写入 SQLite 与 `data/assets`。
 
 ## 目录结构
 
 ```text
 python/
 ├── README.md
-├── convert/
-│   ├── __init__.py
-│   ├── convert_data.py          # C++ worker 默认调用入口
-│   └── <product_code>/          # 产品专属转换脚本，可选
 ├── admin/
-│   ├── admin.py                 # 统一入口，交互式选择 TOML 配置
-│   ├── _product.py              # 产品写入
-│   ├── _release.py              # 版本写入
-│   ├── _asset.py                # 全量包写入与 hash/size 计算
-│   ├── _channel.py              # 渠道 latest 指针
-│   ├── _update_package.py       # 增量包写入
-│   ├── _convert_rule.py         # 数据转换规则写入
-│   ├── _page.py                 # 页面清单校验与运维
-│   └── _cleanup.py              # 临时文件清理
+│   ├── admin.py        # CLI 入口
+│   ├── _site.py        # 站点资料
+│   ├── _project.py     # 项目写入
+│   ├── _page.py        # 项目页面写入
+│   └── _asset.py       # 资源文件复制与登记
 └── lib/
     ├── __init__.py
-    ├── db.py
-    ├── config.py
-    ├── toml_loader.py
-    └── operations.py
+    ├── config.py        # 读取 config/app.json
+    ├── db.py            # SQLite 连接与迁移
+    └── toml_loader.py   # TOML 加载
 ```
 
-## 管理员入口
-
-推荐直接运行：
+## 命令
 
 ```bash
-python python/admin/admin.py
+python python/admin/admin.py init-db
+python python/admin/admin.py set-site config/site.toml
+python python/admin/admin.py add-project config/projects/daily.toml
+python python/admin/admin.py add-page config/pages/daily_overview.toml
+python python/admin/admin.py add-asset config/assets/daily_cover.toml
+python python/admin/admin.py apply config/showcase.toml
+python python/admin/admin.py list-projects
+python python/admin/admin.py export data/export.json
 ```
 
-`admin.py` 会列出 `config/*.toml` 配置文件，选择后默认先预演。确认无误后再次运行，并在提示中选择写入数据库。
+`apply` 可以一次性写入站点、项目、页面和资源，适合整站导入。
 
-自动化场景不使用命令行参数，改用环境变量：
+## 配置示例
 
-```bash
-ADMIN_CONFIG=config/daily_release.toml ADMIN_DRY_RUN=0 python python/admin/admin.py
-```
+整站配置 `config/showcase.toml`：
 
-## Daily 示例
+```toml
+[site_profile]
+owner_name = "Xiang Y."
+site_name = "Personal Software Lab"
 
-`config/daily_release.toml` 已注册 Daily 插件：
+[[projects]]
+slug = "daily"
+name = "Daily"
+category = "Obsidian Plugin"
+summary = "Daily workflow plugin."
+long_description = "A personal knowledge workflow plugin."
+featured = true
+sort_order = 10
 
-1. `products.code = Daily`
-2. `releases.version = v1.0.0`
-3. `releases.data_schema_version = v1.0.0`
-4. `release_assets.platform = obsidian`
-5. `release_assets.arch = any`
-6. `release_assets.package_type = plugin`
+[[projects.pages]]
+slug = "overview"
+title = "Overview"
+html = "./pages/overview.html"
 
-插件包位于：
-
-```text
-data/packages/Daily/v1.0.0/Daily-v1.0.0.zip
+[[projects.assets]]
+source = "./assets/cover.png"
+asset_key = "projects/daily/cover.png"
 ```
 
 ## 与 C++ 后端的协调
 
-1. `config/app.json` 中的 `convert_script` 指向 `./python/convert/convert_data.py`。
-2. `convert_rules.script_path` 可指向 `python/convert/<product_code>/convert_xxx.py`。
-3. 管理工具直接写 SQLite，使用 WAL 模式，可与 C++ 并发读写。
+- Python CLI 直接写 SQLite 和 `data/assets`，使用 WAL 模式，可与 C++ 服务并发读。
+- C++ 后端只读取数据库和资源目录，不修改内容。
+- 资源通过 `/assets/{asset_key}` 受控访问，不再暴露整个 `data/`。

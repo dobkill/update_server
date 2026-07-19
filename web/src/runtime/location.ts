@@ -36,6 +36,9 @@ export function resolveAppLocation(pathname: string): AppLocation {
 
   if (segments[0] === "projects") {
     const slug = normalizeSlug(segments[1]);
+    if (slug && segments[2] === "pages" && segments[3]) {
+      return { page: "project", slug };
+    }
     return slug ? { page: "project", slug } : { page: "catalog" };
   }
 

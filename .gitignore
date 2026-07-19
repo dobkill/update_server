@@ -1,1 +1,10 @@
 data/
+build/
+web/node_modules/
+web/dist/
+__pycache__/
+*.pyc
+*.db
+*.db-*
+compile_commands.json
+.cache/

@@ -1,36 +1,38 @@
 #!/usr/bin/env python3
-
-"""SQLite 数据库连接与读写封装。
-
-- 从 config/app.json 读取 database_path
-- 启用 WAL 模式和 foreign_keys
-- 提供 execute / query_one / query_all 基础 CRUD
-"""
+"""Showcase SQLite 连接与读写封装。"""
 
 from __future__ import annotations
 
+import json
 import sqlite3
 from pathlib import Path
 from typing import Any
 
-from lib.config import get as config_get
+from lib.config import get_database_path, project_root
 
 _conn: sqlite3.Connection | None = None
 
 
 def get_db_path() -> Path:
-    """从 config/app.json 读取数据库路径（相对于项目根目录）。"""
-    raw = config_get("database_path")
-    if not raw:
-        raise RuntimeError("config/app.json 中缺少 database_path 配置")
-    # 相对路径基于项目根目录解析
-    project_root = Path(__file__).resolve().parent.parent.parent
-    db_path = project_root / raw
-    return db_path
+    return get_database_path()
+
+
+def run_migrations_if_needed(conn: sqlite3.Connection) -> None:
+    cur = conn.execute(
+        "SELECT name FROM sqlite_master WHERE type = 'table' AND name = 'projects'"
+    )
+    if cur.fetchone() is not None:
+        return
+
+    sql_file = project_root() / "migrations" / "001_init_showcase.sql"
+    if not sql_file.exists():
+        raise FileNotFoundError(f"迁移文件不存在: {sql_file}")
+
+    conn.executescript(sql_file.read_text(encoding="utf-8"))
+    conn.commit()
 
 
 def get_connection() -> sqlite3.Connection:
-    """返回 sqlite3.Connection（启用 WAL、foreign_keys），单例复用。"""
     global _conn
     if _conn is not None:
         return _conn
@@ -42,48 +44,34 @@ def get_connection() -> sqlite3.Connection:
     _conn.row_factory = sqlite3.Row
     _conn.execute("PRAGMA journal_mode = WAL")
     _conn.execute("PRAGMA foreign_keys = ON")
+    run_migrations_if_needed(_conn)
     return _conn
 
 
-def execute(sql: str, params: tuple | None = None) -> sqlite3.Cursor:
-    """执行写操作 SQL，自动 commit。"""
+def execute(sql: str, params: tuple = ()) -> sqlite3.Cursor:
     conn = get_connection()
-    cur = conn.execute(sql, params or ())
+    cur = conn.execute(sql, params)
     conn.commit()
     return cur
 
 
-def query_one(sql: str, params: tuple | None = None) -> dict | None:
-    """查询单行，返回 dict 或 None。"""
+def query_one(sql: str, params: tuple = ()) -> dict | None:
     conn = get_connection()
-    cur = conn.execute(sql, params or ())
-    row = cur.fetchone()
-    if row is None:
-        return None
-    return dict(row)
+    row = conn.execute(sql, params).fetchone()
+    return dict(row) if row is not None else None
 
 
-def query_all(sql: str, params: tuple | None = None) -> list[dict]:
-    """查询多行，返回 dict 列表。"""
+def query_all(sql: str, params: tuple = ()) -> list[dict]:
     conn = get_connection()
-    cur = conn.execute(sql, params or ())
-    return [dict(row) for row in cur.fetchall()]
+    return [dict(row) for row in conn.execute(sql, params).fetchall()]
 
 
-def get_product_id_by_code(product_code: str) -> int:
-    """根据产品编码查询产品 ID，不存在则抛出 ValueError。"""
-    row = query_one("SELECT id FROM products WHERE code = ?", (product_code,))
+def get_project_id(slug: str) -> int:
+    row = query_one("SELECT id FROM projects WHERE slug = ?", (slug,))
     if row is None:
-        raise ValueError(f"产品不存在: code={product_code}")
+        raise ValueError(f"项目不存在: slug={slug}")
     return row["id"]
 
 
-def get_release_id(product_id: int, version: str) -> int:
-    """根据产品 ID 和版本号查询版本 ID，不存在则抛出 ValueError。"""
-    row = query_one(
-        "SELECT id FROM releases WHERE product_id = ? AND version = ?",
-        (product_id, version),
-    )
-    if row is None:
-        raise ValueError(f"版本不存在: product_id={product_id}, version={version}")
-    return row["id"]
+def json_dumps(value: Any) -> str:
+    return json.dumps(value, ensure_ascii=False)

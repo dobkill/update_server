@@ -1,2 +1,0 @@
-/usr/bin/ar qc libupdate_config.a CMakeFiles/update_config.dir/app_config.cc.o
-/usr/bin/ranlib libupdate_config.a
