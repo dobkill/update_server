@@ -176,7 +176,7 @@ void ApiRoutes::registerApiRoutes()
                     {{"slug", slug}}));
                 return;
             }
-            callback(self->success({{"project", project}}));
+            callback(self->success({{"project", project}, {"profile", self->storage->getSiteProfile()}}));
         },
         {drogon::Get});
 

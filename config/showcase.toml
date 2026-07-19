@@ -1,0 +1,142 @@
+[site_profile]
+owner_name = "Xiang Y."
+site_name = "Personal Software Lab"
+subtitle = "Self-built apps, tools, systems, and experiments."
+hero_label = "DEVELOPER & BUILDER"
+hero_title = "Personal Software Lab"
+hero_description = "A collection of self-built apps, tools, systems, and experiments, crafted with code and curiosity."
+github_url = "https://github.com/your-github-username"
+email = "your-email@example.com"
+resume_url = "/assets/resume.pdf"
+linkedin_url = ""
+twitter_url = ""
+
+[[projects]]
+slug = "daily"
+name = "Daily"
+category = "Obsidian Plugin"
+summary = "Daily workflow plugin for tasks, projects, quick notes, and progress review inside Obsidian."
+long_description = "Daily connects daily tasks, project planning, quick capture, and review dashboards inside Obsidian. It supports table, kanban, gantt, and mind map project views, with heatmaps and trend charts for tracking progress over time."
+status = "active"
+year = "2026"
+role = "Full-stack / Plugin Developer"
+platform = "Obsidian"
+project_type = "Plugin"
+featured = true
+visibility = "public"
+sort_order = 10
+cover_asset_key = "projects/daily/releases/v1.0.0/html/总览.png"
+hero_asset_key = "projects/daily/releases/v1.0.0/html/总览.png"
+tech_stack = ["TypeScript", "Obsidian", "CSS", "Local-first", "Project Management"]
+features = [
+  "Task overview with today view, timeline, trend charts, weekly charts, and yearly heatmap",
+  "Project management with import/export and multiple project views",
+  "Four project views: table, kanban, gantt, and mind map",
+  "Quick capture for diary entries, appended notes, tasks, and mind map nodes",
+  "Progress review with heatmaps and completion trends"
+]
+architecture = [
+  "Obsidian plugin runtime",
+  "Local vault data files",
+  "Task and project models",
+  "Multiple visual project views",
+  "Review dashboards and charts"
+]
+challenge = "Daily work often scatters across notes, task lists, project plans, and review pages, which makes it hard to keep a clear workflow inside Obsidian."
+solution = "Daily unifies tasks, projects, quick capture, and review views into one Obsidian plugin, keeping data local and giving the same project multiple visual perspectives."
+result = "The v1.0.0 release provides a usable Obsidian workflow for daily task tracking, project planning, and progress review."
+
+[projects.links]
+download = "/assets/projects/daily/releases/v1.0.0/Daily-v1.0.0.zip"
+liveDemo = "/projects/daily/pages/release-v1.0.0"
+github = "https://github.com/your-github-username/daily"
+
+[[projects.screenshots]]
+title = "Overview"
+desc = "Task overview and project progress tabs in one dashboard."
+image = "projects/daily/releases/v1.0.0/html/总览.png"
+
+[[projects.screenshots]]
+title = "Yearly Heatmap"
+desc = "A GitHub-style activity heatmap for reviewing consistency."
+image = "projects/daily/releases/v1.0.0/html/项目总览-热力图.png"
+
+[[projects.screenshots]]
+title = "Project Progress"
+desc = "Centralized project progress management."
+image = "projects/daily/releases/v1.0.0/html/项目进度页.png"
+
+[[projects.screenshots]]
+title = "Kanban View"
+desc = "Manage task status using kanban columns."
+image = "projects/daily/releases/v1.0.0/html/项目-看板.png"
+
+[[projects.screenshots]]
+title = "Gantt View"
+desc = "Understand project cadence through a timeline view."
+image = "projects/daily/releases/v1.0.0/html/项目-甘特图.png"
+
+[[projects.screenshots]]
+title = "Mind Map View"
+desc = "Break down project goals and dependencies as a mind map."
+image = "projects/daily/releases/v1.0.0/html/项目-思维导图.png"
+
+[[projects.assets]]
+source = "../data/releases/Daily/v1.0.0/html/总览.png"
+asset_key = "projects/daily/releases/v1.0.0/html/总览.png"
+
+[[projects.assets]]
+source = "../data/releases/Daily/v1.0.0/html/项目总览-热力图.png"
+asset_key = "projects/daily/releases/v1.0.0/html/项目总览-热力图.png"
+
+[[projects.assets]]
+source = "../data/releases/Daily/v1.0.0/html/项目进度页.png"
+asset_key = "projects/daily/releases/v1.0.0/html/项目进度页.png"
+
+[[projects.assets]]
+source = "../data/releases/Daily/v1.0.0/html/项目-表格.png"
+asset_key = "projects/daily/releases/v1.0.0/html/项目-表格.png"
+
+[[projects.assets]]
+source = "../data/releases/Daily/v1.0.0/html/项目-看板.png"
+asset_key = "projects/daily/releases/v1.0.0/html/项目-看板.png"
+
+[[projects.assets]]
+source = "../data/releases/Daily/v1.0.0/html/项目-甘特图.png"
+asset_key = "projects/daily/releases/v1.0.0/html/项目-甘特图.png"
+
+[[projects.assets]]
+source = "../data/releases/Daily/v1.0.0/html/项目-思维导图.png"
+asset_key = "projects/daily/releases/v1.0.0/html/项目-思维导图.png"
+
+[[projects.assets]]
+source = "../data/releases/Daily/v1.0.0/html/今日任务.png"
+asset_key = "projects/daily/releases/v1.0.0/html/今日任务.png"
+
+[[projects.assets]]
+source = "../data/releases/Daily/v1.0.0/html/快速记录-创建.png"
+asset_key = "projects/daily/releases/v1.0.0/html/快速记录-创建.png"
+
+[[projects.assets]]
+source = "../data/releases/Daily/v1.0.0/html/快速记录-写日记.png"
+asset_key = "projects/daily/releases/v1.0.0/html/快速记录-写日记.png"
+
+[[projects.assets]]
+source = "../data/releases/Daily/v1.0.0/html/快速记录-追加笔记.png"
+asset_key = "projects/daily/releases/v1.0.0/html/快速记录-追加笔记.png"
+
+[[projects.assets]]
+source = "../data/releases/Daily/v1.0.0/html/快速记录-导图补充.png"
+asset_key = "projects/daily/releases/v1.0.0/html/快速记录-导图补充.png"
+
+[[projects.assets]]
+source = "../data/packages/Daily/v1.0.0/Daily-v1.0.0.zip"
+asset_key = "projects/daily/releases/v1.0.0/Daily-v1.0.0.zip"
+
+[[projects.pages]]
+slug = "release-v1.0.0"
+title = "Daily v1.0.0 Release"
+summary = "Release page with screenshots, features, installation notes, and download link."
+html = "../data/releases/Daily/v1.0.0/html/DailyReleasePage.html"
+sort_order = 10
+visibility = "public"

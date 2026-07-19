@@ -275,7 +275,8 @@ function renderMeta(project: PortfolioProject): string {
 function renderActionLinks(project: PortfolioProject): string {
   const links = [
     ["Live Demo", project.links.liveDemo],
-    ["View on GitHub", project.links.github]
+    ["View on GitHub", project.links.github],
+    ["Download", project.links.download]
   ];
 
   return links

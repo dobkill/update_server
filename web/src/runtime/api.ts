@@ -75,6 +75,21 @@ export type ProjectListData = {
 
 export type ProjectDetailData = {
   project: PortfolioProject;
+  profile?: SiteProfile;
+};
+
+type HomeApiData = Partial<ProjectListData> & {
+  site?: unknown;
+  profile?: unknown;
+  featuredProjects?: unknown;
+  projects?: unknown;
+  categories?: unknown;
+};
+
+type DetailApiData = {
+  project?: unknown;
+  profile?: unknown;
+  site?: unknown;
 };
 
 export const defaultProfile: SiteProfile = {
@@ -101,6 +116,8 @@ function isProject(value: unknown): value is PortfolioProject {
       Array.isArray(candidate.techStack) &&
       Array.isArray(candidate.features) &&
       Array.isArray(candidate.screenshots) &&
+      candidate.links &&
+      typeof candidate.links === "object" &&
       candidate.screenshots.every(
         (item) =>
           item &&
@@ -109,6 +126,14 @@ function isProject(value: unknown): value is PortfolioProject {
           (item.desc === undefined || typeof item.desc === "string")
       )
   );
+}
+
+function normalizeProfile(value: unknown): SiteProfile {
+  if (!value || typeof value !== "object") {
+    return defaultProfile;
+  }
+
+  return { ...defaultProfile, ...(value as Partial<SiteProfile>) };
 }
 
 async function fetchJson<T>(url: string): Promise<T> {
@@ -127,16 +152,23 @@ async function fetchJson<T>(url: string): Promise<T> {
 }
 
 export async function fetchHome(): Promise<ProjectListData> {
-  const data = await fetchJson<ProjectListData>("/api/v1/home");
+  const data = await fetchJson<HomeApiData>("/api/v1/home");
 
-  const profile = data.profile ?? defaultProfile;
-  const items = Array.isArray(data.items) ? data.items.filter(isProject) : [];
-  const featured = Array.isArray(data.featured)
-    ? data.featured.filter(isProject)
+  const profile = normalizeProfile(data.profile ?? data.site);
+  const rawItems = data.items ?? data.projects;
+  const rawFeatured = data.featured ?? data.featuredProjects;
+  const rawFilters = data.filters ?? data.categories;
+  const items = Array.isArray(rawItems) ? rawItems.filter(isProject) : [];
+  const featured = Array.isArray(rawFeatured)
+    ? rawFeatured.filter(isProject)
     : items.filter((item) => item.featured);
-  const filters = Array.isArray(data.filters) ? data.filters : ["All"];
+  const filters = Array.isArray(rawFilters) ? rawFilters : ["All"];
 
   return { profile, featured, items, filters };
+}
+
+export async function fetchSite(): Promise<SiteProfile> {
+  return normalizeProfile(await fetchJson<unknown>("/api/v1/site"));
 }
 
 export async function fetchProjects(): Promise<PortfolioProject[]> {
@@ -145,11 +177,14 @@ export async function fetchProjects(): Promise<PortfolioProject[]> {
 }
 
 export async function fetchProjectDetail(slug: string): Promise<ProjectDetailData> {
-  const data = await fetchJson<ProjectDetailData>(
+  const data = await fetchJson<DetailApiData>(
     `/api/v1/projects/${encodeURIComponent(slug)}`
   );
   if (!isProject(data.project)) {
     throw new Error("项目详情接口返回结构不完整");
   }
-  return data;
+  return {
+    project: data.project,
+    profile: data.profile || data.site ? normalizeProfile(data.profile ?? data.site) : undefined
+  };
 }

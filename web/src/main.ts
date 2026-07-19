@@ -3,6 +3,7 @@ import {
   defaultProfile,
   fetchHome,
   fetchProjectDetail,
+  fetchSite,
   type PortfolioProject,
   type ProjectListData,
   type SiteProfile
@@ -116,7 +117,7 @@ async function loadProjectPage(slug: string): Promise<void> {
   render();
 
   const data = await fetchProjectDetail(slug);
-  state.profile = state.projectList?.profile ?? defaultProfile;
+  state.profile = data.profile ?? state.projectList?.profile ?? (await fetchSite());
   state.projectDetail = data.project;
   state.loading = false;
   render();
