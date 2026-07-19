@@ -116,6 +116,7 @@ CREATE TABLE IF NOT EXISTS project_assets (
     sha256 TEXT NOT NULL DEFAULT '',
     kind TEXT NOT NULL DEFAULT 'file',
     created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE CASCADE,
     CHECK(kind IN ('image', 'html', 'file', 'video'))

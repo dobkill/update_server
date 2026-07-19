@@ -60,7 +60,7 @@ def add_asset(
     if existing:
         execute(
             "UPDATE project_assets SET project_id = ?, original_name = ?, content_type = ?, "
-            "file_size = ?, sha256 = ?, kind = ? WHERE asset_key = ?",
+            "file_size = ?, sha256 = ?, kind = ?, updated_at = CURRENT_TIMESTAMP WHERE asset_key = ?",
             (project_id, source_file.name, content_type, size, sha,
              _kind_from_content_type(content_type), asset_key),
         )
@@ -68,8 +68,8 @@ def add_asset(
     else:
         cur = execute(
             "INSERT INTO project_assets "
-            "(project_id, asset_key, original_name, content_type, file_size, sha256, kind) "
-            "VALUES (?, ?, ?, ?, ?, ?, ?)",
+            "(project_id, asset_key, original_name, content_type, file_size, sha256, kind, updated_at) "
+            "VALUES (?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)",
             (project_id, asset_key, source_file.name, content_type, size, sha,
              _kind_from_content_type(content_type)),
         )
