@@ -1,6 +1,9 @@
 import { defineConfig } from "vite";
 
 export default defineConfig({
+  build: {
+    assetsDir: "static"
+  },
   server: {
     port: 5173,
     proxy: {

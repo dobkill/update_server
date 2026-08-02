@@ -13,6 +13,10 @@ C++/Drogon 个人作品展示站，提供站点首页、项目列表、项目详
 ```bash
 cmake -S . -B build
 cmake --build build -j
+
+cd web
+npm install
+npm run build
 ```
 
 ## Run
